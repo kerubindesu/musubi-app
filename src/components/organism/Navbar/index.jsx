@@ -49,7 +49,7 @@ const Navbar = () => {
 
   return (
     <>
-        <div className={`border px-4 h-14 w-screen box-border flex justify-between items-center text-base sticky bg-white backdrop-blur-sm top-0 transition ease-in duration-300 ${onScrolling?'hidden':'bg-opacity-100'}`}>
+        <div className={`border px-4 h-14 w-screen box-border flex justify-between items-center text-base sticky top-0 backdrop-blur-sm transition ease-in duration-300 ${onScrolling?'bg-white/10':'bg-white'}`}>
             <div className="w-[4rem] max-h-max box-border overflow-hidden flex justify-start items-center text-2xl">
                 <RiMenuLine onClick={(e) => {e.preventDefault(); handleBurgerMenu()}} className="cursor-pointer"/>
                 {/* menu list */}

@@ -1,8 +1,12 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import React from 'react';
+import { AdminTemplate, GuestTemplate } from '../../templates';
 
-const Layout = () => {
-  return <Outlet />
-}
+const MainLayout = ({ isAdmin, children }) => {
+  return isAdmin ? (
+    <AdminTemplate>{children}</AdminTemplate>
+  ) : (
+    <GuestTemplate>{children}</GuestTemplate>
+  );
+};
 
-export default Layout
+export default MainLayout;
