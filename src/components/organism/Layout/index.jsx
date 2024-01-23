@@ -1,11 +1,12 @@
 import React from 'react';
-import { AdminTemplate, GuestTemplate } from '../../templates';
+import { Footer } from '../../organism';
 
-const MainLayout = ({ isAdmin, children }) => {
-  return isAdmin ? (
-    <AdminTemplate>{children}</AdminTemplate>
-  ) : (
-    <GuestTemplate>{children}</GuestTemplate>
+const MainLayout = ({ children }) => {
+  return (
+    <>
+      { children }
+      <Footer />
+    </>
   );
 };
 

@@ -1,8 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <div className="flex flex-col justify-center items-center">
+      Footer
+      <Link to="login" className="text-blue-500 cursor-pointer">Login</Link>
+    </div>
   )
 }
 
