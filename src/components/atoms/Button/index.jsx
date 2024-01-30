@@ -1,17 +1,18 @@
-import React from 'react'
+import React from "react";
 
-const Button = ({type, variant, disabled, name}) => {
+const Button = ({ type, variant, icon, text, disabled }) => {
   return (
     <>
-      <Button
-        type={type}
-        className={`${variant}`}
+      <button
         disabled={disabled}
+        type={type}
+        className={`px-[0.55rem] h-[2.4rem] w-full box-border flex justify-center items-center gap-1 rounded-md border-slate-300 placeholder-slate-400 focus:outline-none focus:border-slate-300 focus:ring-0 whitespace-nowrap text-base ${variant}`}
       >
-        {name}
-      </Button>
+        <span className="text-lg">{icon}</span>
+        <span>{text}</span>
+      </button>
     </>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;

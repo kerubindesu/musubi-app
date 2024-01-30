@@ -8,7 +8,7 @@ const AppRoutes = () => {
   return (
     <MainLayout>
       <Routes>
-        <Route path="/dash/*" element={<AdminRoutes />} />
+        <Route path="dash/*" element={<AdminRoutes />} />
         <Route path="/*" element={<PublicRoutes />} />
       </Routes>
     </MainLayout>

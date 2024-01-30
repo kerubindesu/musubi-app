@@ -1,22 +1,28 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { AdminTemplate } from '../components/templates';
 import AdminDashboard from '../pages/admin/AdminDashboard';
 import NotFound from '../pages/NotFound';
-import UsersList from '../features/users/components/UsersList';
-import PostsList from '../features/posts/components/PostsList';
-import EditUser from '../features/users/components/EditUser';
-import NewUserForm from '../features/users/components/NewUserForm';
-import NewPost from '../features/posts/components/NewPost';
-import EditPost from '../features/posts/components/EditPost';
+import { useSelector } from 'react-redux';
+import { selectIsAuthenticated } from '../features/auth/authSlice';
 
 const AdminRoutes = () => {
+  const navigate = useNavigate();
+
+  const isAuthenticated = useSelector(selectIsAuthenticated)
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/auth/login")
+    }
+  }, [isAuthenticated, navigate]);
+
   return (
     <Routes>
       <Route path="/*" element={<AdminTemplate />} >
         <Route index element={<AdminDashboard />} />
 
-        <Route path="users">
+        {/* <Route path="users">
           <Route index element={<UsersList />} />
           <Route path="new" element={<NewUserForm />} />
           <Route path=":id" element={<EditUser />} />
@@ -26,7 +32,7 @@ const AdminRoutes = () => {
           <Route index element={<PostsList />} />
           <Route path="new" element={<NewPost />} />
           <Route path=":id" element={<EditPost />} />
-        </Route>
+        </Route> */}
 
         <Route path="*" element={<NotFound />} />
       </Route>
