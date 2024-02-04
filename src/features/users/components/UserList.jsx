@@ -21,6 +21,8 @@ const UserList = () => {
       dispatch(getUsers({ search: keyword, page, limit }))
   }, [dispatch, limit, keyword, page])
 
+  console.log(page)
+
   const handleDelete = async (id) => {
     await dispatch(setModal(true));
     setId(id);
@@ -41,7 +43,7 @@ const UserList = () => {
         users &&
           users.map((user, index) => {
             return {
-              "#": index + 1,
+              "#": page * limit + (index + 1),
               id: user._id,
               Username: user.username,
               Nama: user.name,
@@ -49,7 +51,7 @@ const UserList = () => {
             };
           })
       );
-    }, [users]);
+    }, [users, page, limit]);
 
     return (
       <>
@@ -60,6 +62,10 @@ const UserList = () => {
           setKeyword={setKeyword}
           isLoading={loading}
           noFoundData={noFoundUser}
+          page={page}
+          totalPage={totalPage}
+          setPage={setPage}
+          totalRows={totalRows}
         />
         <ConfirmDeleteModal confirm={confirm} message={message} />
       </>
