@@ -1,8 +1,11 @@
 import React from 'react'
+import UserList from '../../components/UserList'
 
 const Users = () => {
   return (
-    <div>Users</div>
+    <div>
+      <UserList />
+    </div>
   )
 }
 

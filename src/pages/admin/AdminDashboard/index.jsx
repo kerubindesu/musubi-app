@@ -7,18 +7,19 @@ const AdminDashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
-  const [items, setItems] = useState("");
+  const [rows, setRows] = useState("");
   const [limit, setLimit] = useState(32);
-  const [q, setQuery] = useState("");
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState("");
 
-  const { users, totalItems } = useSelector((state) => state.users);
-
-  useEffect(() => {
-    dispatch(getUsers({ limit, q }));
-  }, [dispatch, limit, q]);
+  const { users, totalRows } = useSelector((state) => state.users);
 
   useEffect(() => {
-    setItems(users)
+    dispatch(getUsers({ limit, search, page }));
+  }, [dispatch, limit, search]);
+
+  useEffect(() => {
+    setRows(users)
   }, [users]);
 
   const handleClick = (e) => {

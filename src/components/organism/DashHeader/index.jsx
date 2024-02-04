@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../../features/auth/authSlice';
 
 
@@ -14,12 +14,13 @@ const DashHeader = () => {
   };
 
   return (
-    <>
+    <div className='p-4 flex gap-4'>
       <div>Dash Header</div>
+      <Link className='underline text-sky-500' to="/dash/users">Users</Link>
       <form onSubmit={handleLogout}>
         <button>Logout</button>
       </form>
-    </>
+    </div>
   )
 }
 

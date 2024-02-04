@@ -5,30 +5,31 @@ import AdminDashboard from '../pages/admin/AdminDashboard';
 import NotFound from '../pages/NotFound';
 import { useSelector } from 'react-redux';
 import { selectIsAuthenticated } from '../features/auth/authSlice';
+import Users from '../features/users/pages/Users';
 
 const AdminRoutes = () => {
   const navigate = useNavigate();
 
-  const isAuthenticated = useSelector(selectIsAuthenticated)
+  const { errRefreshToken, isAuthenticated } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated && errRefreshToken) {
       navigate("/auth/login")
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, errRefreshToken, navigate]);
 
   return (
     <Routes>
       <Route path="/*" element={<AdminTemplate />} >
         <Route index element={<AdminDashboard />} />
 
-        {/* <Route path="users">
-          <Route index element={<UsersList />} />
-          <Route path="new" element={<NewUserForm />} />
-          <Route path=":id" element={<EditUser />} />
+        <Route path="users">
+          <Route index element={<Users />} />
+          {/* <Route path="new" element={<NewUserForm />} />
+          <Route path=":id" element={<EditUser />} /> */}
         </Route>
 
-        <Route path="posts">
+        {/* <Route path="posts">
           <Route index element={<PostsList />} />
           <Route path="new" element={<NewPost />} />
           <Route path=":id" element={<EditPost />} />
