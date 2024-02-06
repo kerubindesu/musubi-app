@@ -9,7 +9,7 @@ export const injectStore = _store => {
 
 export const axiosPrivate = axios.create({});
 
-axiosPrivate.interceptors.request.use(async (config) => {
+axiosPrivate.interceptors.request.use(async(config) => {
 
   // refresh token ketika accessToken tidak tersedia dalam state
   if (store.getState().auth.accessToken === "") {

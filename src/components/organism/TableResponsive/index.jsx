@@ -5,8 +5,13 @@ import { MdOutlineDataSaverOn } from "react-icons/md";
 import { TableSearch } from "../../molecules";
 import { Button, HeadingTitle, Loading } from "../../atoms";
 import ReactPaginate from "react-paginate";
+import { useDispatch } from "react-redux";
+import { setImagePreview, setImageURL } from "../../../features/imagePreview/imagePreviewSlice";
+import ImagePreview from "../../../features/imagePreview/components/ImagePreview";
 
 const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyword, page, totalPage, setPage, totalRows }) => {
+  const dispatch = useDispatch()
+
   const data = useMemo(() => (items ? [...items] : []), [items]);
 
   const columns = useMemo(
@@ -23,11 +28,30 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
                   </>
                 ),
               };
+            if (key.toLowerCase() === "image")
+            return {
+              Header: key,
+              accessor: key,
+              Cell: ({ value }) => (
+                <>
+                  <img 
+                    onClick={() => { 
+                      dispatch(setImagePreview(true))
+                      dispatch(setImageURL([value[0], value[1]]))
+                    }}
+                    src={value[0]} 
+                    className="absolute inset-0 lg:relative h-full w-full max-h-[4rem] object-cover hover:filter hover:contrast-50 cursor-pointer" 
+                    alt={value[1]}
+                  />
+                  <ImagePreview />
+                </>
+              ),
+            };
   
             return { Header: key, accessor: key };
           })
         : [],
-    [items]
+    [items, dispatch]
   );  
 
   const initialState = { hiddenColumns: ["id"] };
@@ -41,7 +65,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
         Cell: ({ row }) => (
           <div className="flex justify-center items-center gap-4">
             <Link to={`${row.values.id}/edit`}>
-              <span className="py-1 px-2 text-emerald-500 bg-emerald-500/20 hover:bg-inherit rounded-sm">Edit</span>
+              <span className="py-1 px-2 text-emerald-500 hover:bg-inherit rounded-sm">Edit</span>
             </Link>
             <button
               value={row.values.id}
@@ -78,7 +102,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
     state,
   } = tableInstance;
 
-  const handlePageClick = async ({ selected }) => {
+  const handlePageClick = async({ selected }) => {
     await setPage(selected)
   }
 
@@ -113,7 +137,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
             <div className="p-4 w-full flex flex-col justify-center items-center">{noFoundData}</div>
           ):(
             <>
-              <div className="overflow-x-auto relative flex flex-col">
+              <div className="overflow-x-auto relative flex flex-col bg-white">
                 <table
                   {...getTableProps()}
                   className="w-full text-left text-gray-500 whitespace-nowrap border"
@@ -148,7 +172,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
                             return (
                               <td
                                 {...cell.getCellProps()}
-                                className="p-4 max-w-[16rem] text-ellipsis overflow-hidden border"
+                                className="px-2 max-w-xs relative text-ellipsis border"
                               >
                                 {cell.render("Cell")}
                               </td>
@@ -177,10 +201,8 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
             pageCount={Math.min(10,totalPage)}
             previousLabel="Previous"
             renderOnZeroPageCount={null}
-            previousLinkClassName={""}
-            nextLinkClassName={""}
             activeLinkClassName={"text-emerald-500"}
-            disabledLinkClassName={"disabled:opacity-75"}
+            disabledLinkClassName={"text-slate-200"}
           />
         </div>
       )}

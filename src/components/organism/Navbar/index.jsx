@@ -20,7 +20,7 @@ const Navbar = () => {
         setMyOption(!myOption) 
     }
 
-    if(burgerMenu || myOption) {
+    if (burgerMenu || myOption) {
         disableBodyScroll(document);
     } else {
         enableBodyScroll(document)
@@ -62,7 +62,7 @@ const Navbar = () => {
                                 <li className="py-2 px-4 hover:bg-slate-100 cursor-pointer">Music</li>
                             </ul>
                             <div onClick={(e) => {e.preventDefault(); setBurgerMenu(false)}} className="p-2 bg-white hover:bg-slate-100 rounded absolute top-2 right-2 cursor-pointer">
-                                <RiCloseLine/>
+                                <RiCloseLine />
                             </div>
                         </div>
                         <div onClick={(e) => {e.preventDefault(); setBurgerMenu(false)}} className="bg-white/65 backdrop-blur absolute inset-0 h-screen w-screen z-10"></div>

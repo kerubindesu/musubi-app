@@ -1,11 +1,11 @@
 import React from 'react';
-import { Footer } from '../../organism';
+// import { Footer } from '../../organism';
 
 const MainLayout = ({ children }) => {
   return (
     <>
       { children }
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

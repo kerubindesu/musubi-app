@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
-  async ({ name, username, email, password, navigate }, { rejectWithValue }) => {
+  async({ name, username, email, password, navigate }, { rejectWithValue }) => {
     try {
       const response = await axios.post('http://localhost:3500/users', {
         name,
@@ -25,7 +25,7 @@ export const registerUser = createAsyncThunk(
 
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
-  async ({ username, password, navigate }, { dispatch, rejectWithValue }) => {
+  async({ username, password, navigate }, { dispatch, rejectWithValue }) => {
     try {
       const response = await axios.post('http://localhost:3500/auth/login', {
         username,
@@ -34,7 +34,7 @@ export const loginUser = createAsyncThunk(
         withCredentials: true
       });
 
-      dispatch((async () => {
+      dispatch((async() => {
         await dispatch(refreshAccessToken()); // menunggu pembaruan token
         navigate("/dash");
       })());
@@ -48,7 +48,7 @@ export const loginUser = createAsyncThunk(
 
 export const refreshAccessToken = createAsyncThunk(
   'auth/refreshAccessToken',
-  async (_, { getState, rejectWithValue }) => {
+  async(_, { getState, rejectWithValue }) => {
     try {
       const response = await axios.get('http://localhost:3500/auth/token', {
         withCredentials: true,
@@ -64,7 +64,7 @@ export const refreshAccessToken = createAsyncThunk(
 );
 
 export const getUserAuth = createAsyncThunk(
-  'auth/user', async () => {
+  'auth/user', async() => {
     try {
       const response = await axios.get('http://localhost:3500/auth/user', {
         withCredentials: true,
@@ -77,7 +77,7 @@ export const getUserAuth = createAsyncThunk(
   }
 );
 
-export const logout = createAsyncThunk('auth/logout', async (navigate, { rejectWithValue }) => {
+export const logout = createAsyncThunk('auth/logout', async(navigate, { rejectWithValue }) => {
   try {
     await axios.delete('http://localhost:3500/auth/logout', {
       withCredentials: true

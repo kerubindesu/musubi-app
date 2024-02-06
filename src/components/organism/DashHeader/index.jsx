@@ -14,9 +14,12 @@ const DashHeader = () => {
   };
 
   return (
-    <div className='p-4 flex gap-4'>
-      <div>Dash Header</div>
-      <Link className='underline text-sky-500' to="/dash/users">Users</Link>
+    <div className='p-4 flex justify-between items center gap-4 bg-white shadow'>
+      <div className='flex gap-4'>
+        <div>Dash Header</div>
+        <Link className='text-sky-500' to="/dash/users">Users</Link>
+        <Link className='text-sky-500' to="/dash/posts">Post</Link>
+      </div>
       <form onSubmit={handleLogout}>
         <button>Logout</button>
       </form>

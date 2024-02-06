@@ -3,7 +3,7 @@ import { axiosPrivate } from '../../utils/api';
 
 export const getUsers = createAsyncThunk(
   'users/getUsers',
-  async ({ search, limit, page }, { rejectWithValue }) => {
+  async({ search, limit, page }, { rejectWithValue }) => {
     try {
       const response = await axiosPrivate.get(`http://localhost:3500/users?search=${search}&page=${page}&limit=${limit}`);
 
@@ -16,7 +16,7 @@ export const getUsers = createAsyncThunk(
 
 export const deleteUser = createAsyncThunk(
   "users/deleteUser",
-  async (id, { rejectWithValue }) => {
+  async(id, { rejectWithValue }) => {
     try {
       const response = await axiosPrivate.delete(`
       http://localhost:3500/users/${id}`);

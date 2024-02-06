@@ -4,8 +4,8 @@ import { AdminTemplate } from '../components/templates';
 import AdminDashboard from '../pages/admin/AdminDashboard';
 import NotFound from '../pages/NotFound';
 import { useSelector } from 'react-redux';
-import { selectIsAuthenticated } from '../features/auth/authSlice';
 import Users from '../features/users/pages/Users';
+import { AddPost, Posts } from '../features/posts';
 
 const AdminRoutes = () => {
   const navigate = useNavigate();
@@ -25,15 +25,14 @@ const AdminRoutes = () => {
 
         <Route path="users">
           <Route index element={<Users />} />
-          {/* <Route path="new" element={<NewUserForm />} />
-          <Route path=":id" element={<EditUser />} /> */}
+          {/* <Route path=":id" element={<EditUser />} /> */}
         </Route>
 
-        {/* <Route path="posts">
-          <Route index element={<PostsList />} />
-          <Route path="new" element={<NewPost />} />
-          <Route path=":id" element={<EditPost />} />
-        </Route> */}
+        <Route path="posts">
+          <Route index element={<Posts />} />
+          <Route path="add" element={<AddPost />} />
+          {/* <Route path=":id" element={<EditPost />} /> */}
+        </Route>
 
         <Route path="*" element={<NotFound />} />
       </Route>
