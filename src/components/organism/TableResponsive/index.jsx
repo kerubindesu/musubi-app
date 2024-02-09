@@ -64,7 +64,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
         Header: "",
         Cell: ({ row }) => (
           <div className="flex justify-center items-center gap-4">
-            <Link to={`${row.values.id}/edit`}>
+            <Link to={`${row.values.id}`}>
               <span className="py-1 px-2 text-emerald-500 hover:bg-inherit rounded-sm">Edit</span>
             </Link>
             <button

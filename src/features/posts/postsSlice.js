@@ -14,6 +14,19 @@ export const getPosts = createAsyncThunk(
   }
 );
 
+export const getPost = createAsyncThunk(
+  'posts/getPost',
+  async(id, { rejectWithValue }) => {
+    try {
+      const response = await axiosPrivate.get(`http://localhost:3500/posts/${id}`);
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const createPost = createAsyncThunk(
   'posts/createPost',
   async({ user, title, text, file, navigate }, { rejectWithValue }) => {
@@ -25,6 +38,33 @@ export const createPost = createAsyncThunk(
       formData.append('file', file);
 
       const response = await axiosPrivate.post('http://localhost:3500/posts', formData, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      if (response) {
+        navigate("/dash/posts")
+      }
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const updatePost = createAsyncThunk(
+  'posts/updatePost',
+  async({ id, title, text, file, navigate }, { rejectWithValue }) => {
+    try {
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('text', text);
+      formData.append('file', file);
+
+      const response = await axiosPrivate.patch(`http://localhost:3500/posts/${id}`, formData, {
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -60,6 +100,7 @@ const postSlice = createSlice({
   name: 'posts',
   initialState: {
     posts: [],
+    post: "",
     totalRows: 0,
     totalPage: 0,
     loading: false,
@@ -84,6 +125,22 @@ const postSlice = createSlice({
     });
 
     builder.addCase(getPosts.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+
+    builder.addCase(getPost.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+
+    builder.addCase(getPost.fulfilled, (state, action) => {
+      state.post = action.payload;
+      state.loading = false;
+      state.error = null;
+    });
+
+    builder.addCase(getPost.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

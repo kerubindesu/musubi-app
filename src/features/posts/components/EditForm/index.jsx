@@ -1,23 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button, FloatingLabel, Loading } from "../../../../components/atoms"
 import { useDispatch, useSelector } from "react-redux";
-import { createPost } from "../../postsSlice";
-import { getUserAuth } from "../../../auth/authSlice";
+import { getPost, updatePost } from "../../postsSlice";
 import { RiImageAddLine } from "react-icons/ri";
 
-const AddForm = () => {
+const EditForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const [user, setUser] = useState("")
+  const { id } = useParams()
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");
 
-  const { loading } = useSelector((state) => state.posts);
-  const { userAuth } = useSelector((state) => state.auth);
+  const { loading, post } = useSelector((state) => state.posts);
+
+  useEffect(() => {
+    dispatch(getPost(id));
+  }, [id, dispatch]);
+
+  useEffect(() => {
+    if (post) {
+      setTitle(post.title)
+      setText(post.text)
+      setPreview(post.img_url)
+    }
+  }, [post])
 
   const loadImage = (e) => {
     const image = e.target.files[0];
@@ -29,17 +39,13 @@ const AddForm = () => {
     e.preventDefault()
     
     try{
-      await dispatch(createPost({ user, title, text, file, navigate }))
+      await dispatch(updatePost({ id, title, text, file, navigate }))
     } catch (error) {
       if(error.response) {
           console.log(error)
       }
     }
   }
-
-  useEffect(() => {
-    dispatch(getUserAuth())
-  }, [dispatch])
 
   return (
     <div className="w-full">
@@ -90,11 +96,10 @@ const AddForm = () => {
           </label>
 
           <Button
-            onClick={() => setUser(userAuth.username)}
             disabled={loading}
             type={"submit"} 
             variant={"bg-gradient-to-r from-sky-800 to-sky-700 shadow-lg text-white"}
-            text={!loading && "Save"}
+            text={!loading && "Update"}
             icon={loading && <Loading />}
           />
         </form>
@@ -103,4 +108,4 @@ const AddForm = () => {
   );
 };
 
-export default AddForm;
+export default EditForm;

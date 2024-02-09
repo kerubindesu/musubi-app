@@ -1,4 +1,5 @@
-import Posts from "./pages/Posts";
 import AddPost from "./pages/AddPost";
+import EditPost from "./pages/EditPost";
+import Posts from "./pages/Posts";
 
-export { AddPost, Posts }
+export { AddPost, EditPost, Posts }

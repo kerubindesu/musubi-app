@@ -5,7 +5,7 @@ import AdminDashboard from '../pages/admin/AdminDashboard';
 import NotFound from '../pages/NotFound';
 import { useSelector } from 'react-redux';
 import Users from '../features/users/pages/Users';
-import { AddPost, Posts } from '../features/posts';
+import { AddPost, EditPost, Posts } from '../features/posts';
 
 const AdminRoutes = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const AdminRoutes = () => {
         <Route path="posts">
           <Route index element={<Posts />} />
           <Route path="add" element={<AddPost />} />
-          {/* <Route path=":id" element={<EditPost />} /> */}
+          <Route path=":id" element={<EditPost />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
