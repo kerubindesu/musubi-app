@@ -1,5 +1,5 @@
 import React from "react";
-import { CgSearch } from "react-icons/cg";
+import { RiSearchLine } from "react-icons/ri";
 
 const InputSearch = ({ variant, value, onChange, placeholder }) => {
   return (
@@ -7,7 +7,7 @@ const InputSearch = ({ variant, value, onChange, placeholder }) => {
       <form
         className={`px-2 w-full md:max-w-lg flex items-center justify-between gap-2 border border-slate-200 rounded ${variant} bg-white`}
       >
-        <CgSearch className="text-slate-400 text-lg" />
+        <RiSearchLine className="text-slate-400 text-lg" />
         <input
           type="q"
           placeholder={placeholder}

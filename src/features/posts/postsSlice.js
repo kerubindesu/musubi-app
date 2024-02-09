@@ -16,16 +16,24 @@ export const getPosts = createAsyncThunk(
 
 export const createPost = createAsyncThunk(
   'posts/createPost',
-  async({ user, tittle, text, file }, { rejectWithValue }) => {
+  async({ user, title, text, file, navigate }, { rejectWithValue }) => {
     try {
-      const response = await axiosPrivate.post('http://localhost:3500/posts', {
-        user,
-        tittle,
-        text,
-        file,
-      }, {
-        withCredentials: true
+      const formData = new FormData();
+      formData.append('username', user);
+      formData.append('title', title);
+      formData.append('text', text);
+      formData.append('file', file);
+
+      const response = await axiosPrivate.post('http://localhost:3500/posts', formData, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       });
+
+      if (response) {
+        navigate("/dash/posts")
+      }
 
       return response.data;
     } catch (error) {

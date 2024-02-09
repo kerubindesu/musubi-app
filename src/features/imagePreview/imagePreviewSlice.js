@@ -3,19 +3,19 @@ import { createSlice } from "@reduxjs/toolkit";
 const imagePreviewSlice = createSlice({
   name: "imagePreview",
   initialState: {
-    imageURL: [],
+    imgProperties: [],
     imagePreview: false,
   },
   reducers: {
     setImagePreview: (state, action) => {
       state.imagePreview = action.payload;
     },
-    setImageURL: (state, action) => {
-      state.imageURL = action.payload;
+    setimgProperties: (state, action) => {
+      state.imgProperties = action.payload;
     }
   },
 });
 
-export const { setImagePreview, setImageURL } = imagePreviewSlice.actions;
+export const { setImagePreview, setimgProperties } = imagePreviewSlice.actions;
 
 export default imagePreviewSlice.reducer;

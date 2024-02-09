@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
-import { setImagePreview, setImageURL } from "../../imagePreviewSlice";
+import { setImagePreview, setimgProperties } from "../../imagePreviewSlice";
 import { RiCloseLine } from 'react-icons/ri'
 
 const ImagePreview = () => {
   const dispatch = useDispatch();
 
-  const { imagePreview, imageURL } = useSelector((state) => state.imagePreview);
+  const { imagePreview, imgProperties } = useSelector((state) => state.imagePreview);
 
   if (imagePreview) {
     disableBodyScroll(document)
@@ -26,21 +26,21 @@ const ImagePreview = () => {
           <div
             onClick={() =>{
               dispatch(setImagePreview(false))
-              dispatch(setImageURL([]))
+              dispatch(setimgProperties([]))
             }}
             className="fixed inset-0 bg-black/20 backdrop-blur-sm"
           ></div>
           <div className="relative w-full max-w-3xl flex flex-col justify-center items-center bg-black rounded-sm shadow">
             <div onClick={() => {
                 dispatch(setImagePreview(false))
-                dispatch(setImageURL([]))
+                dispatch(setimgProperties([]))
               }}
               className="absolute top-2 right-2 bg-slate-800/10 rounded text-white text-3xl font-semibold text-center cursor-pointer z-10"
             >
                 <RiCloseLine />
             </div>
             <figure className={`w-full object-cover`}>
-              <img src={imageURL[0]} alt={imageURL[1]} />
+              <img src={imgProperties.url} alt={imgProperties.alt} />
             </figure>
           </div>
         </div>

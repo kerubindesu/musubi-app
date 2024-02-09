@@ -6,7 +6,7 @@ import { TableSearch } from "../../molecules";
 import { Button, HeadingTitle, Loading } from "../../atoms";
 import ReactPaginate from "react-paginate";
 import { useDispatch } from "react-redux";
-import { setImagePreview, setImageURL } from "../../../features/imagePreview/imagePreviewSlice";
+import { setImagePreview, setimgProperties } from "../../../features/imagePreview/imagePreviewSlice";
 import ImagePreview from "../../../features/imagePreview/components/ImagePreview";
 
 const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyword, page, totalPage, setPage, totalRows }) => {
@@ -37,7 +37,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
                   <img 
                     onClick={() => { 
                       dispatch(setImagePreview(true))
-                      dispatch(setImageURL([value[0], value[1]]))
+                      dispatch(setimgProperties({url: value[0], alt: value[1]}))
                     }}
                     src={value[0]} 
                     className="absolute inset-0 lg:relative h-full w-full max-h-[4rem] object-cover hover:filter hover:contrast-50 cursor-pointer" 
