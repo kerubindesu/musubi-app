@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Logo = ({variant, icon}) => {
+const Logo = ({variant, icon, text}) => {
   return (
-    <Link to="/">
-      <i className={`text-2xl ${variant}`}>{icon}</i>
+    <Link className={`flex items-center ${variant} text-xl`} to="/">
+      <i className={`text-2xl`}>{icon}</i>
+      {text}
     </Link>
   )
 }
