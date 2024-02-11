@@ -145,6 +145,38 @@ const postSlice = createSlice({
       state.error = action.payload;
     });
 
+    builder.addCase(createPost.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+
+    builder.addCase(createPost.fulfilled, (state, action) => {
+      state.post = action.payload;
+      state.loading = false;
+      state.error = null;
+    });
+
+    builder.addCase(createPost.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+
+    builder.addCase(updatePost.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+
+    builder.addCase(updatePost.fulfilled, (state, action) => {
+      state.post = action.payload;
+      state.loading = false;
+      state.error = null;
+    });
+
+    builder.addCase(updatePost.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+
     builder.addCase(deletePost.pending, (state) => {
       state.loading = true;
     });

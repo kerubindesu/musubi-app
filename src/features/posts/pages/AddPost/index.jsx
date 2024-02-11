@@ -5,7 +5,11 @@ import { HeadingTitle } from '../../../../components/atoms'
 const AddPost = () => {
   return (
     <>
-      <HeadingTitle text={"Add Post"} back={true} />
+      <HeadingTitle
+        text={"Add Post"}
+        back={true} 
+        variant={"mb-4"}
+      />
       <AddForm />
     </>
   )

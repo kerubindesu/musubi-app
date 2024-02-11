@@ -42,7 +42,7 @@ const ConfirmDeleteModal = ({ message, confirm }) => {
                   onClick={confirm}
                   data-modal-toggle="popup-modal"
                   type="button"
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-100 rounded text-emerald-500 hover:text-emerald-400 font-medium focus:z-10"
+                  className="px-4 py-2 bg-slate-100 hover:bg-slate-100 rounded text-red-500 hover:text-red-400 font-medium focus:z-10"
                 >
                   Hapus
                 </button>

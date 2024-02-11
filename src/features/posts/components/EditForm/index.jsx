@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button, FloatingLabel, Loading } from "../../../../components/atoms"
 import { useDispatch, useSelector } from "react-redux";
 import { getPost, updatePost } from "../../postsSlice";
-import { RiImageAddLine } from "react-icons/ri";
+import { RiImageAddLine, RiImageEditLine, RiInformationLine } from "react-icons/ri";
 
 const EditForm = () => {
   const dispatch = useDispatch()
@@ -15,7 +15,7 @@ const EditForm = () => {
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");
 
-  const { loading, post } = useSelector((state) => state.posts);
+  const { loading, post, error: errPost } = useSelector((state) => state.posts);
 
   useEffect(() => {
     dispatch(getPost(id));
@@ -71,7 +71,7 @@ const EditForm = () => {
             htmlFor={ "text" }
           />
 
-          <label htmlFor="file-upload" className="relative flex flex-col items-center bg-white/90 border rounded shadow-sm hover:shadow-none cursor-pointer">
+          <label htmlFor="file-upload" className="relative flex flex-col items-center bg-white/90 border rounded shadow-sm hover:shadow-none cursor-pointer overflow-hidden box-border">
           {preview ? (
             <figure className="absolute inset-0">
               <img
@@ -83,9 +83,11 @@ const EditForm = () => {
           ) : (
             ""
           )}
-          <div className="py-6 px-4 h-full w-full bg-white/20 hover:bg-white/50 z-10 flex flex-col justify-center items-center rounded">
-            <RiImageAddLine className="text-3xl" />
-            <span className="mt-2 text-base leading-normal">{preview ? "Change image" : "Select a image"}</span>
+          <div className="py-6 px-4 h-full w-full bg-black/20 hover:bg-black/50 z-10 flex flex-col justify-center items-center rounded text-slate-200">
+            { preview ? <RiImageEditLine className="text-3xl" /> : <RiImageAddLine className="text-3xl" /> }
+            <span className="mt-2 text-base leading-normal">
+              { preview ? "Change image" : "Select a image"}
+            </span>
           </div>
           <input
             id="file-upload"
@@ -94,6 +96,14 @@ const EditForm = () => {
             onChange={loadImage}
           />
           </label>
+
+          { errPost && errPost ? (
+              <div className="w-full flex items-center gap-1 text-red-500 text-base font-semibold">
+                <RiInformationLine className="text-xl" /> { `${errPost.message}` }
+              </div>
+          ) : (
+              ""
+          )}
 
           <Button
             disabled={loading}

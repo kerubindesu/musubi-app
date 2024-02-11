@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
-import { setImagePreview, setimgProperties } from "../../imagePreviewSlice";
+import { setImagePreview, setImgProperties } from "../../imagePreviewSlice";
 import { RiCloseLine } from 'react-icons/ri'
 
 const ImagePreview = () => {
@@ -9,42 +9,41 @@ const ImagePreview = () => {
 
   const { imagePreview, imgProperties } = useSelector((state) => state.imagePreview);
 
-  if (imagePreview) {
-    disableBodyScroll(document)
-  } else {
-    enableBodyScroll(document)
-  }
+  useEffect(() => {
+    // Mengatur scroll body
+    if (imagePreview) {
+      disableBodyScroll(document.body);
+    } else {
+      enableBodyScroll(document.body);
+    }
+    
+    return () => {
+      enableBodyScroll(document.body);
+    };
+  }, [imagePreview]);
+
+  const closePreview = () => {
+    dispatch(setImagePreview(false));
+    dispatch(setImgProperties([]));
+  };
 
   return (
     <>
-      <div
-        className={`${
-          imagePreview ? "flex" : "hidden"
-        } flex justify-center items-center overflow-hidden fixed inset-0 z-50`}
-      >
-        <div className="p-4 absolute inset-0 flex justify-center items-center">
-          <div
-            onClick={() =>{
-              dispatch(setImagePreview(false))
-              dispatch(setimgProperties([]))
-            }}
-            className="fixed inset-0 bg-black/20 backdrop-blur-sm"
-          ></div>
-          <div className="relative w-full max-w-3xl flex flex-col justify-center items-center bg-black rounded-sm shadow">
-            <div onClick={() => {
-                dispatch(setImagePreview(false))
-                dispatch(setimgProperties([]))
-              }}
-              className="absolute top-2 right-2 bg-slate-800/10 rounded text-white text-3xl font-semibold text-center cursor-pointer z-10"
+      {imagePreview && (
+        <div onClick={closePreview} className="flex justify-center items-center fixed inset-0 z-50 bg-black/20">
+          <div className="p-4 flex flex-col justify-center items-center">
+            <div
+              onClick={closePreview}
+              className="absolute top-2 right-2 bg-slate-800/10 rounded-full text-white text-3xl font-semibold text-center cursor-pointer z-10"
             >
-                <RiCloseLine />
+              <RiCloseLine />
             </div>
-            <figure className={`w-full object-cover`}>
-              <img src={imgProperties.url} alt={imgProperties.alt} />
-            </figure>
+            <div onClick={(e) => e.stopPropagation()} className="max-w-3xl w-full bg-white rounded-sm shadow-lg overflow-hidden">
+              <img src={imgProperties.url} alt={imgProperties.alt} className="w-full h-full object-contain" />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

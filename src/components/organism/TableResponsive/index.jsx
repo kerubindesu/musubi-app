@@ -6,8 +6,9 @@ import { TableSearch } from "../../molecules";
 import { Button, HeadingTitle, Loading } from "../../atoms";
 import ReactPaginate from "react-paginate";
 import { useDispatch } from "react-redux";
-import { setImagePreview, setimgProperties } from "../../../features/imagePreview/imagePreviewSlice";
+import { setImagePreview, setImgProperties } from "../../../features/imagePreview/imagePreviewSlice";
 import ImagePreview from "../../../features/imagePreview/components/ImagePreview";
+import { RiEyeLine } from "react-icons/ri";
 
 const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyword, page, totalPage, setPage, totalRows }) => {
   const dispatch = useDispatch()
@@ -34,15 +35,21 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
               accessor: key,
               Cell: ({ value }) => (
                 <>
-                  <img 
+                  <div
                     onClick={() => { 
                       dispatch(setImagePreview(true))
-                      dispatch(setimgProperties({url: value[0], alt: value[1]}))
+                      dispatch(setImgProperties({url: value[0], alt: value[1]}))
                     }}
-                    src={value[0]} 
-                    className="absolute inset-0 lg:relative h-full w-full max-h-[4rem] object-cover hover:filter hover:contrast-50 cursor-pointer" 
-                    alt={value[1]}
-                  />
+                    className="absolute inset-0 z-10 flex flex-col justify-center items-center text-2xl text-transparent hover:text-white cursor-pointer hover:bg-black/10">
+                    <RiEyeLine />
+                  </div>
+                  <div className="absolute inset-0">
+                    <img 
+                      src={value[0]} 
+                      className="w-full object-contain" 
+                      alt={value[1]}
+                    />
+                  </div>
                   <ImagePreview />
                 </>
               ),
@@ -172,7 +179,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
                             return (
                               <td
                                 {...cell.getCellProps()}
-                                className="px-2 max-w-xs relative text-ellipsis border"
+                                className="p-2 max-w-xs relative truncate border"
                               >
                                 {cell.render("Cell")}
                               </td>

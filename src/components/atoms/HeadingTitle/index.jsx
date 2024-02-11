@@ -6,18 +6,18 @@ const HeadingTitle = ({ text, variant, back }) => {
   const navigate = useNavigate()
 
   return (
-    <>
+    <div className={`${variant}`}>
       {back && back ? (
-        <div onClick={() => navigate(-1)} className="mb-8 flex flex-row text-slate-700 font-semibold cursor-pointer">
+        <div onClick={() => navigate(-1)} className="flex flex-row text-slate-700 font-semibold cursor-pointer">
           <RiArrowLeftSLine className="-ml-2 text-2xl" />
           <h1 className={`${variant}`}>{text}</h1>
         </div>
       ) : (
-        <div className="mb-8 text-slate-700 font-semibold">
-          <h1 className={`${variant}`}>{text}</h1>
+        <div className="text-slate-700 font-semibold">
+          <h1>{text}</h1>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

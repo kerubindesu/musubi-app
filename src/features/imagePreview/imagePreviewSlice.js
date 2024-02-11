@@ -10,12 +10,12 @@ const imagePreviewSlice = createSlice({
     setImagePreview: (state, action) => {
       state.imagePreview = action.payload;
     },
-    setimgProperties: (state, action) => {
+    setImgProperties: (state, action) => {
       state.imgProperties = action.payload;
     }
   },
 });
 
-export const { setImagePreview, setimgProperties } = imagePreviewSlice.actions;
+export const { setImagePreview, setImgProperties } = imagePreviewSlice.actions;
 
 export default imagePreviewSlice.reducer;
