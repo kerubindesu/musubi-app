@@ -171,10 +171,19 @@ const authSlice = createSlice({
       state.errRefreshToken = action.payload;
     });
 
+    builder.addCase(getUserAuth.pending, (state) => {
+      state.loading = true;
+    });
+
     builder.addCase(getUserAuth.fulfilled, (state, action) => {
       state.userAuth = action.payload;
       state.loading = false;
       state.error = null;
+    });
+
+    builder.addCase(getUserAuth.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     });
 
     builder.addCase(logout.pending, (state) => {

@@ -16,6 +16,6 @@ const navbarSlice = createSlice({
   },
 });
 
-export const { setNavBurgerMenu, navOption } = navbarSlice.actions;
+export const { setNavBurgerMenu, setNavOption } = navbarSlice.actions;
 
 export default navbarSlice.reducer;

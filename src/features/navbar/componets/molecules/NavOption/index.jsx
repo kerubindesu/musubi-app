@@ -17,11 +17,11 @@ const NavOption = ({ onClose, userAuth, onLogout }) => {
               </div>
             </div>
             <div className="p-4 w-full border-t hover:bg-slate-100 text-base font-semibold cursor-pointer" onClick={onLogout}>Logout</div>
-            <div onClick={onClose} className="p-2 bg-slate-200 rounded-full absolute top-4 right-4 cursor-pointer">
+            <div onClick={onClose} className="p-2 bg-slate-200 rounded-full absolute top-[0.75rem] right-4 cursor-pointer">
                 <RiCloseLine />
             </div>
         </div>
-        <div onClick={onClose} className="bg-white/65 backdrop-blur absolute inset-0 h-screen w-screen z-10"></div>
+        <div onClick={onClose} className="bg-transparent absolute inset-0 h-screen w-screen z-10"></div>
     </>
   )
 };

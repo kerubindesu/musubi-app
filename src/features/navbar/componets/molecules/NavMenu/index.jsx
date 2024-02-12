@@ -1,12 +1,13 @@
 import React from 'react'
+import { NavItem } from '../../atoms'
 
-const NavMenu = () => {
+const NavMenu = ({ variant }) => {
   return (
-    <div className="hidden md:flex gap-4">
-      <div>Home</div>
-      <div>Products</div>
-      <div>System</div>
-      <div>Tentang</div>
+    <div className={`${variant} w-full`}>
+      <NavItem to={"/"} text={"Home"} />
+      <NavItem to={"/products"} text={"Products"} />
+      <NavItem to={"/system"} text={"System"} />
+      <NavItem to={"/about"} text={"About"} />
     </div>
   )
 }

@@ -1,16 +1,18 @@
 import React from 'react'
 import { RiCloseLine } from 'react-icons/ri';
+import NavMenu from '../NavMenu';
 
 const NavBurgerMenu = ({ onClose }) => {
   return (
     <>
-        <div className="py-2 h-screen max-w-[20rem] flex flex-col justify-between items-start bg-white backdrop-blur-sm absolute inset-0 shadow z-20 text-base">
+        <div className="py-2 h-screen max-w-[20rem] flex flex-col justify-between items-start bg-white backdrop-blur-sm absolute inset-0 shadow z-20 text-base overflow-y-auto">
             <div className="pt-12 w-full flex flex-col text-base">
-                <div className="py-2 px-4 hover:bg-slate-100 cursor-pointer truncate">Apps</div>
-                <div className="py-2 px-4 hover:bg-slate-100 cursor-pointer truncate">Games</div>
-                <div className="py-2 px-4 hover:bg-slate-100 cursor-pointer truncate">Music</div>
+              
+              {/* Navbar Menu */}
+              <NavMenu variant={"pl-4 w-full flex flex-col md:hidden justify-center items-start"} />
+
             </div>
-            <div onClick={onClose} className="p-2 bg-slate-200 rounded-full absolute top-4 right-4 cursor-pointer">
+            <div onClick={onClose} className="p-2 bg-slate-200 rounded-full absolute top-[0.75rem] right-4 cursor-pointer">
                 <RiCloseLine />
             </div>
         </div>
