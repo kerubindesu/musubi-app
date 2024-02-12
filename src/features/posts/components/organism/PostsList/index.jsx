@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { deletePost, getPosts } from '../../postsSlice'
-import { setModal } from '../../../confirmDeleteModal/confirmDeleteModalSlice'
-import { TableResponsive } from '../../../../components/organism'
-import ConfirmDeleteModal from '../../../confirmDeleteModal/components/ConfirmDeleteModal'
+import { deletePost, getPosts } from '../../../postsSlice'
+import { setModal } from '../../../../confirmDeleteModal/confirmDeleteModalSlice'
+import { TableResponsive } from '../../../../../components/organism'
+import { ConfirmDeleteModal } from '../../../../confirmDeleteModal/components/organism'
 
 
-const PostList = () => {
+const PostsList = () => {
   const dispatch = useDispatch()
 
   const [items, setItems] = useState([])
@@ -72,4 +72,4 @@ const PostList = () => {
     )
 }
 
-export default PostList
+export default PostsList

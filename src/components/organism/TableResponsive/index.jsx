@@ -7,7 +7,7 @@ import { Button, HeadingTitle, Loading } from "../../atoms";
 import ReactPaginate from "react-paginate";
 import { useDispatch } from "react-redux";
 import { setImagePreview, setImgProperties } from "../../../features/imagePreview/imagePreviewSlice";
-import ImagePreview from "../../../features/imagePreview/components/ImagePreview";
+import { ImagePreview } from "../../../features/imagePreview/components/organism";
 import { RiEyeLine } from "react-icons/ri";
 
 const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyword, page, totalPage, setPage, totalRows }) => {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteUser, getUsers } from '../../usersSlice'
-import { setModal } from '../../../confirmDeleteModal/confirmDeleteModalSlice'
-import { TableResponsive } from '../../../../components/organism'
-import ConfirmDeleteModal from '../../../confirmDeleteModal/components/ConfirmDeleteModal'
+import { deleteUser, getUsers } from '../../../usersSlice'
+import { setModal } from '../../../../confirmDeleteModal/confirmDeleteModalSlice'
+import { TableResponsive } from '../../../../../components/organism'
+import { ConfirmDeleteModal } from '../../../../confirmDeleteModal/components/organism'
 
 const UserList = () => {
   const dispatch = useDispatch()

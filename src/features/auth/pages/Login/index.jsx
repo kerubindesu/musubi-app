@@ -1,6 +1,6 @@
 import React from 'react'
-import LoginForm from '../../components/LoginForm'
 import { AuthHeader } from '../../../../components/organism'
+import { LoginForm } from '../../components/organism'
 
 const Login = () => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react'
-import EditForm from '../../components/EditForm'
 import { HeadingTitle } from '../../../../components/atoms'
+import { EditForm } from '../../components/organism'
 
 const EditPost = () => {
   return (

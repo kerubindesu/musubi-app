@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Button, FloatingLabel, Loading } from '../../../../components/atoms'
+import { Button, FloatingLabel, Loading } from '../../../../../components/atoms'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import { registerUser, selectError, selectLoading } from '../../authSlice'
+import { registerUser, selectError, selectLoading } from '../../../authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 const RegisterForm = () => {

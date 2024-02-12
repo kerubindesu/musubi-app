@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
-import { setImagePreview, setImgProperties } from "../../imagePreviewSlice";
+import { setImagePreview, setImgProperties } from "../../../imagePreviewSlice";
 import { RiCloseLine } from 'react-icons/ri'
 
 const ImagePreview = () => {

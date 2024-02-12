@@ -1,6 +1,6 @@
 import React from 'react'
-import RegisterForm from '../../components/RegisterForm'
 import { AuthHeader } from '../../../../components/organism'
+import { RegisterForm } from '../../components/organism'
 
 const Register = () => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react'
-import AddForm from '../../components/AddForm'
 import { HeadingTitle } from '../../../../components/atoms'
+import { AddForm } from '../../components/organism'
 
 const AddPost = () => {
   return (

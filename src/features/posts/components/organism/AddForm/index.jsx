@@ -1,33 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Button, FloatingLabel, Loading } from "../../../../components/atoms"
+import { useNavigate } from "react-router-dom";
+import { Button, FloatingLabel, Loading } from "../../../../../components/atoms"
 import { useDispatch, useSelector } from "react-redux";
-import { getPost, updatePost } from "../../postsSlice";
+import { createPost } from "../../../postsSlice";
+import { getUserAuth } from "../../../../auth/authSlice";
 import { RiImageAddLine, RiImageEditLine, RiInformationLine } from "react-icons/ri";
 
-const EditForm = () => {
+const AddForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { id } = useParams()
+  const [user, setUser] = useState("")
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");
 
-  const { loading, post, error: errPost } = useSelector((state) => state.posts);
-
-  useEffect(() => {
-    dispatch(getPost(id));
-  }, [id, dispatch]);
-
-  useEffect(() => {
-    if (post) {
-      setTitle(post.title)
-      setText(post.text)
-      setPreview(post.img_url)
-    }
-  }, [post])
+  const { loading, error: errPost } = useSelector((state) => state.posts);
+  const { userAuth } = useSelector((state) => state.auth);
 
   const loadImage = (e) => {
     const image = e.target.files[0];
@@ -39,13 +29,17 @@ const EditForm = () => {
     e.preventDefault()
     
     try{
-      await dispatch(updatePost({ id, title, text, file, navigate }))
+      await dispatch(createPost({ user, title, text, file, navigate }))
     } catch (error) {
       if(error.response) {
           console.log(error)
       }
     }
   }
+
+  useEffect(() => {
+    dispatch(getUserAuth())
+  }, [dispatch])
 
   return (
     <div className="w-full">
@@ -83,7 +77,7 @@ const EditForm = () => {
           ) : (
             ""
           )}
-          <div className="py-6 px-4 h-full w-full bg-black/20 hover:bg-black/50 z-10 flex flex-col justify-center items-center rounded text-slate-200">
+          <div className="py-6 px-4 h-full w-full bg-black/20 hover:bg-black/50 z-10 flex flex-col justify-center items-center rounded text-white">
             { preview ? <RiImageEditLine className="text-3xl" /> : <RiImageAddLine className="text-3xl" /> }
             <span className="mt-2 text-base leading-normal">
               { preview ? "Change image" : "Select a image"}
@@ -106,10 +100,11 @@ const EditForm = () => {
           )}
 
           <Button
+            onClick={() => setUser(userAuth.username)}
             disabled={loading}
             type={"submit"} 
             variant={"bg-gradient-to-r from-sky-800 to-sky-700 shadow-lg text-white"}
-            text={!loading && "Update"}
+            text={!loading && "Save"}
             icon={loading && <Loading />}
           />
         </form>
@@ -118,4 +113,4 @@ const EditForm = () => {
   );
 };
 
-export default EditForm;
+export default AddForm;

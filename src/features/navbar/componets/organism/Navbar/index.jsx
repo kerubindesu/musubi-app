@@ -71,7 +71,7 @@ const Navbar = () => {
                     />
                 </div>
 
-                <NavMenu variant={"w-[30rem] hidden md:flex justify-center items-center gap-6 lg:gap-8"} />
+                <NavMenu variant={"max-w-[30rem] hidden md:flex justify-center items-center gap-6 lg:gap-8"} />
                 
                 <div className="max-h-max w-[7rem] box-border overflow-hidden flex justify-end items-center gap-4">
                     <div className="flex justify-center items-center gap-2">

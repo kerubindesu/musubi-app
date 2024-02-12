@@ -1,10 +1,10 @@
 import React from 'react'
-import PostList from '../../components/PostList'
+import { PostsList } from '../../components/organism'
 
 const Posts = () => {
   return (
     <div>
-      <PostList />
+      <PostsList />
     </div>
   )
 }

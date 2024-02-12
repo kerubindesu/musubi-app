@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setModal } from "../../confirmDeleteModalSlice";
+import { setModal } from "../../../confirmDeleteModalSlice";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 const ConfirmDeleteModal = ({ message, confirm }) => {

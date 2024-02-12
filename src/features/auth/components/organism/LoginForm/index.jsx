@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Button, FloatingLabel, Loading } from '../../../../components/atoms'
+import { Button, FloatingLabel, Loading } from '../../../../../components/atoms'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { loginUser, selectError, selectLoading } from '../../authSlice'
+import { loginUser, selectError, selectLoading } from '../../../authSlice'
 
 const LoginForm = () => {
     const dispatch = useDispatch()
