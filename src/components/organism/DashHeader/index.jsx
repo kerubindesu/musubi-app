@@ -19,6 +19,7 @@ const DashHeader = () => {
         <div>Dash Header</div>
         <Link className='text-sky-500' to="/dash/users">Users</Link>
         <Link className='text-sky-500' to="/dash/posts">Post</Link>
+        <Link className='text-sky-500' to="/dash/settings">Settings</Link>
       </div>
       <form onSubmit={handleLogout}>
         <button>Logout</button>

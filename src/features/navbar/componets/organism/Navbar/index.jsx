@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { RiWindowsFill, RiMenuLine, RiWhatsappLine, RiFacebookCircleLine } from 'react-icons/ri';
+import { RiMenuLine, RiWhatsappLine, RiFacebookCircleLine } from 'react-icons/ri';
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { NavBurgerMenu, NavMenu, NavOption } from "../../molecules";
-import { Logo } from "../../../../../components/molecules"
 import { useDispatch, useSelector } from "react-redux";
 import { getUserAuth, logout } from "../../../../auth/authSlice";
 import { useNavigate } from "react-router-dom";
-import { Loading } from "../../../../../components/atoms";
+import { Loading, Logo } from "../../../../../components/atoms";
 import { setNavBurgerMenu, setNavOption } from "../../../navbarSlice";
 
 const Navbar = () => {
@@ -55,8 +54,8 @@ const Navbar = () => {
 
     return (
         <div className={`${onScrolling ? 'bg-white/10' : 'bg-white'} sticky top-0 w-full border-b`}>
-            <div className={`mx-auto px-4 h-14 w-full max-w-7xl box-border flex justify-between items-center text-base backdrop-blur-sm transition ease-in duration-300`}>
-                <div className="max-h-max md:w-[7rem] box-border overflow-hidden flex justify-start items-center text-2xl gap-4">
+            <div className={`mx-auto px-4 h-16 w-full max-w-7xl box-border flex justify-between items-center text-base backdrop-blur-sm transition ease-in duration-300`}>
+                <div className="max-h-max md:w-[7rem] box-border overflow-hidden flex justify-start items-center text-2xl gap-2">
                     <RiMenuLine onClick={() => dispatch(setNavBurgerMenu(true))} className="block md:hidden cursor-pointer" />
                     {navBurgerMenu && (
                         <>
@@ -65,9 +64,7 @@ const Navbar = () => {
                     )}
 
                     <Logo
-                        variant="justify-center md:justify-start"
-                        icon={<RiWindowsFill />}
-                        text={"Microsoft"}
+                        variant="max-h-[3rem] box-border"
                     />
                 </div>
 

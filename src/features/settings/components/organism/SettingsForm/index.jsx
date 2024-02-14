@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, FloatingLabel, Loading } from '../../../../../components/atoms';
 import { RiImageAddLine, RiImageEditLine, RiInformationLine } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSetting, updateSetting } from '../../../settingsSlice';
+import { getSettings, updateSettings } from '../../../settingsSlice';
 import { useNavigate } from 'react-router-dom';
 
 const SettingsForm = () => {
@@ -26,28 +26,30 @@ const SettingsForm = () => {
     const [password, setPassword] = useState("");
     const [senderEmail, setSenderEmail] = useState("");
     
-    const { loading, settings, error: errSettings } = useSelector((state) => state.posts);
+    const { loading, settings, error: errSettings } = useSelector((state) => state.settings);
 
     useEffect(() => {
-        dispatch(getSetting());
-        }, [dispatch]);
+        dispatch(getSettings());
+    }, [dispatch]);
 
-        useEffect(() => {
+    console.log(settings?.theme)
+
+    useEffect(() => {
         if (settings) {
-            setTheme(settings.theme)
-            setPrimary(settings?.color_palette?.primary)
-            setSecondary(settings?.color_palette?.secondary)
-            setBackground(settings?.color_palette?.background)
-            setText(settings?.color_palette?.text)
-            setDescription(settings.description)
-            setSiteName(settings.site_name)
-            setSiteDescription(settings.site_description)
-            setKeywords(settings.keywords)
-            setEmailServer(settings.email_server)
-            setPort(settings.port)
-            setUsername(settings.username)
-            setSenderEmail(settings.sender_email)
-            setPreview(settings.logo_url)
+            setTheme(settings.theme || "")
+            setPrimary(settings?.color_palette?.primary || "")
+            setSecondary(settings?.color_palette?.secondary || "")
+            setBackground(settings?.color_palette?.background || "")
+            setText(settings?.color_palette?.text || "")
+            setDescription(settings.description || "")
+            setSiteName(settings.site_name || "")
+            setSiteDescription(settings.site_description || "")
+            setKeywords(settings.keywords || "")
+            setEmailServer(settings.email_server || "")
+            setPort(settings.port || "")
+            setUsername(settings.username || "")
+            setSenderEmail(settings.sender_email || "")
+            setPreview(settings.logo_url || "")
         }
     }, [settings])
 
@@ -60,8 +62,8 @@ const SettingsForm = () => {
     const handleSubmit = async(e) => {
         e.preventDefault()
         
-        try{
-            await dispatch(updateSetting({ 
+        try {
+            await dispatch(updateSettings({ 
                 theme,
                 primary,
                 secondary,
@@ -99,8 +101,6 @@ const SettingsForm = () => {
                     variant={ "border-b-0 rounded-t-lg" }
                     htmlFor={ "theme" }
                 />
-
-                <div>Color Palette</div>
 
                 <FloatingLabel 
                     id={"primary"}
@@ -191,7 +191,7 @@ const SettingsForm = () => {
                 <FloatingLabel 
                     id={"siteDescription"}
                     type={ "text" }
-                    text={ "SiteDescription" }
+                    text={ "Site Description" }
                     value={ siteDescription }
                     onChange={ (e) => setSiteDescription(e.target.value) }
                     variant={ "border-b-0 rounded-t-lg" }
@@ -211,7 +211,7 @@ const SettingsForm = () => {
                 <FloatingLabel 
                     id={"emailServer"}
                     type={ "email" }
-                    text={ "EmailServer" }
+                    text={ "Email Server" }
                     value={ emailServer }
                     onChange={ (e) => setEmailServer(e.target.value) }
                     variant={ "border-b-0 rounded-t-lg" }
@@ -251,7 +251,7 @@ const SettingsForm = () => {
                 <FloatingLabel 
                     id={"senderEmail"}
                     type={ "email" }
-                    text={ "SenderEmail" }
+                    text={ "Sender Email" }
                     value={ senderEmail }
                     onChange={ (e) => setSenderEmail(e.target.value) }
                     variant={ "border-b-0 rounded-t-lg" }
@@ -268,10 +268,10 @@ const SettingsForm = () => {
 
                 <Button
                     disabled={loading}
-                    type={"submit"} 
-                    variant={"bg-gradient-to-r from-sky-800 to-sky-700 shadow-lg text-white"}
-                    text={!loading && "Update"}
-                    icon={loading && <Loading />}
+                    type="submit" 
+                    variant="bg-gradient-to-r from-sky-800 to-sky-700 shadow-lg text-white"
+                    text={!loading ? "Update" : ""}
+                    icon={loading ? <Loading /> : null}
                 />
             </form>
         </div>

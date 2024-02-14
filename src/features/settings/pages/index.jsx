@@ -1,3 +1,3 @@
-import Settings from "./Settings";
+import LogoSettings from "./LogoSettings";
 
-export { Settings }
+export { LogoSettings }

@@ -1,11 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosPrivate } from '../../utils/api';
 
-export const getSetting = createAsyncThunk(
-  'settings/getSetting',
-  async({ rejectWithValue }) => {
+export const getSettings = createAsyncThunk(
+  'settings/getSettings',
+  async(_, { rejectWithValue }) => {
     try {
-      const response = await axiosPrivate.get("http://localhost:3500/config");
+      const response = await axiosPrivate.get("http://localhost:3500/config",
+      {
+        withCredentials: true,
+      });
 
       return response.data;
     } catch (error) {
@@ -14,17 +17,17 @@ export const getSetting = createAsyncThunk(
   }
 );
 
-export const updateSetting = createAsyncThunk(
-  'settings/updateSetting',
+export const updateSettings = createAsyncThunk(
+  'settings/updateSettings',
   async({ theme, primary, secondary, background, text, file, description, siteName, siteDescription, keywords, emailServer, port, username, password, senderEmail, navigate }, { rejectWithValue }) => {
     try {
       const formData = new FormData();
 
       formData.append('theme', theme);
-      formData.append('color_palette.primary', primary);
-      formData.append('color_palette.secondary', secondary);
-      formData.append('color_palette.background', background);
-      formData.append('color_palette.text', text);
+      formData.append('primary', primary);
+      formData.append('secondary', secondary);
+      formData.append('background', background);
+      formData.append('text', text);
       formData.append('file', file);
       formData.append('description', description);
       formData.append('site_name', siteName);
@@ -44,7 +47,69 @@ export const updateSetting = createAsyncThunk(
       });
 
       if (response) {
-        navigate("/dash/settings")
+        navigate(window.location.pathname)
+      }
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+// export const createLogo = createAsyncThunk(
+//   'settings/createLogo',
+//   async({ file }, { rejectWithValue }) => {
+//     try {
+//       const formData = new FormData();
+//       formData.append('file', file);
+
+//       const response = await axiosPrivate.post('http://localhost:3500/logo', formData, {
+//         withCredentials: true,
+//         headers: {
+//           'Content-Type': 'multipart/form-data'
+//         }
+//       });
+
+//       return response.data;
+//     } catch (error) {
+//       return rejectWithValue(error.response.data);
+//     }
+//   }
+// );
+
+export const getLogo = createAsyncThunk(
+  'settings/getLogo',
+  async(_, { rejectWithValue }) => {
+    try {
+      const response = await axiosPrivate.get("http://localhost:3500/logo",
+      {
+        withCredentials: true,
+      });
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const updateLogo = createAsyncThunk(
+  'settings/updateLogo',
+  async({ file, dispatch }, { rejectWithValue }) => {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await axiosPrivate.patch(`http://localhost:3500/logo/`, formData, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      if (response) {
+        dispatch(getLogo())
       }
 
       return response.data;
@@ -58,40 +123,89 @@ const settingslice = createSlice({
   name: 'settings',
   initialState: {
     settings: [],
+    logo: [],
     loading: false,
     error: null,
   },
   reducers: {
   },
   extraReducers: (builder) => {
-    builder.addCase(getSetting.pending, (state) => {
+    builder.addCase(getSettings.pending, (state) => {
       state.loading = true;
       state.error = null;
     });
 
-    builder.addCase(getSetting.fulfilled, (state, action) => {
-      state.post = action.payload;
+    builder.addCase(getSettings.fulfilled, (state, action) => {
+      state.settings = action.payload;
       state.loading = false;
       state.error = null;
     });
 
-    builder.addCase(getSetting.rejected, (state, action) => {
+    builder.addCase(getSettings.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });
 
-    builder.addCase(updateSetting.pending, (state) => {
+    builder.addCase(updateSettings.pending, (state) => {
       state.loading = true;
       state.error = null;
     });
 
-    builder.addCase(updateSetting.fulfilled, (state, action) => {
-      state.post = action.payload;
+    builder.addCase(updateSettings.fulfilled, (state, action) => {
+      state.settings = action.payload;
       state.loading = false;
       state.error = null;
     });
 
-    builder.addCase(updateSetting.rejected, (state, action) => {
+    builder.addCase(updateSettings.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+
+    // builder.addCase(createLogo.pending, (state) => {
+    //   state.loading = true;
+    //   state.error = null;
+    // });
+
+    // builder.addCase(createLogo.fulfilled, (state, action) => {
+    //   state.settings = action.payload;
+    //   state.loading = false;
+    //   state.error = null;
+    // });
+
+    // builder.addCase(createLogo.rejected, (state, action) => {
+    //   state.loading = false;
+    //   state.error = action.payload;
+    // });
+
+    builder.addCase(getLogo.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+
+    builder.addCase(getLogo.fulfilled, (state, action) => {
+      state.logo = action.payload;
+      state.loading = false;
+      state.error = null;
+    });
+
+    builder.addCase(getLogo.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+
+    builder.addCase(updateLogo.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+
+    builder.addCase(updateLogo.fulfilled, (state, action) => {
+      state.logo = action.payload;
+      state.loading = false;
+      state.error = null;
+    });
+
+    builder.addCase(updateLogo.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });
