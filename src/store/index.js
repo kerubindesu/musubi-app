@@ -5,7 +5,8 @@ import postsReducer from '../features/posts/postsSlice';
 import confirmDeleteModalReducer from '../features/confirmDeleteModal/confirmDeleteModalSlice';
 import imagePreviewReducer from '../features/imagePreview/imagePreviewSlice';
 import navbarReducer from '../features/navbar/navbarSlice';
-import settingsReducer from '../features/settings/settingsSlice';
+import menusReducer from '../features/menus/menusSlice';
+import logoReducer from '../features/logo/logoSlice';
 
 
 const store = configureStore({
@@ -13,7 +14,8 @@ const store = configureStore({
     auth: authReducer,
     users: usersReducer,
     navbar: navbarReducer,
-    settings: settingsReducer,
+    menus: menusReducer,
+    logo: logoReducer,
     posts: postsReducer,
     confirmDeleteModal: confirmDeleteModalReducer,
     imagePreview: imagePreviewReducer,

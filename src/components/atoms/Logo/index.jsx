@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getLogo } from '../../../features/settings/settingsSlice';
+import { getLogo } from '../../../features/logo/logoSlice';
 import Loading from '../Loading';
 
 const Logo = ({ variant }) => {
     const dispatch = useDispatch()
 
-    const { loading, logo } = useSelector((state) => state.settings);
+    const { loading, logo } = useSelector((state) => state.logo);
 
     useEffect(() => {
         dispatch(getLogo())
@@ -14,7 +14,7 @@ const Logo = ({ variant }) => {
     return (
         <>
             {loading && <Loading />}
-            {logo && <img className={`${variant} object-contain`} src={logo.img_url} alt={logo.name} />}
+            {!loading && logo && <img className={`${variant} object-contain`} src={logo.img_url} alt={logo.name} />}
         </>
     )
 }

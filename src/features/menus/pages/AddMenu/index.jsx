@@ -2,11 +2,11 @@ import React from 'react'
 import { HeadingTitle } from '../../../../components/atoms'
 import { AddForm } from '../../components/organism'
 
-const AddPost = () => {
+const AddMenu = () => {
   return (
     <>
       <HeadingTitle
-        text={"Add Post"}
+        text={"Add Menu"}
         back={true} 
         marginBottom={"mb-8"}
         variant={"text-2xl"}
@@ -16,4 +16,4 @@ const AddPost = () => {
   )
 }
 
-export default AddPost
+export default AddMenu

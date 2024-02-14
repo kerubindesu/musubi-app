@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
-import { Login, Register } from '../features'
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshAccessToken, selectIsAuthenticated } from '../features/auth/authSlice';
 import NotFound from '../pages/NotFound';
+import { Login, Register } from '../features/auth/pages';
 
 const AuthRoutes = () => {
   const dispatch = useDispatch()

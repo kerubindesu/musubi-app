@@ -5,5 +5,6 @@ import InputSearch from "./InputSearch";
 import Loading from "./Loading";
 import Logo from "./Logo";
 import FloatingLabel from "./FloatingLabel";
+import Placeholder from "./Placeholder";
 
-export { Button, HeadingTitle, FloatingLabel, Input, InputSearch, Loading, Logo }
+export { Button, HeadingTitle, FloatingLabel, Input, InputSearch, Loading, Logo, Placeholder }

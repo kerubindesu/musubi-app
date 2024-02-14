@@ -1,3 +1,3 @@
-import Users from "../../users/pages/Users";
+import Users from "./Users";
 
 export { Users }

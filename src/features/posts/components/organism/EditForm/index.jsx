@@ -31,8 +31,14 @@ const EditForm = () => {
 
   const loadImage = (e) => {
     const image = e.target.files[0];
-    setFile(image);
-    setPreview(URL.createObjectURL(image));
+    if (image) {
+      setFile(image);
+      try {
+          setPreview(URL.createObjectURL(image));
+      } catch (error) {
+          console.error('Error creating object URL:', error);
+      }
+    }
   };
 
   const handleSubmit = async(e) => {
@@ -83,7 +89,7 @@ const EditForm = () => {
           ) : (
             ""
           )}
-          <div className="py-6 px-4 h-full w-full bg-black/20 hover:bg-black/50 z-10 flex flex-col justify-center items-center rounded text-slate-200">
+          <div className="px-4 h-full min-h-[24rem] w-full bg-black/20 hover:bg-black/50 z-10 flex flex-col justify-center items-center rounded text-slate-200">
             { preview ? <RiImageEditLine className="text-3xl" /> : <RiImageAddLine className="text-3xl" /> }
             <span className="mt-2 text-base leading-normal">
               { preview ? "Change image" : "Select a image"}
@@ -96,6 +102,10 @@ const EditForm = () => {
             onChange={loadImage}
           />
           </label>
+
+          {preview && (
+              <div className="text-base text-red-500">Klik gambar untuk mengubahnya.</div>
+          )}
 
           { errPost && errPost ? (
               <div className="w-full flex items-center gap-1 text-red-500 text-base font-semibold">

@@ -1,19 +1,19 @@
 import React from 'react'
 import { HeadingTitle } from '../../../../components/atoms'
-import { AddForm } from '../../components/organism'
+import { EditForm } from '../../components/organism'
 
-const AddPost = () => {
+const EditMenu = () => {
   return (
     <>
       <HeadingTitle
-        text={"Add Post"}
+        text={"Edit Post"}
         back={true} 
         marginBottom={"mb-8"}
         variant={"text-2xl"}
       />
-      <AddForm />
+      <EditForm />
     </>
   )
 }
 
-export default AddPost
+export default EditMenu

@@ -6,7 +6,8 @@ import NotFound from '../pages/NotFound';
 import { useSelector } from 'react-redux';
 import Users from '../features/users/pages/Users';
 import { AddPost, EditPost, Posts } from '../features/posts';
-import { LogoSettings } from '../features/settings/pages';
+import { LogoSettings } from '../features/logo/pages';
+import { AddMenu, EditMenu, Menus } from '../features/menus/pages';
 
 const AdminRoutes = () => {
   const navigate = useNavigate();
@@ -27,6 +28,12 @@ const AdminRoutes = () => {
         <Route path="users">
           <Route index element={<Users />} />
           {/* <Route path=":id" element={<EditUser />} /> */}
+        </Route>
+
+        <Route path="menus">
+          <Route index element={<Menus />} />
+          <Route path="add" element={<AddMenu />} />
+          <Route path=":id" element={<EditMenu />} />
         </Route>
 
         <Route path="posts">

@@ -3,7 +3,7 @@ import { useTable, useGlobalFilter, useSortBy } from "react-table";
 import { Link } from "react-router-dom";
 import { MdOutlineDataSaverOn } from "react-icons/md";
 import { TableSearch } from "../../molecules";
-import { Button, HeadingTitle, Loading } from "../../atoms";
+import { Button, Loading } from "../../atoms";
 import ReactPaginate from "react-paginate";
 import { useDispatch } from "react-redux";
 import { setImagePreview, setImgProperties } from "../../../features/imagePreview/imagePreviewSlice";
@@ -43,7 +43,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
                     className="absolute inset-0 z-10 flex flex-col justify-center items-center text-2xl text-transparent hover:text-white cursor-pointer hover:bg-black/10">
                     <RiEyeLine />
                   </div>
-                  <div className="absolute inset-0">
+                  <div className="absolute inset-0 flex flex-col justify-center items-center">
                     <img 
                       src={value[0]} 
                       className="w-full object-contain" 
@@ -115,11 +115,14 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
 
   return (
     <>
-      <div className="mb-4 w-full flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="w-full flex flex-col items-start justify-center">
-          <HeadingTitle text={title} variant={"text-xl"} />
-        </div>
-        <div className="w-full flex flex-row-reverse gap-4 justify-between items-center md:justify-start">
+      <div className="mb-4 w-full flex flex-col justify-cener items-center">
+        <div className="w-full flex flex-row-reverse gap-4 justify-between items-center">
+          <TableSearch
+            preGlobalFilteredRows={preGlobalFilteredRows}
+            setGlobalFilter={setGlobalFilter}
+            globalFilter={state.globalFilter}
+            setKeyword={setKeyword}
+          />
           <Link className={`${title === "Users" && "hidden"}`} to="add">
             <Button
               variant={"bg-sky-400 hover:bg-sky-500 rounded text-white"}
@@ -127,12 +130,6 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
               icon={<MdOutlineDataSaverOn />}
             />
           </Link>
-          <TableSearch
-            preGlobalFilteredRows={preGlobalFilteredRows}
-            setGlobalFilter={setGlobalFilter}
-            globalFilter={state.globalFilter}
-            setKeyword={setKeyword}
-          />
         </div>
       </div>
       {isLoading && isLoading?
@@ -197,7 +194,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
       )}
       
       <>
-      {items && (
+      {items && totalPage && (
         <div className="py-4 w-full flex flex-col md:flex-row justify-between md:items-center gap-4">
           <div className="text-gray-700">Showing {page +1} to {totalPage} of {totalRows}</div>
           <ReactPaginate

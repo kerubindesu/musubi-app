@@ -8,7 +8,8 @@ const EditPost = () => {
       <HeadingTitle
         text={"Edit Post"}
         back={true} 
-        variant={"mb-4"}
+        marginBottom={"mb-8"}
+        variant={"text-2xl"}
       />
       <EditForm />
     </>
