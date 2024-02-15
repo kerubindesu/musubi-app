@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosPrivate } from '../../utils/api';
+import { showNotification } from '../notification/notificationSlice';
 
 export const getUsers = createAsyncThunk(
   'users/getUsers',
@@ -16,14 +17,23 @@ export const getUsers = createAsyncThunk(
 
 export const deleteUser = createAsyncThunk(
   "users/deleteUser",
-  async(id, { rejectWithValue }) => {
+  async({ id, search, limit, page, dispatch }, { rejectWithValue }) => {
     try {
       const response = await axiosPrivate.delete(`
       http://localhost:3500/users/${id}`);
 
+      if (response) {
+        dispatch(showNotification({ message: response.data.message, type: 'success' }));
+        dispatch(getUsers({ search, page, limit }));
+      }
+
       return response.data;
-    } catch (err) {
-      return rejectWithValue(err.response.data.message);
+    } catch (error) {
+      if (error) {
+        dispatch(showNotification({ message: rejectWithValue(error.response.data.message).payload.message }));
+      }
+
+      return rejectWithValue(error.response.data.message);
     }
   }
 );

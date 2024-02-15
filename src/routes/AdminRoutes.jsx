@@ -4,8 +4,8 @@ import { AdminTemplate } from '../components/templates';
 import AdminDashboard from '../pages/admin/AdminDashboard';
 import NotFound from '../pages/NotFound';
 import { useSelector } from 'react-redux';
-import Users from '../features/users/pages/Users';
-import { AddPost, EditPost, Posts } from '../features/posts';
+import { Users } from '../features/users/pages';
+import { AddPost, EditPost, Posts } from '../features/posts/pages';
 import { LogoSettings } from '../features/logo/pages';
 import { AddMenu, EditMenu, Menus } from '../features/menus/pages';
 

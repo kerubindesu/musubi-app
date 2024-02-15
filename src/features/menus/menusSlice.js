@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosPrivate } from '../../utils/api';
+import { showNotification } from '../notification/notificationSlice';
 
 export const getMenus = createAsyncThunk(
   'menus/getMenus',
@@ -16,12 +17,16 @@ export const getMenus = createAsyncThunk(
 
 export const getMenu = createAsyncThunk(
   'menus/getMenu',
-  async(id, { rejectWithValue }) => {
+  async({ id, dispatch }, { rejectWithValue }) => {
     try {
       const response = await axiosPrivate.get(`http://localhost:3500/menus/${id}`);
 
       return response.data;
     } catch (error) {
+      if  (error) {
+        dispatch(showNotification({ message: rejectWithValue(error.response.data).payload.message }))
+      }
+
       return rejectWithValue(error.response.data);
     }
   }
@@ -29,7 +34,7 @@ export const getMenu = createAsyncThunk(
 
 export const createMenu = createAsyncThunk(
   'menus/createMenu',
-  async({ name, link, icon, navigate }, { rejectWithValue }) => {
+  async({ name, link, icon, dispatch, navigate }, { rejectWithValue }) => {
     try {
 
       const response = await axiosPrivate.post('http://localhost:3500/menus', { name, link, icon }, {
@@ -40,11 +45,17 @@ export const createMenu = createAsyncThunk(
       });
 
       if (response) {
+        dispatch(showNotification({ message: response.data.message, type: "success" }))
+
         navigate("/dash/menus")
       }
 
       return response.data;
     } catch (error) {
+      if  (error) {
+        dispatch(showNotification({ message: rejectWithValue(error.response.data).payload.message }))
+      }
+
       return rejectWithValue(error.response.data);
     }
   }
@@ -52,18 +63,24 @@ export const createMenu = createAsyncThunk(
 
 export const updateMenu = createAsyncThunk(
   'menus/updateMenu',
-  async({ id, name, link, icon, navigate }, { rejectWithValue }) => {
+  async({ id, name, link, icon, dispatch, navigate }, { rejectWithValue }) => {
     try {
       const response = await axiosPrivate.patch(`http://localhost:3500/menus/${id}`, { name, link, icon }, {
         withCredentials: true
       });
 
       if (response) {
+        dispatch(showNotification({ message: response.data.message, type: "success" }))
+
         navigate("/dash/menus")
       }
 
       return response.data;
     } catch (error) {
+      if  (error) {
+        dispatch(showNotification({ message: rejectWithValue(error.response.data).payload.message }))
+      }
+
       return rejectWithValue(error.response.data);
     }
   }
@@ -71,14 +88,24 @@ export const updateMenu = createAsyncThunk(
 
 export const deleteMenu = createAsyncThunk(
   "menus/deleteMenu",
-  async(id, { rejectWithValue }) => {
+  async({ id, search, page, limit, dispatch }, { rejectWithValue }) => {
     try {
       const response = await axiosPrivate.delete(`
       http://localhost:3500/menus/${id}`);
 
+      if (response) {
+        dispatch(showNotification({ message: response.data.message, type: "success" }))
+
+        dispatch(getMenus({ search, page, limit }))
+      }
+
       return response.data;
-    } catch (err) {
-      return rejectWithValue(err.response.data.message);
+    } catch (error) {
+      if  (error) {
+        dispatch(showNotification({ message: rejectWithValue(error.response.data).payload.message }))
+      }
+
+      return rejectWithValue(error.response.data.message);
     }
   }
 );

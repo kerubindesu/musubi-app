@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, FloatingLabel, Loading } from "../../../../../components/atoms"
 import { useDispatch, useSelector } from "react-redux";
-import { RiInformationLine } from "react-icons/ri";
 import { createMenu } from "../../../menusSlice";
 
 const AddForm = () => {
@@ -13,13 +12,13 @@ const AddForm = () => {
   const [link, setLink] = useState("");
   const [icon, setIcon] = useState("");
 
-  const { loading, error: errMenu } = useSelector((state) => state.menus);
+  const { loading } = useSelector((state) => state.menus);
 
   const handleSubmit = async(e) => {
     e.preventDefault()
     
     try{
-      await dispatch(createMenu({ name, link, icon, navigate }))
+      await dispatch(createMenu({ name, link, icon, dispatch, navigate }))
     } catch (error) {
       if(error.response) {
           console.log(error)
@@ -60,14 +59,6 @@ const AddForm = () => {
             variant={ "border-b-0 rounded-t-lg" }
             htmlFor={ "icon" }
           />
-
-          { errMenu && errMenu ? (
-              <div className="w-full flex items-center gap-1 text-red-500 text-base font-semibold">
-                <RiInformationLine className="text-xl" /> { `${errMenu.message}` }
-              </div>
-          ) : (
-              ""
-          )}
 
           <Button
             disabled={loading}

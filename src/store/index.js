@@ -6,6 +6,7 @@ import confirmDeleteModalReducer from '../features/confirmDeleteModal/confirmDel
 import imagePreviewReducer from '../features/imagePreview/imagePreviewSlice';
 import navbarReducer from '../features/navbar/navbarSlice';
 import menusReducer from '../features/menus/menusSlice';
+import notificationReducer from '../features/notification/notificationSlice'
 import logoReducer from '../features/logo/logoSlice';
 
 
@@ -15,6 +16,7 @@ const store = configureStore({
     users: usersReducer,
     navbar: navbarReducer,
     menus: menusReducer,
+    notification: notificationReducer,
     logo: logoReducer,
     posts: postsReducer,
     confirmDeleteModal: confirmDeleteModalReducer,

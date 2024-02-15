@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getLogo, updateLogo } from '../../../logoSlice'
-import { RiImageAddLine, RiImageEditLine, RiInformationLine } from 'react-icons/ri'
+import { RiImageAddLine, RiImageEditLine } from 'react-icons/ri'
 import { Button, Loading } from '../../../../../components/atoms'
 
 const LogoSettingsForm = () => {
@@ -11,7 +11,7 @@ const LogoSettingsForm = () => {
     const [file, setFile] = useState()
     const [preview, setPreview] = useState()
 
-    const { loading, logo, error } = useSelector((state) => state.logo);
+    const { loading, logo } = useSelector((state) => state.logo);
 
     useEffect(() => {
         dispatch(getLogo())
@@ -73,14 +73,6 @@ const LogoSettingsForm = () => {
                         onChange={loadImage}
                     />
                 </label>
-
-                { error && error ? (
-                    <div className="w-full flex items-center gap-1 text-red-500 text-base font-semibold">
-                        <RiInformationLine className="text-xl" /> { `${error.message}` }
-                    </div>
-                ) : (
-                    ""
-                )}
 
                 <Button
                     disabled={loading}

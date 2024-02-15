@@ -4,7 +4,7 @@ import { Button, FloatingLabel, Loading } from "../../../../../components/atoms"
 import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../../postsSlice";
 import { getUserAuth } from "../../../../auth/authSlice";
-import { RiImageAddLine, RiImageEditLine, RiInformationLine } from "react-icons/ri";
+import { RiImageAddLine, RiImageEditLine } from "react-icons/ri";
 
 const AddForm = () => {
   const dispatch = useDispatch()
@@ -16,7 +16,7 @@ const AddForm = () => {
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");
 
-  const { loading, error: errPost } = useSelector((state) => state.posts);
+  const { loading } = useSelector((state) => state.posts);
   const { userAuth } = useSelector((state) => state.auth);
 
   const loadImage = (e) => {
@@ -35,7 +35,7 @@ const AddForm = () => {
     e.preventDefault()
     
     try{
-      await dispatch(createPost({ user, title, text, file, navigate }))
+      await dispatch(createPost({ user, title, text, file, dispatch, navigate }))
     } catch (error) {
       if(error.response) {
           console.log(error)
@@ -100,14 +100,6 @@ const AddForm = () => {
             onChange={loadImage}
           />
           </label>
-
-          { errPost && errPost ? (
-              <div className="w-full flex items-center gap-1 text-red-500 text-base font-semibold">
-                <RiInformationLine className="text-xl" /> { `${errPost.message}` }
-              </div>
-          ) : (
-              ""
-          )}
 
           <Button
             onClick={() => setUser(userAuth.username)}

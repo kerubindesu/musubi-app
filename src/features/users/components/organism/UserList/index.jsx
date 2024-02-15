@@ -32,43 +32,43 @@ const UserList = () => {
 
   const confirm = async(e) => {
     e.preventDefault();
-    await dispatch(deleteUser(id));
-    await dispatch(getUsers({ search: keyword, page, limit }));
+
+    await dispatch(deleteUser({ id, search: keyword, page, limit, dispatch }));
     dispatch(setModal(false));
   };
 
   useEffect(() => {
-      setItems(
-        users &&
-          users.map((user, index) => {
-            return {
-              "#": page * limit + (index + 1),
-              id: user._id,
-              Username: user.username,
-              Nama: user.name,
-              Email: user.email,
-            };
-          })
-      );
-    }, [users, page, limit]);
+    setItems(
+      users &&
+        users.map((user, index) => {
+          return {
+            "#": page * limit + (index + 1),
+            id: user._id,
+            Username: user.username,
+            Nama: user.name,
+            Email: user.email,
+          };
+        })
+    );
+  }, [users, page, limit]);
 
-    return (
-      <>
-        <TableResponsive
-          items={items}
-          title={"Users"}
-          action={handleDelete}
-          setKeyword={setKeyword}
-          isLoading={loading}
-          noFoundData={noFoundUser}
-          page={page}
-          totalPage={totalPage}
-          setPage={setPage}
-          totalRows={totalRows}
-        />
-        <ConfirmDeleteModal confirm={confirm} message={message} />
-      </>
-    )
+  return (
+    <>
+      <TableResponsive
+        items={items}
+        title={"Users"}
+        action={handleDelete}
+        setKeyword={setKeyword}
+        isLoading={loading}
+        noFoundData={noFoundUser}
+        page={page}
+        totalPage={totalPage}
+        setPage={setPage}
+        totalRows={totalRows}
+      />
+      <ConfirmDeleteModal confirm={confirm} message={message} />
+    </>
+  )
 }
 
 export default UserList

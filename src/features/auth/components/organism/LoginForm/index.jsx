@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, FloatingLabel, Loading } from '../../../../../components/atoms'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { loginUser, selectError, selectLoading } from '../../../authSlice'
+import { loginUser, selectLoading } from '../../../authSlice'
 
 const LoginForm = () => {
     const dispatch = useDispatch()
@@ -11,13 +11,12 @@ const LoginForm = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
-    const errLogin = useSelector(selectError)
     const loading = useSelector(selectLoading)
 
     const handleSubmit = async(e) => {
         e.preventDefault()
         try{
-            await dispatch(loginUser({ username, password, navigate }))
+            await dispatch(loginUser({ username, password, dispatch, navigate }))
         } catch (error) {
             if(error.response) {
                 console.log(error)
@@ -32,14 +31,6 @@ const LoginForm = () => {
                 <div className="mb-4 w-full text-center">
                     <h1 className="text-2xl font-semibold text-slate-800">Login</h1>
                 </div>
-
-                { errLogin && errLogin ? (
-                    <p className="my-4 w-full text-red-500 text-base font-semibold">
-                    { `${errLogin.message}` }
-                    </p>
-                ) : (
-                    ""
-                )}
 
                 <FloatingLabel 
                     id={"username"}

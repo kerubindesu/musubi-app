@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, FloatingLabel, Loading } from '../../../../../components/atoms'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import { registerUser, selectError, selectLoading } from '../../../authSlice'
+import { registerUser, selectLoading } from '../../../authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 const RegisterForm = () => {
@@ -13,14 +13,13 @@ const RegisterForm = () => {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    
-    const errRegister = useSelector(selectError)
+
     const loading = useSelector(selectLoading)
 
     const handleSubmit = async(e) => {
         e.preventDefault()
         try{
-            await dispatch(registerUser({ name, username, email, password, navigate }))
+            await dispatch(registerUser({ name, username, email, password, dispatch, navigate }))
         } catch (error) {
             if(error.response) {
                 console.log(error)
@@ -35,13 +34,6 @@ const RegisterForm = () => {
                 <div className="mb-4 w-full text-center">
                     <h1 className="text-2xl font-semibold text-slate-800">Register</h1>
                 </div>
-                { errRegister && errRegister ? (
-                    <p className="my-4 w-full text-red-500 text-base font-semibold">
-                    { `${errRegister.message}*` }
-                    </p>
-                ) : (
-                    ""
-                )}
                 
                 <FloatingLabel 
                     id={"name"}

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button, FloatingLabel, Loading } from "../../../../../components/atoms"
 import { useDispatch, useSelector } from "react-redux";
 import { getPost, updatePost } from "../../../postsSlice";
-import { RiImageAddLine, RiImageEditLine, RiInformationLine } from "react-icons/ri";
+import { RiImageAddLine, RiImageEditLine } from "react-icons/ri";
 
 const EditForm = () => {
   const dispatch = useDispatch()
@@ -15,10 +15,10 @@ const EditForm = () => {
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");
 
-  const { loading, post, error: errPost } = useSelector((state) => state.posts);
+  const { loading, post } = useSelector((state) => state.posts);
 
   useEffect(() => {
-    dispatch(getPost(id));
+    dispatch(getPost({ id, dispatch }));
   }, [id, dispatch]);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const EditForm = () => {
     e.preventDefault()
     
     try{
-      await dispatch(updatePost({ id, title, text, file, navigate }))
+      await dispatch(updatePost({ id, title, text, file, dispatch, navigate }))
     } catch (error) {
       if(error.response) {
           console.log(error)
@@ -105,14 +105,6 @@ const EditForm = () => {
 
           {preview && (
               <div className="text-base text-red-500">Klik gambar untuk mengubahnya.</div>
-          )}
-
-          { errPost && errPost ? (
-              <div className="w-full flex items-center gap-1 text-red-500 text-base font-semibold">
-                <RiInformationLine className="text-xl" /> { `${errPost.message}` }
-              </div>
-          ) : (
-              ""
           )}
 
           <Button

@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { showNotification } from '../notification/notificationSlice';
 
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
-  async({ name, username, email, password, navigate }, { rejectWithValue }) => {
+  async({ name, username, email, password, dispatch, navigate }, { rejectWithValue }) => {
     try {
       const response = await axios.post('http://localhost:3500/users', {
         name,
@@ -14,10 +15,18 @@ export const registerUser = createAsyncThunk(
         withCredentials: true
       });
 
-      navigate("/auth/login");
+      if (response) {
+        dispatch(showNotification({ message: response.data.message, type: "success" }))
+  
+        navigate("/auth/login");
+      }
 
       return response.data;
     } catch (error) {
+      if  (error) {
+        dispatch(showNotification({ message: rejectWithValue(error.response.data).payload.message }))
+      }
+      
       return rejectWithValue(error.response.data);
     }
   }
@@ -36,11 +45,18 @@ export const loginUser = createAsyncThunk(
 
       dispatch((async() => {
         await dispatch(refreshAccessToken()); // menunggu pembaruan token
+        
+        dispatch(showNotification({ message: response.data.message, type: "success" }))
+
         navigate("/dash");
       })());
 
       return response.data
     } catch (error) {
+      if  (error) {
+        dispatch(showNotification({ message: rejectWithValue(error.response.data).payload.message }))
+      }
+
       return rejectWithValue(error.response.data);
     }
   }
@@ -48,7 +64,7 @@ export const loginUser = createAsyncThunk(
 
 export const refreshAccessToken = createAsyncThunk(
   'auth/refreshAccessToken',
-  async(_, { getState, rejectWithValue }) => {
+  async(_, { rejectWithValue }) => {
     try {
       const response = await axios.get('http://localhost:3500/auth/token', {
         withCredentials: true,
@@ -87,7 +103,6 @@ export const logout = createAsyncThunk('auth/logout', async(navigate, { rejectWi
 
     return null;
   } catch (error) {
-    
     return rejectWithValue(error.response.data);
   }
 });

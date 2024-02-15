@@ -33,43 +33,42 @@ const PostsList = () => {
 
   const confirm = async(e) => {
     e.preventDefault();
-    await dispatch(deletePost(id));
-    await dispatch(getPosts({ search: keyword, page, limit }));
+    await dispatch(deletePost({ id, search: keyword, page, limit, dispatch }));
     dispatch(setModal(false));
   };
 
   useEffect(() => {
-      setItems(
-        posts &&
-          posts.map((post, index) => {
-            return {
-              "#": page * limit + (index + 1),
-              id: post._id,
-              Title: post.title,
-              Desc: post.text,
-              Image: [post.img_url, post.image]
-            };
-          })
-      );
-    }, [posts, page, limit]);
+    setItems(
+      posts &&
+        posts.map((post, index) => {
+          return {
+            "#": page * limit + (index + 1),
+            id: post._id,
+            Title: post.title,
+            Desc: post.text,
+            Image: [post.img_url, post.image]
+          };
+        })
+    );
+  }, [posts, page, limit]);
 
-    return (
-      <>
-        <TableResponsive
-          items={items}
-          title={"Posts"}
-          action={handleDelete}
-          setKeyword={setKeyword}
-          isLoading={loading}
-          noFoundData={noFoundPost}
-          page={page}
-          totalPage={totalPage}
-          setPage={setPage}
-          totalRows={totalRows}
-        />
-        <ConfirmDeleteModal confirm={confirm} message={message} />
-      </>
-    )
+  return (
+    <>
+      <TableResponsive
+        items={items}
+        title={"Posts"}
+        action={handleDelete}
+        setKeyword={setKeyword}
+        isLoading={loading}
+        noFoundData={noFoundPost}
+        page={page}
+        totalPage={totalPage}
+        setPage={setPage}
+        totalRows={totalRows}
+      />
+      <ConfirmDeleteModal confirm={confirm} message={message} />
+    </>
+  )
 }
 
 export default PostsList

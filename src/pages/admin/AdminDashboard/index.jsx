@@ -1,47 +1,28 @@
-import React, { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { getUsers } from "../../../features/users/usersSlice"
-import { useDispatch, useSelector } from "react-redux"
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { HeadingTitle } from '../../../components/atoms';
+import { hideNotification } from '../../../features/notification/notificationSlice';
+import { Notification } from '../../../features/notification/components/organism';
 
 const AdminDashboard = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const { message, type, isOpen } = useSelector((state) => state.notification);
 
-  const [rows, setRows] = useState("");
-  const [limit, setLimit] = useState(32);
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState("");
-
-  const { users, totalRows } = useSelector((state) => state.users);
-
-  useEffect(() => {
-    dispatch(getUsers({ limit, search, page }));
-  }, [dispatch, limit, search]);
-
-  useEffect(() => {
-    setRows(users)
-  }, [users]);
-
-  const handleClick = (e) => {
-    e.preventDefault()
-    navigate("/")
-  }
-
+  const handleCloseNotification = () => {
+    dispatch(hideNotification());
+  };
+  
   return (
-    <>
-    <button onClick={handleClick} className="p-2 border shadow-lg cursor-pointer">Click here!</button>
-    {users &&
-    users.map((user, index) => (
-      <div key={index + 1}>
-        <br />
-        <div>Name: {user.name}</div>
-        <div>Username: {user.username}</div>
-        <div>Email: {user.email}</div>
-        <br />
-        <hr />
-      </div>
-    ))}
-    </>
+    <div>
+      <HeadingTitle variant={"text-2xl"} text={"Post"} />
+      {isOpen && (
+        <Notification
+          message={message}
+          type={type}
+          onClose={handleCloseNotification}
+        />
+      )}
+    </div>
   )
 }
 

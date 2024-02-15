@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosPrivate } from '../../utils/api';
+import { showNotification } from '../notification/notificationSlice';
 
 export const getPosts = createAsyncThunk(
   'posts/getPosts',
@@ -16,12 +17,16 @@ export const getPosts = createAsyncThunk(
 
 export const getPost = createAsyncThunk(
   'posts/getPost',
-  async(id, { rejectWithValue }) => {
+  async({ id, dispatch }, { rejectWithValue }) => {
     try {
       const response = await axiosPrivate.get(`http://localhost:3500/posts/${id}`);
 
       return response.data;
     } catch (error) {
+      if  (error) {
+        dispatch(showNotification({ message: rejectWithValue(error.response.data).payload.message }))
+      }
+
       return rejectWithValue(error.response.data);
     }
   }
@@ -29,7 +34,7 @@ export const getPost = createAsyncThunk(
 
 export const createPost = createAsyncThunk(
   'posts/createPost',
-  async({ user, title, text, file, navigate }, { rejectWithValue }) => {
+  async({ user, title, text, file, dispatch, navigate }, { rejectWithValue }) => {
     try {
       const formData = new FormData();
       formData.append('username', user);
@@ -45,11 +50,16 @@ export const createPost = createAsyncThunk(
       });
 
       if (response) {
+        dispatch(showNotification({ message: response.data.message, type: 'success' }));
         navigate("/dash/posts")
       }
 
       return response.data;
     } catch (error) {
+      if  (error) {
+        dispatch(showNotification({ message: rejectWithValue(error.response.data).payload.message }))
+      }
+
       return rejectWithValue(error.response.data);
     }
   }
@@ -57,7 +67,7 @@ export const createPost = createAsyncThunk(
 
 export const updatePost = createAsyncThunk(
   'posts/updatePost',
-  async({ id, title, text, file, navigate }, { rejectWithValue }) => {
+  async({ id, title, text, file, dispatch, navigate }, { rejectWithValue }) => {
     try {
       const formData = new FormData();
       formData.append('title', title);
@@ -72,11 +82,16 @@ export const updatePost = createAsyncThunk(
       });
 
       if (response) {
+        dispatch(showNotification({ message: response.data.message, type: 'success' }));
         navigate("/dash/posts")
       }
 
       return response.data;
     } catch (error) {
+      if  (error) {
+        dispatch(showNotification({ message: rejectWithValue(error.response.data).payload.message }))
+      }
+      
       return rejectWithValue(error.response.data);
     }
   }
@@ -84,14 +99,24 @@ export const updatePost = createAsyncThunk(
 
 export const deletePost = createAsyncThunk(
   "posts/deletePost",
-  async(id, { rejectWithValue }) => {
+  async({ id, search, page, limit, dispatch }, { rejectWithValue }) => {
     try {
       const response = await axiosPrivate.delete(`
       http://localhost:3500/posts/${id}`);
 
+      if (response) {
+        dispatch(showNotification({ message: response.data.message, type: 'success' }));
+
+        dispatch(getPosts({ search, page, limit }));
+      }
+
       return response.data;
-    } catch (err) {
-      return rejectWithValue(err.response.data.message);
+    } catch (error) {
+      if  (error) {
+        dispatch(showNotification({ message: rejectWithValue(error.response.data).payload.message }))
+      }
+      
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -122,6 +147,7 @@ const postSlice = createSlice({
       state.totalPage = action.payload.totalPage;
       state.loading = false;
       state.error = null;
+
     });
 
     builder.addCase(getPosts.rejected, (state, action) => {

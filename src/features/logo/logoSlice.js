@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosPrivate } from '../../utils/api';
 import axios from 'axios';
+import { showNotification } from '../notification/notificationSlice';
 
 // export const createLogo = createAsyncThunk(
 //   'logo/createLogo',
-//   async({ file }, { rejectWithValue }) => {
+//   async({ file, dispatch }, { rejectWithValue }) => {
 //     try {
 //       const formData = new FormData();
 //       formData.append('file', file);
@@ -16,9 +17,17 @@ import axios from 'axios';
 //         }
 //       });
 
+//       if (response) {
+//         dispatch(getLogo())
+//       }
+
 //       return response.data;
 //     } catch (error) {
-//       return rejectWithValue(error.response.data);
+//       if  (error) {
+//         dispatch(showNotification({ message: rejectWithValue(error.response.data).payload.message }))
+//       }
+
+//      return rejectWithValue(error.response.data);
 //     }
 //   }
 // );
@@ -54,11 +63,17 @@ export const updateLogo = createAsyncThunk(
       });
 
       if (response) {
+        dispatch(showNotification({ message: response.data.message, type: "success" }))
+
         dispatch(getLogo())
       }
 
       return response.data;
     } catch (error) {
+      if  (error) {
+        dispatch(showNotification({ message: rejectWithValue(error.response.data).payload.message }))
+      }
+
       return rejectWithValue(error.response.data);
     }
   }
