@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosPrivate } from '../../utils/api';
+import axios from 'axios';
 
 // export const createLogo = createAsyncThunk(
 //   'logo/createLogo',
@@ -26,7 +27,7 @@ export const getLogo = createAsyncThunk(
   'logo/getLogo',
   async(_, { rejectWithValue }) => {
     try {
-      const response = await axiosPrivate.get("http://localhost:3500/logo",
+      const response = await axios.get("http://localhost:3500/logo",
       {
         withCredentials: true,
       });

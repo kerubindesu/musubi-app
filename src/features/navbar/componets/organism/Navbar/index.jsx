@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { RiMenuLine, RiWhatsappLine, RiFacebookCircleLine } from 'react-icons/ri';
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
-import { NavBurgerMenu, NavMenu, NavOption } from "../../molecules";
+import { NavBurgerMenu, NavMenu } from "../../molecules";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserAuth, logout } from "../../../../auth/authSlice";
 import { useNavigate } from "react-router-dom";
-import { Loading, Logo } from "../../../../../components/atoms";
-import { setNavBurgerMenu, setNavOption } from "../../../navbarSlice";
+import { Dropdown, Loading, Logo } from "../../../../../components/atoms";
+import { setNavBurgerMenu } from "../../../navbarSlice";
 
 const Navbar = () => {
     const dispatch = useDispatch()
@@ -50,7 +50,10 @@ const Navbar = () => {
         dispatch(logout(navigate))
     };
 
-    console.log(navOption)
+    const dropdownOptions = [
+        { label: 'Profile', link: '/profile' },
+        { label: 'Settings', link: '/settings' },
+      ];
 
     return (
         <div className={`${onScrolling ? 'bg-white/10' : 'bg-white'} sticky top-0 w-full border-b`}>
@@ -70,7 +73,7 @@ const Navbar = () => {
 
                 <NavMenu variant={"max-w-[30rem] hidden md:flex justify-center items-center gap-6 lg:gap-8"} />
                 
-                <div className="max-h-max w-[7rem] box-border overflow-hidden flex justify-end items-center gap-4">
+                <div className="max-h-max w-[7rem] box-border flex justify-end items-center gap-4">
                     <div className="flex justify-center items-center gap-2">
                         <RiFacebookCircleLine className="text-2xl" />
                         <RiWhatsappLine className="text-2xl" />
@@ -82,18 +85,11 @@ const Navbar = () => {
                     ) : (
                         <>
                         {userAuth && (
-                            <>
-                                <div onClick={() => dispatch(setNavOption(true))} className="h-8 w-8 flex items-center justify-center bg-gray-200 rounded-full cursor-pointer text-lg font-semibold">
+                            <Dropdown onLogout={handleLogout} options={dropdownOptions}>
+                                <div className="h-8 w-8 flex items-center justify-center bg-gray-200 rounded-full cursor-pointer text-lg font-semibold">
                                     {Array.from(`${userAuth.name}`)[0]}
                                 </div>
-                                {navOption && (
-                                    <NavOption
-                                        onClose={() => {dispatch(setNavOption(false))}} 
-                                        userAuth={{username: userAuth.username, name: userAuth.name}}
-                                        onLogout={handleLogout}
-                                    />
-                                )}
-                            </>
+                            </Dropdown>
                         )}
                         </>
                     ) }
