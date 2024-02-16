@@ -5,7 +5,7 @@ const InputSearch = ({ variant, value, onChange, placeholder }) => {
   return (
     <>
       <form
-        className={`px-2 w-full md:max-w-lg flex items-center justify-between gap-2 border border-slate-200 rounded ${variant} bg-white`}
+        className={`px-2 w-full flex items-center justify-between gap-2 border border-slate-200 rounded ${variant} bg-white`}
       >
         <RiSearchLine className="text-slate-400 text-lg" />
         <input

@@ -1,11 +1,11 @@
 import React from 'react'
 import { Breadcrumb, HeadingTitle } from '../../../../components/atoms'
-import { LogoSettingsForm } from '../../components/organism'
+import { LogoConfigurationForm } from '../../components/organism'
 import { useDispatch, useSelector } from 'react-redux';
 import { hideNotification } from '../../../notification/notificationSlice';
 import { Notification } from '../../../notification/components/organism';
 
-const LogoSettings = () => {
+const LogoConfiguration = () => {
   const dispatch = useDispatch();
   const { message, type, isOpen } = useSelector((state) => state.notification);
 
@@ -15,13 +15,13 @@ const LogoSettings = () => {
 
   const breadcrumbs = [
     { text: 'Dashboard', url: '/dash/home' },
-    { text: 'Logo Settings' },
+    { text: 'Logo' },
   ];
 
   return (
     <>
       <Breadcrumb items={breadcrumbs} />
-      <HeadingTitle variant={"text-lg"} text={"Logo Settings"} />
+      <HeadingTitle variant={"text-lg"} text={"Logo"} />
       {isOpen && (
         <Notification
           message={message}
@@ -29,9 +29,9 @@ const LogoSettings = () => {
           onClose={handleCloseNotification}
         />
       )}
-      <LogoSettingsForm />
+      <LogoConfigurationForm />
     </>
   )
 }
 
-export default LogoSettings
+export default LogoConfiguration

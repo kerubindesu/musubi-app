@@ -1,3 +1,3 @@
-import LogoSettingsForm from "./LogoSettingsForm";
+import LogoConfigurationForm from "./LogoConfigurationForm";
 
-export { LogoSettingsForm }
+export { LogoConfigurationForm }

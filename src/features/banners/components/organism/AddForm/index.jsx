@@ -76,7 +76,7 @@ const AddForm = () => {
           ) : (
             ""
           )}
-          <div className="px-4 h-full min-h-[8rem] w-full bg-black/20 hover:bg-black/50 z-10 flex flex-col justify-center items-center rounded text-white">
+          <div className="px-4 min-h-[10rem] w-full bg-black/20 hover:bg-black/50 z-10 flex flex-col justify-center items-center rounded text-white">
             { preview ? <RiImageEditLine className="text-3xl" /> : <RiImageAddLine className="text-3xl" /> }
             <span className="mt-2 text-base leading-normal">
               { preview ? "Change image" : "Select a image"}
@@ -91,7 +91,7 @@ const AddForm = () => {
           </label>
 
           {preview && (
-              <div className="text-base text-red-500">Klik gambar untuk mengubahnya.</div>
+              <div className="text-base text-orange-400 font-semibold">Click the Image to change it.</div>
           )}
 
           <Button

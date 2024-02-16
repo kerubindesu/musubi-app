@@ -1,10 +1,10 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Breadcrumb, HeadingTitle } from '../../../components/atoms';
-import { hideNotification } from '../../../features/notification/notificationSlice';
-import { Notification } from '../../../features/notification/components/organism';
+import { Breadcrumb, HeadingTitle } from '../../components/atoms';
+import { hideNotification } from '../../features/notification/notificationSlice';
+import { Notification } from '../../features/notification/components/organism';
 
-const AdminDashboard = () => {
+const Dashboard = () => {
   const dispatch = useDispatch();
   const { message, type, isOpen } = useSelector((state) => state.notification);
 
@@ -32,4 +32,4 @@ const AdminDashboard = () => {
   )
 }
 
-export default AdminDashboard
+export default Dashboard

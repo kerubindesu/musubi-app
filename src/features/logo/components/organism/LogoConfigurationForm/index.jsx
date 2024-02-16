@@ -4,7 +4,7 @@ import { getLogo, updateLogo } from '../../../logoSlice'
 import { RiImageAddLine, RiImageEditLine } from 'react-icons/ri'
 import { Button, Loading } from '../../../../../components/atoms'
 
-const LogoSettingsForm = () => {
+const LogoConfigurationForm = () => {
     const dispatch = useDispatch()
     // const navigate = useNavigate()
 
@@ -57,7 +57,7 @@ const LogoSettingsForm = () => {
                     ) : (
                         ""
                     )}
-                    <div className="px-4 min-h-[16rem] w-full bg-black/20 hover:bg-black/50 z-10 flex flex-col justify-center items-center rounded text-white">
+                    <div className="px-4 min-h-[10rem] w-full bg-black/20 hover:bg-black/50 z-10 flex flex-col justify-center items-center rounded text-white">
                         { preview ? <RiImageEditLine className="text-3xl" /> : <RiImageAddLine className="text-3xl" /> }
                         <span className="mt-2 text-base leading-normal">
                         { preview ? "Change logo" : "Select a image"}
@@ -72,7 +72,7 @@ const LogoSettingsForm = () => {
                 </label>
 
                 {preview && (
-                    <div className="text-base text-red-500">Klik gambar untuk mengubahnya.</div>
+                    <div className="text-base text-orange-400 font-semibold">Click the Image to change it.</div>
                 )}
 
                 <Button
@@ -88,4 +88,4 @@ const LogoSettingsForm = () => {
     )
 }
 
-export default LogoSettingsForm
+export default LogoConfigurationForm

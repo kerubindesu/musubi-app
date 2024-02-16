@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { AdminTemplate } from '../components/templates';
-import AdminDashboard from '../pages/admin/AdminDashboard';
+import { ProtectedTemplate } from '../components/templates';
+import Dashboard from '../pages/Dashboard';
 import NotFound from '../pages/NotFound';
 import { useSelector } from 'react-redux';
 import { Users } from '../features/users/pages';
 import { AddPost, EditPost, Posts } from '../features/posts/pages';
-import { LogoSettings } from '../features/logo/pages';
+import { LogoConfiguration } from '../features/logo/pages';
 import { AddMenu, EditMenu, Menus } from '../features/menus/pages';
 import { Banners, EditBanner } from '../features/banners/pages';
 import { About, AddAbout, EditAbout } from '../features/about/pages';
@@ -24,8 +24,8 @@ const AdminRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/*" element={<AdminTemplate />} >
-        <Route path="home" element={<AdminDashboard />} />
+      <Route path="/*" element={<ProtectedTemplate />} >
+        <Route path="home" element={<Dashboard />} />
 
         <Route path="users">
           <Route index element={<Users />} />
@@ -44,9 +44,9 @@ const AdminRoutes = () => {
           <Route path=":id" element={<EditBanner />} />
         </Route>
 
-        <Route path="settings">
-          {/* <Route index element={<Settings />} /> */}
-          <Route path="logo" element={<LogoSettings />} />
+        <Route path="configuration">
+          {/* <Route index element={<Configuration />} /> */}
+          <Route path="logo" element={<LogoConfiguration />} />
 
           <Route path="about">
             <Route index element={<About />} />

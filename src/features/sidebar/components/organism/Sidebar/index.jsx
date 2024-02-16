@@ -45,16 +45,18 @@ const Sidebar = () => {
     <>
       <div className={`
         ${sidebar && sidebar ? "flex" : "hidden"}
-        fixed z-30 inset-0 top-0 left-0 right-auto w-[14rem] lg:flex flex-col justify-between overflow-x-hidden overflow-y-hidden font-semibold leading-6 border-r bg-white`
+        fixed z-30 inset-0 top-0 left-0 right-auto w-[14rem] lg:flex flex-col justify-between overflow-x-hidden overflow-y-hidden font-semibold leading-6 bg-white`
       }>
         <div className="w-full h-full flex flex-col justify-start items-start">
-          <div className="relative px-3 h-16 w-full flex justify-start items-center gap-2 border-b">
+
+          <div className="relative px-3 h-16 w-full flex justify-start items-center gap-2 lg:border-r border-b">
             <div onClick={() => dispatch(setSidebar(!sidebar))} className="lg:hidden h-10 w-10 flex justify-center items-center rounded-full hover:bg-slate-200 focus:bg-slate-100 cursor-pointer">
               <RiMenuLine className="text-2xl" />
             </div>
             <Logo variant="max-h-[2.5rem]" />
           </div>
-          <div className="px-3 py-3 w-full flex flex-col justify-center items-start gap-4 border-b truncate box-border">
+
+          <div className="px-3 py-3 w-full flex flex-col justify-center items-start gap-4 border-b truncate box-border border-r">
 
             {AuthLoading ? <Placeholder variant={"h-[2.8rem] w-full"} /> : (
               <>
@@ -84,7 +86,7 @@ const Sidebar = () => {
             )}
           </div>
 
-          <div className="pt-3 flex-1 w-full flex flex-col justify-between overflow-y-auto no-scrollbar">
+          <div className="pt-3 flex-1 w-full flex flex-col justify-between overflow-y-auto no-scrollbar border-r">
             <SidebarMenu />
             <DashFooter />
           </div>

@@ -89,7 +89,7 @@ const EditForm = () => {
           ) : (
             ""
           )}
-          <div className="px-4 h-full min-h-[24rem] w-full bg-black/20 hover:bg-black/50 z-10 flex flex-col justify-center items-center rounded text-slate-200">
+          <div className="px-4 min-h-[10rem] w-full bg-black/20 hover:bg-black/50 z-10 flex flex-col justify-center items-center rounded text-slate-200">
             { preview ? <RiImageEditLine className="text-3xl" /> : <RiImageAddLine className="text-3xl" /> }
             <span className="mt-2 text-base leading-normal">
               { preview ? "Change image" : "Select a image"}
@@ -104,7 +104,7 @@ const EditForm = () => {
           </label>
 
           {preview && (
-              <div className="text-base text-red-500">Klik gambar untuk mengubahnya.</div>
+              <div className="text-base text-orange-400 font-semibold">Click the Image to change it.</div>
           )}
 
           <Button

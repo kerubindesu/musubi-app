@@ -38,14 +38,14 @@ const SidebarMenu = () => {
           />
         </div>
         <li>
-            <div className="pt-4 pb-3 pl-3 text-xs text-slate-500">Configurations</div>
+            <div className="pt-4 pb-3 pl-3 text-xs text-slate-500">Configuration</div>
             <ul className="px-3 flex flex-col justify-center items-start">
                 <NavItem
-                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-5 border-l-4 rounded-r"} to={"/dash/settings/logo"} text={"Logo"} />
+                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-5 border-l-4 rounded-r"} to={"/dash/configuration/logo"} text={"Logo"} />
                 <NavItem
-                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-5 border-l-4 rounded-r"} to={"/dash/settings/about"} text={"About"} />
+                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-5 border-l-4 rounded-r"} to={"/dash/configuration/about"} text={"About"} />
                 <NavItem
-                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-5 border-l-4 rounded-r"} to={"/dash/settings/menus"} text={"Guest Menu"} />
+                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-5 border-l-4 rounded-r"} to={"/dash/configuration/menus"} text={"Guest Menu"} />
             </ul>
         </li>
       </ul>

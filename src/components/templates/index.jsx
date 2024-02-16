@@ -1,4 +1,4 @@
-import AdminTemplate from "./AdminTemplate";
+import ProtectedTemplate from "./ProtectedTemplate";
 import GuestTemplate from "./GuestTemplate";
 
-export { AdminTemplate, GuestTemplate }
+export { ProtectedTemplate, GuestTemplate }
