@@ -25,23 +25,11 @@ const AdminRoutes = () => {
   return (
     <Routes>
       <Route path="/*" element={<AdminTemplate />} >
-        <Route index element={<AdminDashboard />} />
-
-        <Route path="about">
-          <Route index element={<About />} />
-          <Route path="add" element={<AddAbout />} />
-          <Route path=":id" element={<EditAbout />} />
-        </Route>
+        <Route path="home" element={<AdminDashboard />} />
 
         <Route path="users">
           <Route index element={<Users />} />
           {/* <Route path=":id" element={<EditUser />} /> */}
-        </Route>
-
-        <Route path="menus">
-          <Route index element={<Menus />} />
-          <Route path="add" element={<AddMenu />} />
-          <Route path=":id" element={<EditMenu />} />
         </Route>
 
         <Route path="posts">
@@ -59,6 +47,18 @@ const AdminRoutes = () => {
         <Route path="settings">
           {/* <Route index element={<Settings />} /> */}
           <Route path="logo" element={<LogoSettings />} />
+
+          <Route path="about">
+            <Route index element={<About />} />
+            <Route path="add" element={<AddAbout />} />
+            <Route path=":id" element={<EditAbout />} />
+          </Route>
+
+          <Route path="menus">
+            <Route index element={<Menus />} />
+            <Route path="add" element={<AddMenu />} />
+            <Route path=":id" element={<EditMenu />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<NotFound />} />

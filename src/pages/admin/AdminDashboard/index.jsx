@@ -14,7 +14,7 @@ const AdminDashboard = () => {
   
   return (
     <div>
-      <HeadingTitle variant={"text-2xl"} text={"Post"} />
+      <HeadingTitle variant={"text-2xl"} text={"Dashboard"} />
       {isOpen && (
         <Notification
           message={message}

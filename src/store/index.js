@@ -7,6 +7,7 @@ import bannersReducer from '../features/banners/bannersSlice';
 import confirmDeleteModalReducer from '../features/confirmDeleteModal/confirmDeleteModalSlice';
 import imagePreviewReducer from '../features/imagePreview/imagePreviewSlice';
 import navbarReducer from '../features/navbar/navbarSlice';
+import sidebarReducer from '../features/sidebar/sidebarSlice';
 import menusReducer from '../features/menus/menusSlice';
 import notificationReducer from '../features/notification/notificationSlice'
 import logoReducer from '../features/logo/logoSlice';
@@ -18,6 +19,7 @@ const store = configureStore({
     about: aboutReducer,
     users: usersReducer,
     navbar: navbarReducer,
+    sidebar: sidebarReducer,
     menus: menusReducer,
     notification: notificationReducer,
     logo: logoReducer,

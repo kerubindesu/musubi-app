@@ -48,7 +48,7 @@ export const loginUser = createAsyncThunk(
         
         dispatch(showNotification({ message: response.data.message, type: "success" }))
 
-        navigate("/dash");
+        navigate("/dash/home");
       })());
 
       return response.data

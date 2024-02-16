@@ -10,12 +10,9 @@ const navbarSlice = createSlice({
     setNavBurgerMenu: (state, action) => {
       state.navBurgerMenu = action.payload;
     },
-    setNavOption: (state, action) => {
-        state.navOption = action.payload;
-    }
   },
 });
 
-export const { setNavBurgerMenu, setNavOption } = navbarSlice.actions;
+export const { setNavBurgerMenu } = navbarSlice.actions;
 
 export default navbarSlice.reducer;

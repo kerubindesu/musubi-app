@@ -1,34 +1,21 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { logout } from '../../../features/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { Logo } from '../../atoms';
+import { RiMenuLine } from 'react-icons/ri';
+import { setSidebar } from '../../../features/sidebar/sidebarSlice';
 
 
 const DashHeader = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
-  const handleLogout = (e) => {
-    e.preventDefault()
-    dispatch(logout(navigate))
-  };
+  const { sidebar } = useSelector((state) => state.sidebar);
 
   return (
-    <div className='p-4 max-h-16 flex justify-between items-center gap-4 bg-white shadow'>
-      <div className='flex justify-start items-center w-full overflow-x-auto no-scrollbar gap-4'>
-        <Logo variant={"max-h-[3.5rem]"} />
-        <Link className='text-sky-500' to="/dash/users">Users</Link>
-        <Link className='text-sky-500' to="/dash/posts">Post</Link>
-        <Link className='text-sky-500' to="/dash/settings">Settings</Link>
-        <Link className='text-sky-500' to="/dash/settings/logo">logo</Link>
-        <Link className='text-sky-500' to="/dash/menus">Menu</Link>
-        <Link className='text-sky-500' to="/dash/banners">Banner</Link>
-        <Link className='text-sky-500' to="/dash/about">About</Link>
+    <div className="lg:hidden sticky top-0 px-3 h-16 w-full flex justify-start items-center gap-2 bg-white border-b">
+      <div onClick={() => dispatch(setSidebar(!sidebar))} className="h-10 w-10 flex justify-center items-center rounded-full hover:bg-slate-200 focus:bg-slate-100 cursor-pointer">
+        <RiMenuLine className="text-2xl" />
       </div>
-      <form onSubmit={handleLogout}>
-        <button>Logout</button>
-      </form>
+      <Logo variant="max-h-[2.5rem]" />
     </div>
   )
 }

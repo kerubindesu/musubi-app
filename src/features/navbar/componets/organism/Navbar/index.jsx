@@ -16,19 +16,19 @@ const Navbar = () => {
 
     const { userAuth, loading: AuthLoading } = useSelector((state) => state.auth);
 
-    const { navBurgerMenu, navOption } = useSelector((state) => state.navbar);
+    const { navBurgerMenu } = useSelector((state) => state.navbar);
 
     useEffect(() => {
         dispatch(getUserAuth())
     }, [dispatch])
 
     useEffect(() => {
-        if (navBurgerMenu || navOption) {
+        if (navBurgerMenu) {
             disableBodyScroll(document);
         } else {
             enableBodyScroll(document);
         }
-    }, [navBurgerMenu, navOption]);
+    }, [navBurgerMenu]);
 
     useEffect(() => {
         const handleScroll = () => {
