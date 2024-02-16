@@ -1,14 +1,13 @@
 import React, { useMemo } from "react";
 import { useTable, useGlobalFilter, useSortBy } from "react-table";
 import { Link } from "react-router-dom";
-import { MdOutlineDataSaverOn } from "react-icons/md";
 import { TableSearch } from "../../molecules";
 import { Button, Loading } from "../../atoms";
 import ReactPaginate from "react-paginate";
 import { useDispatch } from "react-redux";
 import { setImagePreview, setImgProperties } from "../../../features/imagePreview/imagePreviewSlice";
 import { ImagePreview } from "../../../features/imagePreview/components/organism";
-import { RiEyeLine } from "react-icons/ri";
+import { RiAddLine, RiEyeLine } from "react-icons/ri";
 
 const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyword, page, totalPage, setPage, totalRows, noAddData, noEdit, noDelete }) => {
   const dispatch = useDispatch()
@@ -135,9 +134,9 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
             <>
               <Link to="add">
                 <Button
-                  variant={"bg-sky-400 hover:bg-sky-500 rounded text-white"}
+                  variant={"bg-slate-200 hover:bg-slate-300 border rounded shadow text-black"}
                   text={title}
-                  icon={<MdOutlineDataSaverOn />}
+                  icon={<RiAddLine />}
                 />
               </Link>
             </>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { EditForm } from '../../components/organism'
-import { HeadingTitle } from '../../../../components/atoms'
+import { Breadcrumb, HeadingTitle } from '../../../../components/atoms'
 import { useDispatch, useSelector } from 'react-redux';
 import { hideNotification } from '../../../notification/notificationSlice';
 import { Notification } from '../../../notification/components/organism';
@@ -20,9 +20,15 @@ const About = () => {
     dispatch(hideNotification());
   };
   
+  const breadcrumbs = [
+    { text: 'Dashboard', url: '/dash/home' },
+    { text: 'About' },
+  ];
+
   return (
-    <div className="relative w-full overflow-x-hidden">
-      <HeadingTitle variant={"text-2xl"} text={"About"} />
+    <>
+      <Breadcrumb items={breadcrumbs} />
+      <HeadingTitle variant={"text-lg"} text={"About"} />
       {isOpen && (
         <Notification
           message={message}
@@ -33,7 +39,7 @@ const About = () => {
       <div className="flex gap-4">
         <EditForm about={about} laoding={loading} />
       </div>
-    </div>
+    </>
   )
 }
 

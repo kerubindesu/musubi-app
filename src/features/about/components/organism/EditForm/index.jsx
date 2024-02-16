@@ -50,7 +50,7 @@ const EditForm = ({ about, loading }) => {
 
   return (
     <div className="w-full">
-      <div className="w-full max-w-lg rounded-sm">
+      <div className="w-full max-w-sm">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <label htmlFor="file-upload" className="relative flex flex-col items-center bg-white/90 border rounded shadow-sm hover:shadow-none cursor-pointer overflow-hidden box-border">
           {preview ? (

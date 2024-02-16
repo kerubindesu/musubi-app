@@ -1,5 +1,5 @@
 import React from 'react'
-import { HeadingTitle } from '../../../../components/atoms'
+import { Breadcrumb, HeadingTitle } from '../../../../components/atoms'
 import { LogoSettingsForm } from '../../components/organism'
 import { useDispatch, useSelector } from 'react-redux';
 import { hideNotification } from '../../../notification/notificationSlice';
@@ -13,9 +13,15 @@ const LogoSettings = () => {
     dispatch(hideNotification());
   };
 
+  const breadcrumbs = [
+    { text: 'Dashboard', url: '/dash/home' },
+    { text: 'Logo Settings' },
+  ];
+
   return (
     <>
-      <HeadingTitle variant={"text-2xl"} text={"Logo Settings"} />
+      <Breadcrumb items={breadcrumbs} />
+      <HeadingTitle variant={"text-lg"} text={"Logo Settings"} />
       {isOpen && (
         <Notification
           message={message}

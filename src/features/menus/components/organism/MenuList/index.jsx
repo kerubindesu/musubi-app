@@ -43,9 +43,9 @@ const MenuList = () => {
             return {
               "#": page * limit + (index + 1),
               id: menu._id,
-              Nama: menu.name,
-              Tautan: menu.link,
-              Ikon: menu.icon,
+              Name: menu.name,
+              Link: menu.link,
+              Icon: menu.icon,
             };
           })
       );
@@ -55,7 +55,7 @@ const MenuList = () => {
       <>
         <TableResponsive
           items={items}
-          title={"Menus"}
+          title={"Menu"}
           action={handleDelete}
           setKeyword={setKeyword}
           isLoading={loading}

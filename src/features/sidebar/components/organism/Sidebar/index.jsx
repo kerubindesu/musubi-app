@@ -15,7 +15,7 @@ const Sidebar = () => {
 
   const [isOpen, setIsOpen] = useState(false)
 
-  const { userAuth, loading: AuthLoading } = useSelector((state) => state.auth);
+  const { userAuth, loading: AuthLoading, error: errAuth, errRefreshToken } = useSelector((state) => state.auth);
   const { sidebar } = useSelector((state) => state.sidebar);
 
   useEffect(() => {
@@ -23,12 +23,18 @@ const Sidebar = () => {
   }, [dispatch])
 
   useEffect(() => {
+    if ( errAuth && errRefreshToken) {
+      navigate("/auth/login")
+    }
+  }, [errAuth, errRefreshToken, navigate]);
+
+  useEffect(() => {
     if (sidebar) {
         disableBodyScroll(document);
     } else {
         enableBodyScroll(document);
     }
-}, [sidebar]);
+  }, [sidebar]);
 
   const handleLogout = (e) => {
     e.preventDefault()
@@ -54,8 +60,8 @@ const Sidebar = () => {
               <>
                 <div className="w-full flex flex-row justify-between items-center">
                   <div className="max-w-[10rem] truncate">
-                    <div className="text-base truncate">{userAuth.name}</div>
-                    <div className="text-sm font-normal truncate">{userAuth.username}</div>
+                    <div className="text-base truncate">{userAuth?.name}</div>
+                    <div className="text-sm font-normal truncate">{userAuth?.username}</div>
                   </div>
 
                   {isOpen ? (

@@ -15,7 +15,7 @@ const SidebarMenu = () => {
             variant={"px-2 rounded"}
             to={"/dash/home"}
             icon={<RiDashboardLine />}
-            text={"Dashboard"} />
+            text={"Home"} />
           <NavItem
             action={() => dispatch(setSidebar(false))}
             variant={"px-2 rounded"}

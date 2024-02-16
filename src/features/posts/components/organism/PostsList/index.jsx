@@ -56,7 +56,7 @@ const PostsList = () => {
     <>
       <TableResponsive
         items={items}
-        title={"Posts"}
+        title={"Post"}
         action={handleDelete}
         setKeyword={setKeyword}
         isLoading={loading}

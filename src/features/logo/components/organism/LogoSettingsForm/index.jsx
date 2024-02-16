@@ -57,7 +57,7 @@ const LogoSettingsForm = () => {
                     ) : (
                         ""
                     )}
-                    <div className="px-4 h-full min-h-[24rem] w-full bg-black/20 hover:bg-black/50 z-10 flex flex-col justify-center items-center rounded text-white">
+                    <div className="px-4 min-h-[16rem] w-full bg-black/20 hover:bg-black/50 z-10 flex flex-col justify-center items-center rounded text-white">
                         { preview ? <RiImageEditLine className="text-3xl" /> : <RiImageAddLine className="text-3xl" /> }
                         <span className="mt-2 text-base leading-normal">
                         { preview ? "Change logo" : "Select a image"}

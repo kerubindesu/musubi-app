@@ -1,5 +1,5 @@
 import React from 'react'
-import { HeadingTitle } from '../../../../components/atoms'
+import { Breadcrumb, HeadingTitle } from '../../../../components/atoms'
 import { AddForm } from '../../components/organism'
 import { useDispatch, useSelector } from 'react-redux';
 import { hideNotification } from '../../../notification/notificationSlice';
@@ -13,13 +13,20 @@ const AddMenu = () => {
     dispatch(hideNotification());
   };
 
+  const breadcrumbs = [
+    { text: 'Dashboard', url: '/dash/home' },
+    { text: 'Menus', url: '/dash/settings/menus' },
+    { text: 'Add Menu' },
+  ];
+
   return (
     <>
+      <Breadcrumb items={breadcrumbs} />
       <HeadingTitle
         text={"Add Menu"}
         back={true} 
-        marginBottom={"mb-8"}
-        variant={"text-2xl"}
+        marginBottom={"mb-9"}
+        variant={"text-lg"}
       />
       {isOpen && (
         <Notification

@@ -66,8 +66,8 @@ const BannersList = () => {
         setPage={setPage}
         totalRows={totalRows}
         noAddData={true}
-        noEdit={true}
-        noDelete={false}
+        noEdit={false}
+        noDelete={true}
       />
       <ConfirmDeleteModal confirm={confirm} message={message} />
     </>

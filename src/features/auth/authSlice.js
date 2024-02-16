@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { showNotification } from '../notification/notificationSlice';
+import { axiosPrivate } from '../../utils/api';
 
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
@@ -82,7 +83,7 @@ export const refreshAccessToken = createAsyncThunk(
 export const getUserAuth = createAsyncThunk(
   'auth/user', async() => {
     try {
-      const response = await axios.get('http://localhost:3500/auth/user', {
+      const response = await axiosPrivate.get('http://localhost:3500/auth/user', {
         withCredentials: true,
       });
 

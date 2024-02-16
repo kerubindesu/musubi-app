@@ -1,6 +1,6 @@
 import React from 'react'
 import { UserList } from '../../components'
-import { HeadingTitle } from '../../../../components/atoms'
+import { Breadcrumb, HeadingTitle } from '../../../../components/atoms'
 import { Notification } from '../../../notification/components/organism';
 import { hideNotification } from '../../../notification/notificationSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,9 +13,15 @@ const Users = () => {
     dispatch(hideNotification());
   };
 
+  const breadcrumbs = [
+    { text: 'Dashboard', url: '/dash/home' },
+    { text: 'Users', url: '/dash/users' },
+  ];
+
   return (
-    <div>
-      <HeadingTitle variant={"text-2xl"} text={"Users"} />
+    <>
+      <Breadcrumb items={breadcrumbs} />
+      <HeadingTitle variant={"text-lg"} text={"Users"} />
       {isOpen && (
         <Notification
           message={message}
@@ -24,7 +30,7 @@ const Users = () => {
         />
       )}
       <UserList />
-    </div>
+    </>
   )
 }
 
