@@ -45,9 +45,6 @@ const LogoSettingsForm = () => {
     <div className="w-full">
         <div className="w-full max-w-sm">
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                {preview && (
-                    <div className="text-base text-red-500">*Klik Gambar untuk mengubahnya.</div>
-                )}
                 <label htmlFor="file-upload" className="relative flex flex-col items-center bg-white/90 border rounded shadow-sm hover:shadow-none cursor-pointer overflow-hidden box-border">
                     {preview ? (
                         <figure className="absolute inset-0 flex flex-col items-center justify-center">
@@ -73,6 +70,10 @@ const LogoSettingsForm = () => {
                         onChange={loadImage}
                     />
                 </label>
+
+                {preview && (
+                    <div className="text-base text-red-500">Klik gambar untuk mengubahnya.</div>
+                )}
 
                 <Button
                     disabled={loading}

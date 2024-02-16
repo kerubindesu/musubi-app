@@ -8,6 +8,8 @@ import { Users } from '../features/users/pages';
 import { AddPost, EditPost, Posts } from '../features/posts/pages';
 import { LogoSettings } from '../features/logo/pages';
 import { AddMenu, EditMenu, Menus } from '../features/menus/pages';
+import { Banners, EditBanner } from '../features/banners/pages';
+import { About, AddAbout, EditAbout } from '../features/about/pages';
 
 const AdminRoutes = () => {
   const navigate = useNavigate();
@@ -25,6 +27,12 @@ const AdminRoutes = () => {
       <Route path="/*" element={<AdminTemplate />} >
         <Route index element={<AdminDashboard />} />
 
+        <Route path="about">
+          <Route index element={<About />} />
+          <Route path="add" element={<AddAbout />} />
+          <Route path=":id" element={<EditAbout />} />
+        </Route>
+
         <Route path="users">
           <Route index element={<Users />} />
           {/* <Route path=":id" element={<EditUser />} /> */}
@@ -40,6 +48,12 @@ const AdminRoutes = () => {
           <Route index element={<Posts />} />
           <Route path="add" element={<AddPost />} />
           <Route path=":id" element={<EditPost />} />
+        </Route>
+
+        <Route path="banners">
+          <Route index element={<Banners />} />
+          {/* <Route path="add" element={<AddBanner />} /> */}
+          <Route path=":id" element={<EditBanner />} />
         </Route>
 
         <Route path="settings">

@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosPrivate } from '../../utils/api';
 import { showNotification } from '../notification/notificationSlice';
+import axios from 'axios';
 
 export const getMenus = createAsyncThunk(
   'menus/getMenus',
   async({ search, limit, page }, { rejectWithValue }) => {
     try {
-      const response = await axiosPrivate.get(`http://localhost:3500/menus?search=${search}&page=${page}&limit=${limit}`);
+      const response = await axios.get(`http://localhost:3500/menus?search=${search}&page=${page}&limit=${limit}`);
 
       return response.data;
     } catch (error) {
@@ -19,7 +20,7 @@ export const getMenu = createAsyncThunk(
   'menus/getMenu',
   async({ id, dispatch }, { rejectWithValue }) => {
     try {
-      const response = await axiosPrivate.get(`http://localhost:3500/menus/${id}`);
+      const response = await axios.get(`http://localhost:3500/menus/${id}`);
 
       return response.data;
     } catch (error) {

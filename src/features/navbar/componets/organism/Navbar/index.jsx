@@ -5,7 +5,7 @@ import { NavBurgerMenu, NavMenu } from "../../molecules";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserAuth, logout } from "../../../../auth/authSlice";
 import { useNavigate } from "react-router-dom";
-import { Dropdown, Loading, Logo } from "../../../../../components/atoms";
+import { Dropdown, Logo, Placeholder } from "../../../../../components/atoms";
 import { setNavBurgerMenu } from "../../../navbarSlice";
 
 const Navbar = () => {
@@ -79,9 +79,9 @@ const Navbar = () => {
                         <RiWhatsappLine className="text-2xl" />
                     </div>
                     {AuthLoading && AuthLoading ? (
-                        <div className="">
-                            <Loading />
-                        </div>
+                        <>
+                            <Placeholder variant={"h-8 w-8 rounded-full"} />
+                        </>
                     ) : (
                         <>
                         {userAuth && (

@@ -23,6 +23,8 @@ const DashHeader = () => {
         <Link className='text-sky-500' to="/dash/settings">Settings</Link>
         <Link className='text-sky-500' to="/dash/settings/logo">logo</Link>
         <Link className='text-sky-500' to="/dash/menus">Menu</Link>
+        <Link className='text-sky-500' to="/dash/banners">Banner</Link>
+        <Link className='text-sky-500' to="/dash/about">About</Link>
       </div>
       <form onSubmit={handleLogout}>
         <button>Logout</button>

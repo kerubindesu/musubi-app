@@ -10,7 +10,7 @@ import { setImagePreview, setImgProperties } from "../../../features/imagePrevie
 import { ImagePreview } from "../../../features/imagePreview/components/organism";
 import { RiEyeLine } from "react-icons/ri";
 
-const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyword, page, totalPage, setPage, totalRows }) => {
+const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyword, page, totalPage, setPage, totalRows, noAddData, noEdit, noDelete }) => {
   const dispatch = useDispatch()
 
   const data = useMemo(() => (items ? [...items] : []), [items]);
@@ -46,7 +46,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
                   <div className="absolute inset-0 flex flex-col justify-center items-center">
                     <img 
                       src={value[0]} 
-                      className="w-full object-contain" 
+                      className="w-full max-w-[16rem] object-cover" 
                       alt={value[1]}
                     />
                   </div>
@@ -71,16 +71,24 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
         Header: "",
         Cell: ({ row }) => (
           <div className="flex justify-center items-center gap-4">
-            <Link to={`${row.values.id}`}>
-              <span className="py-1 px-2 text-emerald-500 hover:bg-inherit rounded-sm">Edit</span>
-            </Link>
-            <button
-              value={row.values.id}
-              onClick={(e) => action(e.target.value)}
-              className="px-2 h-7 text-red-500 bg-red-500/20 hover:bg-inherit rounded-sm"
-            >
-              Delete
-            </button>
+            {!noEdit && (
+              <>
+                <Link to={`${row.values.id}`}>
+                  <span className="py-1 px-2 text-emerald-500 hover:bg-inherit rounded-sm">Edit</span>
+                </Link>
+              </>
+            )}
+            {!noDelete && (
+              <>
+                <button
+                  value={row.values.id}
+                  onClick={(e) => action(e.target.value)}
+                  className="px-2 h-7 text-red-500 bg-red-500/20 hover:bg-red-700/20 rounded-sm shadow"
+                >
+                  Delete
+                </button>
+              </>
+            )}
           </div>
         ),
       },
@@ -123,13 +131,17 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
             globalFilter={state.globalFilter}
             setKeyword={setKeyword}
           />
-          <Link className={`${title === "Users" && "hidden"}`} to="add">
-            <Button
-              variant={"bg-sky-400 hover:bg-sky-500 rounded text-white"}
-              text={title}
-              icon={<MdOutlineDataSaverOn />}
-            />
-          </Link>
+          {!noAddData && (
+            <>
+              <Link to="add">
+                <Button
+                  variant={"bg-sky-400 hover:bg-sky-500 rounded text-white"}
+                  text={title}
+                  icon={<MdOutlineDataSaverOn />}
+                />
+              </Link>
+            </>
+          )}
         </div>
       </div>
       {isLoading && isLoading?
@@ -176,7 +188,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
                             return (
                               <td
                                 {...cell.getCellProps()}
-                                className="p-2 max-w-xs relative truncate border"
+                                className="p-2 max-w-[16rem] relative truncate border"
                               >
                                 {cell.render("Cell")}
                               </td>

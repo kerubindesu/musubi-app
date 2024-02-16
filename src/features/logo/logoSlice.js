@@ -82,7 +82,7 @@ export const updateLogo = createAsyncThunk(
 const logoSlice = createSlice({
   name: 'logo',
   initialState: {
-    logo: [],
+    logo: "",
     loading: false,
     error: null,
   },

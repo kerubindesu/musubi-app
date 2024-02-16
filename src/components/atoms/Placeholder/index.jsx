@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Placeholder = ({ width, height }) => {
+const Placeholder = ({ variant }) => {
   return (
     <div
-      className={`h-[${height}] w-[${width}] bg-gray-300 animate-pulse`}
+      className={`${variant} bg-gray-300 animate-pulse`}
     ></div>
   );
 };
