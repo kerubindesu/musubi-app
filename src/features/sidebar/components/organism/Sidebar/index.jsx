@@ -53,7 +53,7 @@ const Sidebar = () => {
             <div onClick={() => dispatch(setSidebar(!sidebar))} className="lg:hidden h-10 w-10 flex justify-center items-center rounded-full hover:bg-slate-200 focus:bg-slate-100 cursor-pointer">
               <RiMenuLine className="text-2xl" />
             </div>
-            <Logo variant="max-h-[2.5rem]" />
+            <Logo link={"/dash/home"} variant="max-h-[2.5rem]" />
           </div>
 
           <div className="px-3 py-3 w-full flex flex-col justify-center items-start gap-4 border-b truncate box-border border-r">

@@ -23,9 +23,9 @@ const EditForm = () => {
 
   useEffect(() => {
     if (post) {
-      setTitle(post.title)
-      setText(post.text)
-      setPreview(post.img_url)
+      setTitle(post.title || "");
+      setText(post.text || "");
+      setPreview(post.img_url || "");
     }
   }, [post])
 

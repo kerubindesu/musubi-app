@@ -21,9 +21,9 @@ const EditForm = () => {
 
   useEffect(() => {
     if (menu) {
-      setName(menu.name)
-      setLink(menu.link)
-      setIcon(menu.icon)
+      setName(menu.name || "")
+      setLink(menu.link || "")
+      setIcon(menu.icon || "")
     }
   }, [menu])
 

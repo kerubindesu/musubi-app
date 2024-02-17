@@ -15,7 +15,7 @@ const AddMenu = () => {
 
   const breadcrumbs = [
     { text: 'Dashboard', url: '/dash/home' },
-    { text: 'Menus', url: '/dash/configuration/menus' },
+    { text: 'Menus', url: '/dash/menus' },
     { text: 'Add Menu' },
   ];
 

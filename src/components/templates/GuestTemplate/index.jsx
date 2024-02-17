@@ -6,7 +6,7 @@ const GuestTemplate = () => {
   return (
     <>
       <Navbar />
-      <div className="mx-auto pt-2 px-4 min-h-[100vh] w-full max-w-7xl">
+      <div className="relative mx-auto pt-16 px-4 min-h-[200vh] w-full max-w-7xl bg-white">
         <Outlet />
       </div>
     </>

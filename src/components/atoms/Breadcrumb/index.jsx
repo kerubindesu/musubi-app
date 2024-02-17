@@ -7,7 +7,7 @@ const Breadcrumb = ({ items }) => {
     <nav className="h-8 lg:h-16 text-sm flex justify-start items-center" aria-label="Breadcrumb">
       <ol className="list-none p-0 inline-flex">
         {items.map((item, index) => (
-          <li key={index} className="flex items-center">
+          <li key={index + 1} className="flex items-center">
             {item.url ? (
               <Link to={item.url} className="text-slate-500 hover:text-slate-700">
                 {item.text}

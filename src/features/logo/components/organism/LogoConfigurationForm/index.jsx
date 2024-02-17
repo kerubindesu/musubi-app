@@ -19,7 +19,7 @@ const LogoConfigurationForm = () => {
 
     useEffect(() => {
         if (logo) {
-            setPreview(logo.img_url)
+            setPreview(logo.img_url || "")
         }
     }, [logo])
 

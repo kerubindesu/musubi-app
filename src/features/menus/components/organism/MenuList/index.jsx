@@ -32,7 +32,7 @@ const MenuList = () => {
 
   const confirm = async(e) => {
     e.preventDefault();
-    await dispatch(deleteMenu({ id, dispatch }));
+    await dispatch(deleteMenu({ id, search: keyword, page, limit, dispatch }));
     dispatch(setModal(false));
   };
 

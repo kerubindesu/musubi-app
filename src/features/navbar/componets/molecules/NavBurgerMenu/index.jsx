@@ -12,7 +12,7 @@ const NavBurgerMenu = ({ onClose }) => {
             <NavMenu variant={"w-full flex flex-col md:hidden justify-center items-start"} />
 
           </div>
-          <div onClick={onClose} className="p-2 bg-slate-200 rounded-full absolute top-[0.75rem] right-4 cursor-pointer">
+          <div onClick={onClose} className="p-2 bg-slate-200 rounded-full absolute top-[1rem] right-4 cursor-pointer">
               <RiCloseLine />
           </div>
       </div>

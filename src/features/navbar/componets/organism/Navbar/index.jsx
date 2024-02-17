@@ -12,7 +12,8 @@ const Navbar = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const [onScrolling, setOnScrolling] = useState(false);
+    const [prevScrollPos, setPrevScrollPos] = useState(0);
+    const [visible, setVisible] = useState(true);
 
     const { userAuth, loading: AuthLoading } = useSelector((state) => state.auth);
 
@@ -32,18 +33,17 @@ const Navbar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            const currentScrollPos = window.scrollY;
-            const isScrollingDown = currentScrollPos > 50;
-
-            setOnScrolling(isScrollingDown);
+          const currentScrollPos = window.pageYOffset;
+          const isScrollDown = prevScrollPos < currentScrollPos;
+    
+          setVisible(currentScrollPos <= 0 || !isScrollDown);
+          setPrevScrollPos(currentScrollPos);
         };
-
+    
         window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+    
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, [prevScrollPos]);
 
     const handleLogout = (e) => {
         e.preventDefault()
@@ -51,12 +51,18 @@ const Navbar = () => {
     };
 
     const dropdownOptions = [
-        { label: 'Profile', link: '/profile' },
+        { label: 'Dashboard', link: '/dash/home' },
         { label: 'Settings', link: '/settings' },
       ];
 
+    //   h-56 sm:h-64 lg:h-80 xl:h-[28rem] 2xl:h-[28rem]
+
     return (
-        <div className={`${onScrolling ? 'bg-white/10' : 'bg-white'} sticky top-0 w-full border-b`}>
+        <div className={`
+            ${visible  ? 'bg-white' : 'hidden'}
+            ${prevScrollPos <= 218 ? "bg-white/20" : ""} 
+            fixed top-0 w-full z-10 transition-all duration-300`
+        }>
             <div className={`mx-auto px-4 h-16 w-full max-w-7xl box-border flex justify-between items-center text-base backdrop-blur-sm transition ease-in duration-300`}>
                 <div className="max-h-max md:w-[7rem] box-border overflow-hidden flex justify-start items-center text-2xl gap-2">
                     <RiMenuLine onClick={() => dispatch(setNavBurgerMenu(true))} className="block md:hidden cursor-pointer" />
@@ -66,12 +72,10 @@ const Navbar = () => {
                         </>
                     )}
 
-                    <Logo
-                        variant="max-h-[3rem] box-border"
-                    />
+                    <Logo link={"/"} variant="max-h-[3rem] box-border" />
                 </div>
 
-                <NavMenu variant={"max-w-[30rem] hidden md:flex justify-center items-center gap-6 lg:gap-8"} />
+                <NavMenu variant={"mx-3 w-full hidden md:flex justify-center items-center gap-3 lg:gap-6"} />
                 
                 <div className="max-h-max w-[7rem] box-border flex justify-end items-center gap-4">
                     <div className="flex justify-center items-center gap-2">

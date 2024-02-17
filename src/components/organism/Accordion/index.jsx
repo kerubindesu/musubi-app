@@ -10,7 +10,7 @@ const Accordion = ({ items }) => {
   const renderedItems = items.map((item, index) => {
     const active = index === activeIndex ? 'block' : 'hidden';
     return (
-      <div key={index} className="accordion-item">
+      <div key={index + 1} className="accordion-item">
         <div
           className="accordion-header bg-gray-200 cursor-pointer py-2 px-4"
           onClick={() => onTitleClick(index)}

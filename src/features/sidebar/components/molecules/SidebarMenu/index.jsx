@@ -1,5 +1,5 @@
 import React from "react";
-import { RiArticleLine, RiDashboardLine, RiFileUserLine, RiImageLine } from "react-icons/ri";
+import { RiArticleLine, RiDashboardLine, RiFileUserLine, RiImageLine, RiListIndefinite, RiPriceTag3Line } from "react-icons/ri";
 import { NavItem } from "../../atoms";
 import { useDispatch } from "react-redux";
 import { setSidebar } from "../../../sidebarSlice";
@@ -26,9 +26,16 @@ const SidebarMenu = () => {
           <NavItem
             action={() => dispatch(setSidebar(false))}
             variant={"px-2 rounded"}
-            to={"/dash/banners"}
+            to={"/dash/categories"}
+            icon={<RiListIndefinite />}
+            text={"Categories"}
+          />
+          <NavItem
+            action={() => dispatch(setSidebar(false))}
+            variant={"px-2 rounded"}
+            to={"/dash/carousels"}
             icon={<RiImageLine />}
-            text={"Banners"} />
+            text={"Carousels"} />
           <NavItem
             action={() => dispatch(setSidebar(false))}
             variant={"px-2 rounded"}
@@ -36,16 +43,23 @@ const SidebarMenu = () => {
             icon={<RiFileUserLine />}
             text={"Users"}
           />
+          <NavItem
+            action={() => dispatch(setSidebar(false))}
+            variant={"px-2 rounded"}
+            to={"/dash/tags"}
+            icon={<RiPriceTag3Line />}
+            text={"Tags"}
+          />
         </div>
         <li>
             <div className="pt-4 pb-3 pl-3 text-xs text-slate-500">Configuration</div>
             <ul className="px-3 flex flex-col justify-center items-start">
                 <NavItem
-                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-5 border-l-4 rounded-r"} to={"/dash/configuration/logo"} text={"Logo"} />
+                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-5 border-l-4 rounded-r"} to={"/dash/logo"} text={"Logo"} />
                 <NavItem
-                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-5 border-l-4 rounded-r"} to={"/dash/configuration/about"} text={"About"} />
+                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-5 border-l-4 rounded-r"} to={"/dash/about"} text={"About"} />
                 <NavItem
-                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-5 border-l-4 rounded-r"} to={"/dash/configuration/menus"} text={"Guest Menu"} />
+                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-5 border-l-4 rounded-r"} to={"/dash/menus"} text={"Guest Menu"} />
             </ul>
         </li>
       </ul>

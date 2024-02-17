@@ -15,7 +15,7 @@ const EditMenu = () => {
   
   const breadcrumbs = [
     { text: 'Dashboard', url: '/dash/home' },
-    { text: 'Menus', url: '/dash/configuration/menus' },
+    { text: 'Menus', url: '/dash/menus' },
     { text: 'Edit Menu' },
   ];
 
@@ -23,7 +23,7 @@ const EditMenu = () => {
     <>
       <Breadcrumb items={breadcrumbs} />
       <HeadingTitle
-        text={"Edit Post"}
+        text={"Edit Menu"}
         back={true} 
         marginBottom={"mb-9"}
         variant={"text-lg"}

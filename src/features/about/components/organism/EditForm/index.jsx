@@ -17,10 +17,10 @@ const EditForm = ({ about, loading }) => {
 
   useEffect(() => {
     if (about) {
-      setTitle(about.title)
-      setText(about.text)
-      setPreview(about.img_url)
-      setMaps(about.maps)
+      setTitle(about.title || "")
+      setText(about.text || "")
+      setPreview(about.img_url || "")
+      setMaps(about.maps || "")
     }
   }, [about])
 

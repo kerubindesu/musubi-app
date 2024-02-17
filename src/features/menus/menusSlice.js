@@ -39,10 +39,7 @@ export const createMenu = createAsyncThunk(
     try {
 
       const response = await axiosPrivate.post('http://localhost:3500/menus', { name, link, icon }, {
-        withCredentials: true,
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+        withCredentials: true
       });
 
       if (response) {

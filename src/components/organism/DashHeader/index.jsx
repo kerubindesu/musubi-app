@@ -15,7 +15,7 @@ const DashHeader = () => {
       <div onClick={() => dispatch(setSidebar(!sidebar))} className="h-10 w-10 flex justify-center items-center rounded-full hover:bg-slate-200 focus:bg-slate-100 cursor-pointer">
         <RiMenuLine className="text-2xl" />
       </div>
-      <Logo variant="max-h-[2.5rem]" />
+      <Logo link={"/dash/home"} variant="max-h-[2.5rem]" />
     </div>
   )
 }

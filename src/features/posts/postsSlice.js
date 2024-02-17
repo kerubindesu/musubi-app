@@ -52,6 +52,7 @@ export const createPost = createAsyncThunk(
 
       if (response) {
         dispatch(showNotification({ message: response.data.message, type: 'success' }));
+
         navigate("/dash/posts")
       }
 
@@ -84,6 +85,7 @@ export const updatePost = createAsyncThunk(
 
       if (response) {
         dispatch(showNotification({ message: response.data.message, type: 'success' }));
+        
         navigate("/dash/posts")
       }
 

@@ -38,7 +38,7 @@ const Dropdown = ({ children, options, dropdownIcon, onLogout }) => {
           <div className="py-1">
             {options.map((option, index) => (
               <Link
-                key={index}
+                key={index + 1}
                 to={option.link}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
