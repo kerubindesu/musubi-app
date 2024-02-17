@@ -17,7 +17,7 @@ const AuthRoutes = () => {
     }
     
     if (isAuthenticated) {
-      navigate("/dash")
+      navigate("/dash/home")
     }
   }, [dispatch, isAuthenticated, navigate]);
 
