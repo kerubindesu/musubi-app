@@ -46,6 +46,8 @@ const PostsList = () => {
             id: post._id,
             Title: post.title,
             Desc: post.text,
+            Category: post?.category?.name,
+            Tags: post?.tags || [],
             Image: [post.img_url, post.image]
           };
         })

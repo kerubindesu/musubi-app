@@ -23,7 +23,7 @@ export const deleteUser = createAsyncThunk(
       http://localhost:3500/users/${id}`);
 
       if (response) {
-        dispatch(showNotification({ message: response.data.message, type: 'success' }));
+        dispatch(showNotification({ message: response.data.message, type: "success" }));
         dispatch(getUsers({ search, page, limit }));
       }
 

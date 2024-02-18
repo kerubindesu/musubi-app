@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button, FloatingLabel, Loading } from "../../../../../components/atoms"
-import { useDispatch, useSelector } from "react-redux";
-import { createTag } from "../../../tagsSlice";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {Button, FloatingLabel, Loading} from "../../../../../components/atoms"
+import {useDispatch, useSelector} from "react-redux";
+import {createTag} from "../../../tagsSlice";
 
 const AddForm = () => {
   const dispatch = useDispatch()
@@ -10,19 +10,19 @@ const AddForm = () => {
 
   const [name, setName] = useState("");
 
-  const { loading } = useSelector((state) => state.tags);
+  const {loading} = useSelector((state) => state.tags);
 
   const handleSubmit = async(e) => {
     e.preventDefault()
     
     try{
-      await dispatch(createTag({ name, dispatch, navigate }))
-    } catch (error) {
+      await dispatch(createTag({name, dispatch, navigate}))
+   } catch (error) {
       if(error.response) {
           console.log(error)
-      }
-    }
-  }
+     }
+   }
+ }
 
   return (
     <div className="w-full">
@@ -30,12 +30,12 @@ const AddForm = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <FloatingLabel 
             id={"name"}
-            type={ "text" }
-            text={ "Name" }
-            value={ name }
-            onChange={ (e) => setName(e.target.value) }
-            variant={ "border-b-0 rounded-t-lg" }
-            htmlFor={ "name" }
+            type={"text"}
+            text={"Name"}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            variant={"border-b-0 rounded-t-lg"}
+            htmlFor={"name"}
           />
 
           <Button

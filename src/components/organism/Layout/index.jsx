@@ -4,7 +4,7 @@ import React from 'react';
 const MainLayout = ({ children }) => {
   return (
     <>
-      { children }
+      {children}
       {/* <Footer /> */}
     </>
   );

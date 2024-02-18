@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button, FloatingLabel, Loading } from "../../../../../components/atoms"
-import { useDispatch, useSelector } from "react-redux";
-import { createCarousel } from "../../../carouselsSlice";
-import { RiImageAddLine, RiImageEditLine } from "react-icons/ri";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {Button, FloatingLabel, Loading} from "../../../../../components/atoms"
+import {useDispatch, useSelector} from "react-redux";
+import {createCarousel} from "../../../carouselsSlice";
+import {RiImageAddLine, RiImageEditLine} from "react-icons/ri";
 
 const AddForm = () => {
   const dispatch = useDispatch()
@@ -14,7 +14,7 @@ const AddForm = () => {
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");
 
-  const { loading } = useSelector((state) => state.carousels);
+  const {loading} = useSelector((state) => state.carousels);
 
   const loadImage = (e) => {
     const image = e.target.files[0];
@@ -22,23 +22,23 @@ const AddForm = () => {
       setFile(image);
       try {
           setPreview(URL.createObjectURL(image));
-      } catch (error) {
+     } catch (error) {
           console.error('Error creating object URL:', error);
-      }
-    }
-  };
+     }
+   }
+ };
 
   const handleSubmit = async(e) => {
     e.preventDefault()
     
     try{
-      await dispatch(createCarousel({ title, text, file, dispatch, navigate }))
-    } catch (error) {
+      await dispatch(createCarousel({title, text, file, dispatch, navigate}))
+   } catch (error) {
       if(error.response) {
           console.log(error)
-      }
-    }
-  }
+     }
+   }
+ }
 
   return (
     <div className="w-full">
@@ -46,22 +46,22 @@ const AddForm = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <FloatingLabel 
             id={"title"}
-            type={ "text" }
-            text={ "Title" }
-            value={ title }
-            onChange={ (e) => setTitle(e.target.value) }
-            variant={ "border-b-0 rounded-t-lg" }
-            htmlFor={ "title" }
+            type={"text"}
+            text={"Title"}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            variant={"border-b-0 rounded-t-lg"}
+            htmlFor={"title"}
           />
 
           <FloatingLabel 
             id={"text"}
-            type={ "text" }
-            text={ "Text" }
-            value={ text }
-            onChange={ (e) => setText(e.target.value) }
-            variant={ "border-b-0 rounded-t-lg" }
-            htmlFor={ "text" }
+            type={"text"}
+            text={"Text"}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            variant={"border-b-0 rounded-t-lg"}
+            htmlFor={"text"}
           />
 
           <label htmlFor="file-upload" className="relative flex flex-col items-center bg-white/90 border rounded shadow-sm hover:shadow-none cursor-pointer overflow-hidden box-border">
@@ -77,9 +77,9 @@ const AddForm = () => {
             ""
           )}
           <div className="px-4 min-h-[10rem] w-full bg-black/20 hover:bg-black/50 z-10 flex flex-col justify-center items-center rounded text-white">
-            { preview ? <RiImageEditLine className="text-3xl" /> : <RiImageAddLine className="text-3xl" /> }
+            {preview ? <RiImageEditLine className="text-3xl" /> : <RiImageAddLine className="text-3xl" />}
             <span className="mt-2 text-base leading-normal">
-              { preview ? "Change image" : "Select a image"}
+              {preview ? "Change image" : "Select a image"}
             </span>
           </div>
           <input

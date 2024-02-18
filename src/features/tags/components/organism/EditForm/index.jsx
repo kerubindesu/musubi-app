@@ -1,39 +1,39 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Button, FloatingLabel, Loading } from "../../../../../components/atoms"
-import { useDispatch, useSelector } from "react-redux";
-import { getTag, updateTag } from "../../../tagsSlice";
+import React, {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import {Button, FloatingLabel, Loading} from "../../../../../components/atoms"
+import {useDispatch, useSelector} from "react-redux";
+import {getTag, updateTag} from "../../../tagsSlice";
 
 const EditForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { id } = useParams()
+  const {id} = useParams()
   const [name, setName] = useState("");
 
-  const { loading, tag } = useSelector((state) => state.tags);
+  const {loading, tag} = useSelector((state) => state.tags);
 
   useEffect(() => {
-    dispatch(getTag({ id, dispatch }));
-  }, [id, dispatch]);
+    dispatch(getTag({id, dispatch}));
+ }, [id, dispatch]);
 
   useEffect(() => {
     if (tag) {
       setName(tag.name || "")
-    }
-  }, [tag])
+   }
+ }, [tag])
 
   const handleSubmit = async(e) => {
     e.preventDefault()
     
     try{
-      await dispatch(updateTag({ id, name, dispatch, navigate }))
-    } catch (error) {
+      await dispatch(updateTag({id, name, dispatch, navigate}))
+   } catch (error) {
       if(error.response) {
           console.log(error)
-      }
-    }
-  }
+     }
+   }
+ }
 
   return (
     <div className="w-full">
@@ -41,12 +41,12 @@ const EditForm = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <FloatingLabel 
             id={"name"}
-            type={ "text" }
-            text={ "Name" }
-            value={ name }
-            onChange={ (e) => setName(e.target.value) }
-            variant={ "border-b-0 rounded-t-lg" }
-            htmlFor={ "name" }
+            type={"text"}
+            text={"Name"}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            variant={"border-b-0 rounded-t-lg"}
+            htmlFor={"name"}
           />
           
           <Button

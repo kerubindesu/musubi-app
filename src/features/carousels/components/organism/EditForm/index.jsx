@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Button, FloatingLabel, Loading } from "../../../../../components/atoms"
-import { useDispatch, useSelector } from "react-redux";
-import { getCarousel, updateCarousel } from "../../../carouselsSlice";
-import { RiImageAddLine, RiImageEditLine } from "react-icons/ri";
+import React, { useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import {Button, FloatingLabel, Loading} from "../../../../../components/atoms"
+import {useDispatch, useSelector} from "react-redux";
+import {getCarousel, updateCarousel} from "../../../carouselsSlice";
+import {RiImageAddLine, RiImageEditLine} from "react-icons/ri";
 
 const EditForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { id } = useParams()
+  const {id} = useParams()
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");
 
-  const { loading, carousel } = useSelector((state) => state.carousels);
+  const {loading, carousel} = useSelector((state) => state.carousels);
 
   useEffect(() => {
-    dispatch(getCarousel({ id, dispatch }));
-  }, [id, dispatch]);
+    dispatch(getCarousel({id, dispatch}));
+ }, [id, dispatch]);
 
   useEffect(() => {
     if (carousel) {
       setTitle(carousel.title || "")
       setText(carousel.text || "")
       setPreview(carousel.img_url || "")
-    }
-  }, [carousel])
+   }
+ }, [carousel])
 
   const loadImage = (e) => {
     const image = e.target.files[0];
@@ -35,23 +35,23 @@ const EditForm = () => {
       setFile(image);
       try {
           setPreview(URL.createObjectURL(image));
-      } catch (error) {
+     } catch (error) {
           console.error('Error creating object URL:', error);
-      }
-    }
-  };
+     }
+   }
+ };
 
   const handleSubmit = async(e) => {
     e.preventDefault()
     
     try{
-      await dispatch(updateCarousel({ id, title, text, file, dispatch, navigate }))
-    } catch (error) {
+      await dispatch(updateCarousel({id, title, text, file, dispatch, navigate}))
+   } catch (error) {
       if(error.response) {
           console.log(error)
-      }
-    }
-  }
+     }
+   }
+ }
 
   return (
     <div className="w-full">
@@ -59,22 +59,22 @@ const EditForm = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <FloatingLabel 
             id={"title"}
-            type={ "text" }
-            text={ "Title" }
-            value={ title }
-            onChange={ (e) => setTitle(e.target.value) }
-            variant={ "border-b-0 rounded-t-lg" }
-            htmlFor={ "title" }
+            type={"text"}
+            text={"Title"}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            variant={"border-b-0 rounded-t-lg"}
+            htmlFor={"title"}
           />
 
           <FloatingLabel 
             id={"text"}
-            type={ "text" }
-            text={ "Text" }
-            value={ text }
-            onChange={ (e) => setText(e.target.value) }
-            variant={ "border-b-0 rounded-t-lg" }
-            htmlFor={ "text" }
+            type={"text"}
+            text={"Text"}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            variant={"border-b-0 rounded-t-lg"}
+            htmlFor={"text"}
           />
 
           <label htmlFor="file-upload" className="relative flex flex-col items-center bg-white/90 border rounded shadow-sm hover:shadow-none cursor-pointer overflow-hidden box-border">
@@ -90,9 +90,9 @@ const EditForm = () => {
             ""
           )}
           <div className="px-4 min-h-[10rem] w-full bg-black/20 hover:bg-black/50 z-10 flex flex-col justify-center items-center rounded text-slate-200">
-            { preview ? <RiImageEditLine className="text-3xl" /> : <RiImageAddLine className="text-3xl" /> }
+            {preview ? <RiImageEditLine className="text-3xl" /> : <RiImageAddLine className="text-3xl" />}
             <span className="mt-2 text-base leading-normal">
-              { preview ? "Change image" : "Select a image"}
+              {preview ? "Change image" : "Select a image"}
             </span>
           </div>
           <input

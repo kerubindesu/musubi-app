@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Button, FloatingLabel, Loading } from "../../../../../components/atoms"
-import { useDispatch, useSelector } from "react-redux";
-import { getCategory, updateCategory } from "../../../categoriesSlice";
-import { RiImageAddLine, RiImageEditLine } from "react-icons/ri";
+import React, { useEffect, useState} from "react";
+import { useNavigate, useParams} from "react-router-dom";
+import { Button, FloatingLabel, Loading} from "../../../../../components/atoms"
+import { useDispatch, useSelector} from "react-redux";
+import { getCategory, updateCategory} from "../../../categoriesSlice";
+import { RiImageAddLine, RiImageEditLine} from "react-icons/ri";
 
 const EditForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { id } = useParams()
+  const {id} = useParams()
   const [name, setName] = useState("");
   const [text, setText] = useState("");
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");
 
-  const { loading, category } = useSelector((state) => state.categories);
+  const {loading, category} = useSelector((state) => state.categories);
 
   useEffect(() => {
-    dispatch(getCategory({ id, dispatch }));
-  }, [id, dispatch]);
+    dispatch(getCategory({id, dispatch}));
+ }, [id, dispatch]);
 
   useEffect(() => {
     if (category) {
       setName(category.name || "");
       setText(category.text || "");
       setPreview(category.img_url || "");
-    }
-  }, [category])
+   }
+ }, [category])
 
   const loadImage = (e) => {
     const image = e.target.files[0];
@@ -35,23 +35,23 @@ const EditForm = () => {
       setFile(image);
       try {
           setPreview(URL.createObjectURL(image));
-      } catch (error) {
+     } catch (error) {
           console.error('Error creating object URL:', error);
-      }
-    }
-  };
+     }
+   }
+ };
 
   const handleSubmit = async(e) => {
     e.preventDefault()
     
     try{
-      await dispatch(updateCategory({ id, name, text, file, dispatch, navigate }))
-    } catch (error) {
+      await dispatch(updateCategory({id, name, text, file, dispatch, navigate}))
+   } catch (error) {
       if(error.response) {
           console.log(error)
-      }
-    }
-  }
+     }
+   }
+ }
 
   return (
     <div className="w-full">
@@ -67,14 +67,14 @@ const EditForm = () => {
             htmlFor={"name"}
           />
 
-<FloatingLabel 
+          <FloatingLabel 
             id={"text"}
-            type={ "text" }
-            text={ "Text" }
-            value={ text }
-            onChange={ (e) => setText(e.target.value) }
-            variant={ "border-b-0 rounded-t-lg" }
-            htmlFor={ "text" }
+            type={"text"}
+            text={"Text"}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            variant={"border-b-0 rounded-t-lg"}
+            htmlFor={"text"}
           />
 
           <label htmlFor="file-upload" className="relative flex flex-col items-center bg-white/90 border rounded shadow-sm hover:shadow-none cursor-pointer overflow-hidden box-border">
@@ -90,9 +90,9 @@ const EditForm = () => {
             ""
           )}
           <div className="px-4 min-h-[10rem] w-full bg-black/20 hover:bg-black/50 z-10 flex flex-col justify-center items-center rounded text-slate-200">
-            { preview ? <RiImageEditLine className="text-3xl" /> : <RiImageAddLine className="text-3xl" /> }
+            {preview ? <RiImageEditLine className="text-3xl" /> : <RiImageAddLine className="text-3xl" />}
             <span className="mt-2 text-base leading-normal">
-              { preview ? "Change image" : "Select a image"}
+              {preview ? "Change image" : "Select a image"}
             </span>
           </div>
           <input

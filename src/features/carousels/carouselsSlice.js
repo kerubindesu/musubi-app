@@ -50,7 +50,7 @@ export const createCarousel = createAsyncThunk(
       });
 
       if (response) {
-        dispatch(showNotification({ message: response.data.message, type: 'success' }));
+        dispatch(showNotification({ message: response.data.message, type: "success" }));
         navigate("/dash/carousels")
       }
 
@@ -82,7 +82,7 @@ export const updateCarousel = createAsyncThunk(
       });
 
       if (response) {
-        dispatch(showNotification({ message: response.data.message, type: 'success' }));
+        dispatch(showNotification({ message: response.data.message, type: "success" }));
         navigate("/dash/carousels")
       }
 
@@ -105,7 +105,7 @@ export const deleteCarousel = createAsyncThunk(
       http://localhost:3500/carousels/${id}`);
 
       if (response) {
-        dispatch(showNotification({ message: response.data.message, type: 'success' }));
+        dispatch(showNotification({ message: response.data.message, type: "success" }));
 
         dispatch(getCarousels({ search, page, limit }));
       }

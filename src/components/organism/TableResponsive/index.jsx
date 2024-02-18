@@ -19,23 +19,37 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
       items && items.length > 0
         ? Object.keys(items[0]).map((key) => {
             if (key === "#")
-              return {
-                Header: key,
-                accessor: key,
-                Cell: ({ value }) => (
-                  <>
-                    <div className="text-center">{value}</div>
-                  </>
-                ),
-              };
+            return {
+              Header: key,
+              accessor: key,
+              Cell: ({value}) => (
+                <>
+                  <div className="text-center">{value}</div>
+                </>
+              ),
+            };
+            if (key === "Tags")
+            return {
+              Header: key,
+              accessor: key,
+              Cell: ({value}) => (
+                <div className="flex flex-grow justify-start items-start gap-2">
+                  {value?.map((tag, index) => (
+                    <div key={index + 1} className="max-w-max max-h-max bg-slate-100 border rounded shadow-sm text-xs">
+                      {tag.name}
+                    </div>
+                  ))}
+                </div>
+              ),
+            };
             if (key.toLowerCase() === "image")
             return {
               Header: key,
               accessor: key,
-              Cell: ({ value }) => (
+              Cell: ({value}) => (
                 <>
                   <div
-                    onClick={() => { 
+                    onClick={() => {
                       dispatch(setImagePreview(true))
                       dispatch(setImgProperties({url: value[0], alt: value[1]}))
                     }}
@@ -68,7 +82,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
       {
         id: "Action",
         Header: "",
-        Cell: ({ row }) => (
+        Cell: ({row}) => (
           <div className="flex justify-center items-center gap-4">
             {!noEdit && (
               <>

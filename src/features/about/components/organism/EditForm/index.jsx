@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button, FloatingLabel, Loading } from "../../../../../components/atoms"
-import { useDispatch } from "react-redux";
-import { updateAbout } from "../../../aboutSlice";
-import { RiImageAddLine, RiImageEditLine } from "react-icons/ri";
+import React, {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {Button, FloatingLabel, Loading} from "../../../../../components/atoms"
+import {useDispatch} from "react-redux";
+import {updateAbout} from "../../../aboutSlice";
+import {RiImageAddLine, RiImageEditLine} from "react-icons/ri";
 
-const EditForm = ({ about, loading }) => {
+const EditForm = ({about, loading}) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -21,8 +21,8 @@ const EditForm = ({ about, loading }) => {
       setText(about.text || "")
       setPreview(about.img_url || "")
       setMaps(about.maps || "")
-    }
-  }, [about])
+   }
+ }, [about])
 
   const loadImage = (e) => {
     const image = e.target.files[0];
@@ -30,23 +30,23 @@ const EditForm = ({ about, loading }) => {
       setFile(image);
       try {
           setPreview(URL.createObjectURL(image));
-      } catch (error) {
+     } catch (error) {
           console.error('Error creating object URL:', error);
-      }
-    }
-  };
+     }
+   }
+ };
 
   const handleSubmit = async(e) => {
     e.preventDefault()
     
     try{
-      await dispatch(updateAbout({ title, text, file, maps, dispatch, navigate }))
-    } catch (error) {
+      await dispatch(updateAbout({title, text, file, maps, dispatch, navigate}))
+   } catch (error) {
       if(error.response) {
           console.log(error)
-      }
-    }
-  }
+     }
+   }
+ }
 
   return (
     <div className="w-full">
@@ -65,9 +65,9 @@ const EditForm = ({ about, loading }) => {
             ""
           )}
           <div className="px-4 min-h-[10rem] w-full bg-black/20 hover:bg-black/50 z-10 flex flex-col justify-center items-center rounded text-slate-200">
-            { preview ? <RiImageEditLine className="text-3xl" /> : <RiImageAddLine className="text-3xl" /> }
+            {preview ? <RiImageEditLine className="text-3xl" /> : <RiImageAddLine className="text-3xl" />}
             <span className="mt-2 text-base leading-normal">
-              { preview ? "Change image" : "Select a image"}
+              {preview ? "Change image" : "Select a image"}
             </span>
           </div>
           <input
@@ -84,32 +84,32 @@ const EditForm = ({ about, loading }) => {
 
           <FloatingLabel 
             id={"title"}
-            type={ "text" }
-            text={ "Title" }
-            value={ title }
-            onChange={ (e) => setTitle(e.target.value) }
-            variant={ "border-b-0 rounded-t-lg" }
-            htmlFor={ "title" }
+            type={"text"}
+            text={"Title"}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            variant={"border-b-0 rounded-t-lg"}
+            htmlFor={"title"}
           />
 
           <FloatingLabel 
             id={"text"}
-            type={ "text" }
-            text={ "Text" }
-            value={ text }
-            onChange={ (e) => setText(e.target.value) }
-            variant={ "border-b-0 rounded-t-lg" }
-            htmlFor={ "text" }
+            type={"text"}
+            text={"Text"}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            variant={"border-b-0 rounded-t-lg"}
+            htmlFor={"text"}
           />
 
           <FloatingLabel 
             id={"maps"}
-            type={ "text" }
-            text={ "Maps" }
-            value={ maps }
-            onChange={ (e) => setMaps(e.target.value) }
-            variant={ "border-b-0 rounded-t-lg" }
-            htmlFor={ "maps" }
+            type={"text"}
+            text={"Maps"}
+            value={maps}
+            onChange={(e) => setMaps(e.target.value)}
+            variant={"border-b-0 rounded-t-lg"}
+            htmlFor={"maps"}
           />
 
           <Button

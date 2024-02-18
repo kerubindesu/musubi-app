@@ -22,12 +22,12 @@ const Notification = ({ message, type, onClose }) => {
   return (
     <div
       className={`mt-4 mr-4 p-4 fixed top-0 right-0 bg-black/80 border-l-8 rounded shadow z-50 ${
-        type === 'success' ? 'border-emerald-500' : 'border-red-500'
+        type === "success" ? 'border-emerald-500' : 'border-red-500'
       } text-white`}
     >
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          {type === 'success' ? (
+          {type === "success" ? (
             <RiCheckLine className="text-2xl" />
           ) : (
             ""

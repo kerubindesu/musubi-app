@@ -35,13 +35,17 @@ export const getPost = createAsyncThunk(
 
 export const createPost = createAsyncThunk(
   'posts/createPost',
-  async({ user, title, text, file, dispatch, navigate }, { rejectWithValue }) => {
+  async({ title, text, file, user, category, tags, dispatch, navigate }, { rejectWithValue }) => {
     try {
       const formData = new FormData();
       formData.append('username', user);
       formData.append('title', title);
       formData.append('text', text);
       formData.append('file', file);
+      formData.append('category', category);
+      tags.forEach(tag => {
+        formData.append('tags[]', tag); // Jika tags adalah array, tambahkan [] di akhir
+      });
 
       const response = await axiosPrivate.post('http://localhost:3500/posts', formData, {
         withCredentials: true,
@@ -51,7 +55,7 @@ export const createPost = createAsyncThunk(
       });
 
       if (response) {
-        dispatch(showNotification({ message: response.data.message, type: 'success' }));
+        dispatch(showNotification({ message: response.data.message, type: "success" }));
 
         navigate("/dash/posts")
       }
@@ -69,12 +73,16 @@ export const createPost = createAsyncThunk(
 
 export const updatePost = createAsyncThunk(
   'posts/updatePost',
-  async({ id, title, text, file, dispatch, navigate }, { rejectWithValue }) => {
+  async({ id, title, text, file, category, tags, dispatch, navigate }, { rejectWithValue }) => {
     try {
       const formData = new FormData();
       formData.append('title', title);
       formData.append('text', text);
       formData.append('file', file);
+      formData.append('category', category);
+      tags.forEach(tag => {
+        formData.append('tags[]', tag); // Jika tags adalah array, tambahkan [] di akhir
+      });
 
       const response = await axiosPrivate.patch(`http://localhost:3500/posts/${id}`, formData, {
         withCredentials: true,
@@ -84,7 +92,7 @@ export const updatePost = createAsyncThunk(
       });
 
       if (response) {
-        dispatch(showNotification({ message: response.data.message, type: 'success' }));
+        dispatch(showNotification({ message: response.data.message, type: "success" }));
         
         navigate("/dash/posts")
       }
@@ -108,7 +116,7 @@ export const deletePost = createAsyncThunk(
       http://localhost:3500/posts/${id}`);
 
       if (response) {
-        dispatch(showNotification({ message: response.data.message, type: 'success' }));
+        dispatch(showNotification({ message: response.data.message, type: "success" }));
 
         dispatch(getPosts({ search, page, limit }));
       }

@@ -1,5 +1,6 @@
 import Button from "./Button";
 import Breadcrumb from "./Breadcrumb";
+import CustomSelect from "./CustomSelect";
 import HeadingTitle from "./HeadingTitle";
 import Input from "./Input";
 import InputSearch from "./InputSearch";
@@ -9,4 +10,4 @@ import FloatingLabel from "./FloatingLabel";
 import Placeholder from "./Placeholder";
 import Dropdown from "./Dropdown";
 
-export { Button, Breadcrumb, Dropdown, HeadingTitle, FloatingLabel, Input, InputSearch, Loading, Logo, Placeholder }
+export { Button, Breadcrumb, CustomSelect, Dropdown, HeadingTitle, FloatingLabel, Input, InputSearch, Loading, Logo, Placeholder }

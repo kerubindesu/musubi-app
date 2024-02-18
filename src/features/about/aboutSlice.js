@@ -34,7 +34,7 @@ export const createAbout = createAsyncThunk(
       });
 
       if (response) {
-        dispatch(showNotification({ message: response.data.message, type: 'success' }));
+        dispatch(showNotification({ message: response.data.message, type: "success" }));
       }
 
       return response.data;
@@ -68,7 +68,7 @@ export const updateAbout = createAsyncThunk(
       });
 
       if (response) {
-        dispatch(showNotification({ message: response.data.message, type: 'success' }));
+        dispatch(showNotification({ message: response.data.message, type: "success" }));
         
         dispatch(getAbout())
       }
@@ -92,7 +92,7 @@ export const deleteAbout = createAsyncThunk(
       http://localhost:3500/about/${id}`);
 
       if (response) {
-        dispatch(showNotification({ message: response.data.message, type: 'success' }));
+        dispatch(showNotification({ message: response.data.message, type: "success" }));
 
         dispatch(getAbout());
       }
