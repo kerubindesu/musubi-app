@@ -45,7 +45,7 @@ const AddForm = () => {
     const selectedTagsValues = selectedTags ? selectedTags?.map(tag => tag.value) : []
     
     try{
-      await dispatch(createPost({user, title, text, category: category.value, tags: selectedTagsValues, file, dispatch, navigate}))
+      await dispatch(createPost({user, title, text, category: category.value || "", tags: selectedTagsValues, file, dispatch, navigate}))
    } catch (error) {
       if(error.response) {
           console.log(error)
