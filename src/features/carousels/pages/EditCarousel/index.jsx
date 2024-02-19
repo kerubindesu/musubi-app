@@ -25,7 +25,7 @@ const EditCarousel = () => {
       <HeadingTitle
         text={"Edit Carousel"}
         back={true} 
-        marginBottom={"mb-9"}
+        mainVariant={"mb-9"}
         variant={"text-lg"}
       />
       {isOpen && (

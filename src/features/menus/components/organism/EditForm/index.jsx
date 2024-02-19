@@ -7,8 +7,8 @@ import {getMenu, updateMenu} from "../../../menusSlice";
 const EditForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  const {id} = useParams()
+  const { id } = useParams()
+  
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
   const [icon, setIcon] = useState("");

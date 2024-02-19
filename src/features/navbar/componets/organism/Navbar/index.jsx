@@ -53,9 +53,7 @@ const Navbar = () => {
     const dropdownOptions = [
         { label: 'Dashboard', link: '/dash/home' },
         { label: 'Settings', link: '/settings' },
-      ];
-
-    //   h-56 sm:h-64 lg:h-80 xl:h-[28rem] 2xl:h-[28rem]
+    ];
 
     return (
         <div className={`
@@ -63,7 +61,7 @@ const Navbar = () => {
             ${prevScrollPos <= 218 ? "bg-white/20" : ""} 
             fixed top-0 w-full z-10 transition-all duration-300`
         }>
-            <div className={`mx-auto px-4 h-16 w-full max-w-7xl box-border flex justify-between items-center text-base backdrop-blur-sm transition ease-in duration-300`}>
+            <div className={`mx-auto px-3 h-16 w-full max-w-7xl box-border flex justify-between items-center text-base backdrop-blur-sm transition ease-in duration-300`}>
                 <div className="max-h-max md:w-[7rem] box-border overflow-hidden flex justify-start items-center text-2xl gap-2">
                     <RiMenuLine onClick={() => dispatch(setNavBurgerMenu(true))} className="block md:hidden cursor-pointer" />
                     {navBurgerMenu && (

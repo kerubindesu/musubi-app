@@ -20,7 +20,24 @@ export const getCategory = createAsyncThunk(
   'categories/getCategory',
   async({ id, dispatch }, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:3500/categories/${id}`);
+      const response = await axios.get(`http://localhost:3500/categories/${ id }`);
+
+      return response.data;
+    } catch (error) {
+      if  (error) {
+        dispatch(showNotification({ message: rejectWithValue(error.response.data).payload.message }))
+      }
+
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const getPostsByCategory = createAsyncThunk(
+  'categories/getPostsByCategory',
+  async({ id, search, page, limit, dispatch }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`http://localhost:3500/categories/posts${ id }?search=${search}&page=${page}&limit=${limit}`);
 
       return response.data;
     } catch (error) {
@@ -75,7 +92,7 @@ export const updateCategory = createAsyncThunk(
       formData.append('text', text);
       formData.append('file', file);
 
-      const response = await axiosPrivate.patch(`http://localhost:3500/categories/${id}`, formData, {
+      const response = await axiosPrivate.patch(`http://localhost:3500/categories/${ id }`, formData, {
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -104,7 +121,7 @@ export const deleteCategory = createAsyncThunk(
   async({ id, search, page, limit, dispatch }, { rejectWithValue }) => {
     try {
       const response = await axiosPrivate.delete(`
-      http://localhost:3500/categories/${id}`);
+      http://localhost:3500/categories/${ id }`);
 
       if (response) {
         dispatch(showNotification({ message: response.data.message, type: "success" }))
@@ -131,7 +148,9 @@ const categorieslice = createSlice({
     totalPage: 0,
     loading: false,
     error: null,
-    noFoundCategory: ""
+    noFoundCategory: "",
+    posts: [],
+    noFoundPost: ""
   },
   reducers: {
   },
@@ -167,6 +186,25 @@ const categorieslice = createSlice({
     });
 
     builder.addCase(getCategory.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+
+    builder.addCase(getPostsByCategory.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+
+    builder.addCase(getPostsByCategory.fulfilled, (state, action) => {
+      state.posts = action.payload.result;
+      state.noFoundPost = action.payload.message;
+      state.totalRows = action.payload.totalRows;
+      state.totalPage = action.payload.totalPage;
+      state.loading = false;
+      state.error = null;
+    });
+
+    builder.addCase(getPostsByCategory.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

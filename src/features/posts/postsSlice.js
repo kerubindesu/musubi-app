@@ -20,7 +20,7 @@ export const getPost = createAsyncThunk(
   'posts/getPost',
   async({ id, dispatch }, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:3500/posts/${id}`);
+      const response = await axios.get(`http://localhost:3500/posts/${ id }`);
 
       return response.data;
     } catch (error) {
@@ -84,7 +84,7 @@ export const updatePost = createAsyncThunk(
         formData.append('tags[]', tag); // Jika tags adalah array, tambahkan [] di akhir
       });
 
-      const response = await axiosPrivate.patch(`http://localhost:3500/posts/${id}`, formData, {
+      const response = await axiosPrivate.patch(`http://localhost:3500/posts/${ id }`, formData, {
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -113,7 +113,7 @@ export const deletePost = createAsyncThunk(
   async({ id, search, page, limit, dispatch }, { rejectWithValue }) => {
     try {
       const response = await axiosPrivate.delete(`
-      http://localhost:3500/posts/${id}`);
+      http://localhost:3500/posts/${ id }`);
 
       if (response) {
         dispatch(showNotification({ message: response.data.message, type: "success" }));

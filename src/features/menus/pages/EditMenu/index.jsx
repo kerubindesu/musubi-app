@@ -25,7 +25,7 @@ const EditMenu = () => {
       <HeadingTitle
         text={"Edit Menu"}
         back={true} 
-        marginBottom={"mb-9"}
+        mainVariant={"mb-9"}
         variant={"text-lg"}
       />
       {isOpen && (

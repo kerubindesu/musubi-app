@@ -4,6 +4,7 @@ import { deleteCategory, getCategories } from '../../../categoriesSlice'
 import { setModal } from '../../../../confirmDeleteModal/confirmDeleteModalSlice'
 import { TableResponsive } from '../../../../../components/organism'
 import { ConfirmDeleteModal } from '../../../../confirmDeleteModal/components/organism'
+import { Link } from 'react-router-dom'
 
 const CategoryList = () => {
   const dispatch = useDispatch()
@@ -44,7 +45,7 @@ const CategoryList = () => {
             return {
               "#": page * limit + (index + 1),
               id: category._id,
-              Name: category.name,
+              Name: <Link className="text-emerald-400" to={`view/${category._id}`}>{category.name}</Link>,
               Desc: category.text,
               Image: [category.img_url, category.image]
             };
@@ -65,6 +66,8 @@ const CategoryList = () => {
           totalPage={totalPage}
           setPage={setPage}
           totalRows={totalRows}
+          noAddData={true}
+          noDelete={true}
         />
         <ConfirmDeleteModal confirm={confirm} message={message} />
       </>

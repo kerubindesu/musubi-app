@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { ProtectedTemplate } from '../components/templates';
-import Dashboard from '../pages/Dashboard';
+import { Dashboard } from '../pages';
 import NotFound from '../pages/NotFound';
 import { useSelector } from 'react-redux';
 import { Users } from '../features/users/pages';
@@ -10,7 +10,7 @@ import { LogoConfiguration } from '../features/logo/pages';
 import { AddMenu, EditMenu, Menus } from '../features/menus/pages';
 import { Carousels, EditCarousel } from '../features/carousels/pages';
 import { About, AddAbout, EditAbout } from '../features/about/pages';
-import { AddCategory, Categories, EditCategory } from '../features/categories/pages';
+import { Categories, DetailCategory, EditCategory } from '../features/categories/pages';
 import { AddTag, EditTag, Tags } from '../features/tags/pages';
 
 const AdminRoutes = () => {
@@ -37,13 +37,13 @@ const AdminRoutes = () => {
         <Route path="posts">
           <Route index element={<Posts />} />
           <Route path="add" element={<AddPost />} />
-          <Route path=":id" element={<EditPost />} />
+          <Route path="edit/:id" element={<EditPost />} />
         </Route>
 
         <Route path="carousels">
           <Route index element={<Carousels />} />
           {/* <Route path="add" element={<AddCarousel />} /> */}
-          <Route path=":id" element={<EditCarousel />} />
+          <Route path="edit/:id" element={<EditCarousel />} />
         </Route>
 
         <Route path="logo" element={<LogoConfiguration />} />
@@ -51,19 +51,20 @@ const AdminRoutes = () => {
         <Route path="about">
           <Route index element={<About />} />
           <Route path="add" element={<AddAbout />} />
-          <Route path=":id" element={<EditAbout />} />
+          <Route path="edit/:id" element={<EditAbout />} />
         </Route>
 
         <Route path="menus">
           <Route index element={<Menus />} />
           <Route path="add" element={<AddMenu />} />
-          <Route path=":id" element={<EditMenu />} />
+          <Route path="edit/:id" element={<EditMenu />} />
         </Route>
 
         <Route path="categories">
           <Route index element={<Categories />} />
-          <Route path="add" element={<AddCategory />} />
-          <Route path=":id" element={<EditCategory />} />
+          {/* <Route path="add" element={<AddCategory />} /> */}
+          <Route path="edit/:id" element={<EditCategory />} />
+          <Route path="view/:id" element={<DetailCategory />} />
         </Route>
 
         <Route path="tags">

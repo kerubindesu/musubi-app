@@ -20,7 +20,7 @@ export const getTag = createAsyncThunk(
   'tags/getTag',
   async({ id, dispatch }, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:3500/tags/${id}`);
+      const response = await axios.get(`http://localhost:3500/tags/${ id }`);
 
       return response.data;
     } catch (error) {
@@ -63,7 +63,7 @@ export const updateTag = createAsyncThunk(
   'tags/updateTag',
   async({ id, name, dispatch, navigate }, { rejectWithValue }) => {
     try {
-      const response = await axiosPrivate.patch(`http://localhost:3500/tags/${id}`, { name }, {
+      const response = await axiosPrivate.patch(`http://localhost:3500/tags/${ id }`, { name }, {
         withCredentials: true
       });
 
@@ -89,7 +89,7 @@ export const deleteTag = createAsyncThunk(
   async({ id, search, page, limit, dispatch }, { rejectWithValue }) => {
     try {
       const response = await axiosPrivate.delete(`
-      http://localhost:3500/tags/${id}`);
+      http://localhost:3500/tags/${ id }`);
 
       if (response) {
         dispatch(showNotification({ message: response.data.message, type: "success" }))

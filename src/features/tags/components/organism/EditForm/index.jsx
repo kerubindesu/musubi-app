@@ -7,8 +7,8 @@ import {getTag, updateTag} from "../../../tagsSlice";
 const EditForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  const {id} = useParams()
+  const { id } = useParams()
+  
   const [name, setName] = useState("");
 
   const {loading, tag} = useSelector((state) => state.tags);

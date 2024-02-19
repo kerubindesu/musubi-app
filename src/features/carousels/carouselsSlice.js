@@ -20,7 +20,7 @@ export const getCarousel = createAsyncThunk(
   'carousels/getCarousel',
   async({ id, dispatch }, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:3500/carousels/${id}`);
+      const response = await axios.get(`http://localhost:3500/carousels/${ id }`);
 
       return response.data;
     } catch (error) {
@@ -74,7 +74,7 @@ export const updateCarousel = createAsyncThunk(
       formData.append('text', text);
       formData.append('file', file);
 
-      const response = await axiosPrivate.patch(`http://localhost:3500/carousels/${id}`, formData, {
+      const response = await axiosPrivate.patch(`http://localhost:3500/carousels/${ id }`, formData, {
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -102,7 +102,7 @@ export const deleteCarousel = createAsyncThunk(
   async({ id, search, page, limit, dispatch }, { rejectWithValue }) => {
     try {
       const response = await axiosPrivate.delete(`
-      http://localhost:3500/carousels/${id}`);
+      http://localhost:3500/carousels/${ id }`);
 
       if (response) {
         dispatch(showNotification({ message: response.data.message, type: "success" }));

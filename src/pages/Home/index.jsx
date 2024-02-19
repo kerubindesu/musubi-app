@@ -15,9 +15,8 @@ const Home = () => {
 
   return (
     <>
-    {/* Carousel */}
-    {loadingCarousels ? <Placeholder variant={"h-56 sm:h-64 lg:h-80 xl:h-[28rem] 2xl:h-[28rem] w-full"} /> : (
-      <div className="aboslute inset-0 h-56 sm:h-64 lg:h-80 xl:h-[28rem] 2xl:h-[28rem] rounded-b">
+    {loadingCarousels ? <Placeholder variant={"h-56 sm:h-64 md:h-80 xl:h-[28rem] 2xl:h-[28rem] w-full rounded-xl"} /> : (
+      <div className="aboslute inset-0 h-56 sm:h-64 md:h-80 xl:h-[28rem] 2xl:h-[28rem] rounded-b">
         <Carousel leftControl={true} rightControl={true}>
           {carousels?.map((carousel, index) => (
               <img key={index + 1} src={carousel.img_url} alt={carousel.image} className="h-full w-full object-cover"/>

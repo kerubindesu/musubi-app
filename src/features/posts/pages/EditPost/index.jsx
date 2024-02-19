@@ -25,7 +25,7 @@ const EditPost = () => {
       <HeadingTitle
         text={"Edit Post"}
         back={true} 
-        marginBottom={"mb-9"}
+        mainVariant={"mb-9"}
         variant={"text-lg"}
       />
       {isOpen && (

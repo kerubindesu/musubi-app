@@ -60,7 +60,7 @@ export const updateAbout = createAsyncThunk(
       formData.append('file', file);
       formData.append('maps', maps);
 
-      const response = await axiosPrivate.patch(`http://localhost:3500/about/${id}`, formData, {
+      const response = await axiosPrivate.patch(`http://localhost:3500/about/${ id }`, formData, {
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -89,7 +89,7 @@ export const deleteAbout = createAsyncThunk(
   async({ id, dispatch }, { rejectWithValue }) => {
     try {
       const response = await axiosPrivate.delete(`
-      http://localhost:3500/about/${id}`);
+      http://localhost:3500/about/${ id }`);
 
       if (response) {
         dispatch(showNotification({ message: response.data.message, type: "success" }));

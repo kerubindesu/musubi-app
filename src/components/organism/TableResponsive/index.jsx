@@ -9,7 +9,7 @@ import { setImagePreview, setImgProperties } from "../../../features/imagePrevie
 import { ImagePreview } from "../../../features/imagePreview/components/organism";
 import { RiAddLine, RiEyeLine } from "react-icons/ri";
 
-const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyword, page, totalPage, setPage, totalRows, noAddData, noEdit, noDelete }) => {
+const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyword, page, totalPage, setPage, totalRows, noAddData, noEdit, noDelete, noActions }) => {
   const dispatch = useDispatch()
 
   const data = useMemo(() => (items ? [...items] : []), [items]);
@@ -83,10 +83,10 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
         id: "Action",
         Header: "",
         Cell: ({row}) => (
-          <div className="flex justify-center items-center gap-4">
+          <div className="flex h-auto w-full justify-center items-center gap-4">
             {!noEdit && (
               <>
-                <Link to={`${row.values.id}`}>
+                <Link to={`edit/${row.values.id}`}>
                   <span className="py-1 px-2 text-emerald-500 hover:bg-inherit rounded-sm">Edit</span>
                 </Link>
               </>
@@ -115,7 +115,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
       data,
     },
     useGlobalFilter,
-    tableHooks,
+    noActions ? "" : tableHooks,
     useSortBy
   );
 
@@ -201,7 +201,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
                             return (
                               <td
                                 {...cell.getCellProps()}
-                                className="p-2 max-w-[16rem] relative truncate border"
+                                className="p-2 min-w-[8rem] max-w-[16rem] relative truncate border"
                               >
                                 {cell.render("Cell")}
                               </td>

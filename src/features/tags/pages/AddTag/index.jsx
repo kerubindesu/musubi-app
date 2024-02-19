@@ -25,7 +25,7 @@ const AddTag = () => {
       <HeadingTitle
         text={"Add Tag"}
         back={true} 
-        marginBottom={"mb-9"}
+        mainVariant={"mb-9"}
         variant={"text-lg"}
       />
       {isOpen && (

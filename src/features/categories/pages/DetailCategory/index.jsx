@@ -1,29 +1,38 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Breadcrumb, HeadingTitle } from '../../../../components/atoms'
-import { EditForm } from '../../components/organism'
+import { PostsByCategory } from '../../components/organism'
 import { useDispatch, useSelector } from 'react-redux';
 import { hideNotification } from '../../../notification/notificationSlice';
 import { Notification } from '../../../notification/components/organism';
+import { useParams } from 'react-router-dom';
+import { getCategory } from '../../categoriesSlice';
 
-const EditAbout = () => {
+const AddCategory = () => {
   const dispatch = useDispatch();
+  const categoryId = useParams().id
+  
+  const { category, loading } = useSelector((state) => state.categories);
   const { message, type, isOpen } = useSelector((state) => state.notification);
 
   const handleCloseNotification = () => {
     dispatch(hideNotification());
   };
-  
+
+  useEffect(() => {
+    dispatch(getCategory({ id: categoryId, dispatch }))
+  }, [categoryId, dispatch])
+
   const breadcrumbs = [
     { text: 'Dashboard', url: '/dash/home' },
-    { text: 'About', url: '/dash/about' },
-    { text: 'Edit About' },
+    { text: 'Categories', url: '/dash/categories' },
+    { text: loading ? "Loading..." : category?.name },
   ];
 
   return (
     <>
       <Breadcrumb items={breadcrumbs} />
       <HeadingTitle
-        text={"Edit About"}
+        text={ loading ? "Loading..." : category?.name }
         back={true} 
         mainVariant={"mb-9"}
         variant={"text-lg"}
@@ -35,9 +44,10 @@ const EditAbout = () => {
           onClose={handleCloseNotification}
         />
       )}
-      <EditForm />
+
+      <PostsByCategory categoryId={categoryId} />
     </>
   )
 }
 
-export default EditAbout
+export default AddCategory

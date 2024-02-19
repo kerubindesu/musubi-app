@@ -16,7 +16,7 @@ const FloatingLabel = ({
         <input
           type={type}
           value={value}
-          id={id}
+          id={ id }
           onChange={onChange}
           className="block py-2.5 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
           placeholder={" "}

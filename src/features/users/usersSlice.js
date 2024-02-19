@@ -20,7 +20,7 @@ export const deleteUser = createAsyncThunk(
   async({ id, search, limit, page, dispatch }, { rejectWithValue }) => {
     try {
       const response = await axiosPrivate.delete(`
-      http://localhost:3500/users/${id}`);
+      http://localhost:3500/users/${ id }`);
 
       if (response) {
         dispatch(showNotification({ message: response.data.message, type: "success" }));
