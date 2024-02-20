@@ -14,7 +14,7 @@ const Logo = ({ variant, link }) => {
     }, [dispatch])
     return (
         <Link to={link}>
-            {loading && <Placeholder variant={"h-[2.5rem] w-[5rem] rounded-sm"} />}
+            {loading && <Placeholder variant={"h-[2.5rem] w-[5rem] rounded-lg"} />}
             {!loading && logo && <img className={`${variant} object-contain`} src={logo.img_url} alt={logo.name} />}
         </Link>
     )

@@ -7,10 +7,10 @@ const NavItem = ({ to, icon, text }) => {
       <NavLink
         to={to}
         className={({ isPending, isActive, isTransitioning }) => 
-          `inline-block py-2 w-full md:w-auto box-border border-l-2 md:border-l-0 truncate ${
-            isPending ? 'text-slate-500' : ''
+          `inline-block py-2 w-full md:w-auto box-border border-l-2 md:border-l-0 truncate font-semibold ${
+            isPending ? 'text-slate-400' : ''
           } ${
-            isActive ? 'border-emerald-500 font-semibold' : 'text-slate-800'
+            isActive ? 'border-slate-900' : 'text-slate-500'
           } ${
             isTransitioning ? 'transition-all duration-300 ease-in-out' : ''
           }`

@@ -33,17 +33,21 @@ const Category = () => {
               <span className="lg:py-6 text-2xl sm:text-4xl lg:text-6xl text-white font-semibold textShadow md:truncate">{title}</span>
             </div>
 
-            <div className="py-2 h-full sm:h-auto min-w-[9rem] sm:min-w-[34.5rem] flex flex-col sm:flex-row gap-4 justify-center items-start sm:items-center box-border bg-white shadow-lg rounded-lg">
+            <div className="px-2 h-full sm:h-auto min-w-[9rem] sm:min-w-[34.5rem] flex flex-col sm:flex-row gap-6 sm:gap-0 justify-center items-start sm:items-center box-border bg-white shadow-lg rounded-lg">
               {categories?.map((category, index) => (
                 <div
                   onClick={() => {
                     setTitle(category.name);
                     setPreview(category.img_url)
                   }}
-                  className={`px-3 sm:py-4 w-max text-sm truncate cursor-pointer hover:text-emerald-500 ${title && title === category.name ? "text-emerald-500 font-semibold" : ""}`}
+                  className={`sm:w-[9rem] text-sm truncate cursor-pointer text-center text-slate-500 hover:text-slate-900 font-semibold ${title && title === category.name ? "text-slate-900" : ""}`}
                   key={index + 1}
                 >
-                  {category.name}
+                  <span className="relative mx-auto px-2 sm:py-4 h-full w-min flex flex-col justify-center items-center text-center">
+                    {category.name}
+                    <div className={`hidden sm:block absolute bottom-0 right-0 left-0 h-1 rounded-sm
+                    ${title && title === category.name ? "bg-slate-900" : "" }`}></div>
+                  </span>
                 </div>
               ))}
             </div>

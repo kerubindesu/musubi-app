@@ -20,7 +20,7 @@ const NavMenu = ({ variant }) => {
           <NavItem key={index + 1} to={menu.link} text={menu.name.charAt(0).toUpperCase() + menu.name.slice(1)} />
         ))}
 
-        {loading && <Placeholder variant={"h-full w-full min-h-[2.5rem] rounded"} />}
+        {loading && <Placeholder variant={"h-full w-full min-h-[2.5rem] rounded-lg"} />}
       </div>
     </>
   )

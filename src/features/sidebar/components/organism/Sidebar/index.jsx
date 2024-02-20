@@ -58,7 +58,7 @@ const Sidebar = () => {
 
           <div className="px-3 py-3 w-full flex flex-col justify-center items-start gap-4 border-b truncate box-border border-r">
 
-            {AuthLoading ? <Placeholder variant={"h-[2.8rem] w-full"} /> : (
+            {AuthLoading ? <Placeholder variant={"h-[2.8rem] w-full rounded-lg"} /> : (
               <>
                 <div className="w-full flex flex-row justify-between items-center">
                   <div className="max-w-[10rem] truncate">
