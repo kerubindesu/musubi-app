@@ -40,7 +40,7 @@ const Category = () => {
                     setTitle(category.name);
                     setPreview(category.img_url)
                   }}
-                  className={`sm:w-[9rem] text-sm truncate cursor-pointer text-center text-slate-500 hover:text-slate-900 font-semibold ${title && title === category.name ? "text-slate-900" : ""}`}
+                  className={`sm:w-[9rem] text-sm truncate cursor-pointer text-center text-slate-700 hover:text-slate-900 font-semibold ${title && title === category.name ? "text-slate-900" : ""}`}
                   key={index + 1}
                 >
                   <span className="relative mx-auto px-2 sm:py-4 h-full w-min flex flex-col justify-center items-center text-center">

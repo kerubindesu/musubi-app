@@ -73,8 +73,6 @@ export const refreshAccessToken = createAsyncThunk(
 
       return response.data.accessToken;
     } catch (error) {
-      console.error('Error refreshing token:', error);
-      console.clear()
       return rejectWithValue(error.response.data);
     }
   }

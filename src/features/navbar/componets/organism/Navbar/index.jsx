@@ -73,7 +73,7 @@ const Navbar = () => {
                     <Logo link={"/"} variant="max-h-[3rem] box-border" />
                 </div>
 
-                <NavMenu variant={"mx-3 w-full hidden md:flex justify-center items-center gap-3 lg:gap-6"} />
+                <NavMenu variant={"mx-3 h-full w-full hidden md:flex justify-center items-center gap-6"} />
                 
                 <div className="max-h-max w-[7rem] box-border flex justify-end items-center gap-4">
                     <div className="flex justify-center items-center gap-2">

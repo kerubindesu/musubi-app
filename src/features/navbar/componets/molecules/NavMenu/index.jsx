@@ -15,7 +15,7 @@ const NavMenu = ({ variant }) => {
 
   return (
     <>
-      <div className={`${variant} w-full`}>
+      <div className={`${variant} h-full w-full`}>
         {menus && menus?.map((menu, index) => (
           <NavItem key={index + 1} to={menu.link} text={menu.name.charAt(0).toUpperCase() + menu.name.slice(1)} />
         ))}
