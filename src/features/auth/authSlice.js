@@ -79,7 +79,7 @@ export const refreshAccessToken = createAsyncThunk(
 );
 
 export const getUserAuth = createAsyncThunk(
-  'auth/user', async() => {
+  'auth/user', async(_, {rejectWithValue}) => {
     try {
       const response = await axiosPrivate.get('http://localhost:3500/auth/user', {
         withCredentials: true,
@@ -87,7 +87,8 @@ export const getUserAuth = createAsyncThunk(
 
       return response.data.user;
     } catch (error) {
-      console.log(error)
+      console.log("error")
+      return rejectWithValue(error.response.data);
     }
   }
 );

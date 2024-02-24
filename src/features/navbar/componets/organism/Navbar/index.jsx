@@ -59,7 +59,7 @@ const Navbar = () => {
         <div className={`
             ${visible  ? 'bg-white' : 'hidden'}
             ${prevScrollPos <= 218 ? "bg-white/20" : ""} 
-            fixed top-0 w-full z-10 transition-all duration-300`
+            fixed top-0 w-full z-20 transition-all duration-300`
         }>
             <div className={`mx-auto px-3 h-16 w-full max-w-7xl box-border flex justify-between items-center text-base backdrop-blur-sm transition ease-in duration-300`}>
                 <div className="max-h-max md:w-[7rem] box-border overflow-hidden flex justify-start items-center text-2xl gap-2">

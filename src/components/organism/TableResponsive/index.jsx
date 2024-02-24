@@ -201,7 +201,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
                             return (
                               <td
                                 {...cell.getCellProps()}
-                                className="p-2 min-w-[8rem] max-w-[16rem] relative truncate border"
+                                className="p-2 max-w-[16rem] relative truncate border"
                               >
                                 {cell.render("Cell")}
                               </td>

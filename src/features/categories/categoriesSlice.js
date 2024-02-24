@@ -144,13 +144,18 @@ const categorieslice = createSlice({
   name: 'categories',
   initialState: {
     categories: [],
+    noFoundCategory: "",
     totalRows: 0,
     totalPage: 0,
     loading: false,
+    isCategoryLoading: false,
     error: null,
-    noFoundCategory: "",
     posts: [],
-    noFoundPost: ""
+    isPostsLoading: false,
+    noFoundPost: "",
+    totalPostsRows: 0,
+    totalPostsPage: 0,
+    errPosts: null,
   },
   reducers: {
   },
@@ -175,37 +180,37 @@ const categorieslice = createSlice({
     });
 
     builder.addCase(getCategory.pending, (state) => {
-      state.loading = true;
+      state.isCategoryLoading = true;
       state.error = null;
     });
 
     builder.addCase(getCategory.fulfilled, (state, action) => {
       state.category = action.payload;
-      state.loading = false;
+      state.isCategoryLoading = false;
       state.error = null;
     });
 
     builder.addCase(getCategory.rejected, (state, action) => {
-      state.loading = false;
+      state.isCategoryLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(getPostsByCategory.pending, (state) => {
-      state.loading = true;
+      state.isPostsLoading = true;
       state.error = null;
     });
 
     builder.addCase(getPostsByCategory.fulfilled, (state, action) => {
       state.posts = action.payload.result;
       state.noFoundPost = action.payload.message;
-      state.totalRows = action.payload.totalRows;
-      state.totalPage = action.payload.totalPage;
-      state.loading = false;
-      state.error = null;
+      state.totalPostsRows = action.payload.totalRows;
+      state.totalPostsPage = action.payload.totalPage;
+      state.isPostsLoading = false;
+      state.errPosts = null;
     });
 
     builder.addCase(getPostsByCategory.rejected, (state, action) => {
-      state.loading = false;
+      state.isPostsLoading = false;
       state.error = action.payload;
     });
 

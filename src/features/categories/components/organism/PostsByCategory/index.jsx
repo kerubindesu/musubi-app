@@ -16,10 +16,10 @@ const PostsByCategory = ({ categoryId }) => {
   const [id, setId] = useState(null)
   const [message, setMessage] = useState("");
 
-  const { noFoundPost, posts, totalRows, totalPage, loading } = useSelector((state) => state.categories);
+  const { noFoundPost, posts, totalPostsRows, totalPostsPage, isPostsLoading } = useSelector((state) => state.categories);
 
   useEffect(() => {
-      dispatch(getPostsByCategory({ id: categoryId, search: keyword, page, limit }))
+      dispatch(getPostsByCategory({ id: categoryId, search: keyword, page, limit, dispatch }))
   }, [dispatch, categoryId, limit, keyword, page])
 
   const handleDelete = async(id) => {
@@ -60,12 +60,12 @@ const PostsByCategory = ({ categoryId }) => {
         title={"Post"}
         action={handleDelete}
         setKeyword={setKeyword}
-        isLoading={loading}
+        isLoading={isPostsLoading}
         noFoundData={noFoundPost}
         page={page}
-        totalPage={totalPage}
+        totalPage={totalPostsPage}
         setPage={setPage}
-        totalRows={totalRows}
+        totalRows={totalPostsRows}
         noAddData={true}
         noActions={true}
       />
