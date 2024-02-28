@@ -86,7 +86,13 @@ const Category = () => {
         )}
       </div>
 
-      {isCategoryLoading ? <Placeholder variant={"my-6 h-32 w-full rounded-xl"} /> : (
+      {isCategoryLoading ? (
+        <>
+          <Placeholder variant={"my-4 h-14 w-56 rounded-xl"} />
+          <Placeholder variant={"my-2 h-10 w-full rounded-xl"} />
+          <Placeholder variant={"my-2 h-10 w-11/12 rounded-xl"} />
+        </>
+      ) : (
       <div className="my-3 py-3 flex flex-col gap-2">
         <div className="text-xl font-semibold">{category?.name}</div>
         <div className="text-base text-justify">{category?.text}</div>
@@ -96,7 +102,9 @@ const Category = () => {
       <div className="App my-20">
         <header className="py-4 text-slate-900">
           <div className="container mx-auto">
-            <h1 className="text-2xl font-semibold flex items-center">{category?.name}</h1>
+            {isCategoryLoading ? <Placeholder variant={"my-6 h-14 w-56 rounded-xl"} /> : (
+              <h1 className="text-2xl font-semibold flex items-center">{category?.name}</h1>
+            )}
           </div>
         </header>
         <main>
@@ -129,7 +137,6 @@ const Category = () => {
                 ))}
               </>
             )}
-            {/* Tambahkan card lainnya sesuai kebutuhan */}
           </div>
         </main>
       </div>

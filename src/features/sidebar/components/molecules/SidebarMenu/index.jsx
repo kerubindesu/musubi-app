@@ -9,7 +9,7 @@ const SidebarMenu = () => {
   return (
     <>
       <ul className="flex-1 w-full flex flex-col">
-        <div className="px-3">
+        <div className="p-3 border-b">
           <NavItem
             action={() => dispatch(setSidebar(false))}
             variant={"px-2 rounded"}
@@ -51,15 +51,15 @@ const SidebarMenu = () => {
             text={"Tags"}
           />
         </div>
-        <li>
+        <li className="py-3">
             <div className="pt-4 pb-3 pl-3 text-xs text-slate-500">Configuration</div>
             <ul className="px-3 flex flex-col justify-center items-start">
                 <NavItem
-                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-5 border-l-4 rounded-r"} to={"/dash/logo"} text={"Logo"} />
+                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-4 border-l-4 rounded-r"} to={"/dash/logo"} text={"Logo"} />
                 <NavItem
-                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-5 border-l-4 rounded-r"} to={"/dash/about"} text={"About"} />
+                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-4 border-l-4 rounded-r"} to={"/dash/about"} text={"About"} />
                 <NavItem
-                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-5 border-l-4 rounded-r"} to={"/dash/menus"} text={"Guest Menu"} />
+                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-4 border-l-4 rounded-r"} to={"/dash/menus"} text={"Guest Menu"} />
             </ul>
         </li>
       </ul>

@@ -157,69 +157,59 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
           )}
         </div>
       </div>
-      {isLoading && isLoading?
-      (
-        <Loading text={true} />
-      ):(
-        <>
-          {noFoundData && noFoundData? (
-            <div className="p-4 w-full flex flex-col justify-center items-center">{noFoundData}</div>
-          ):(
-            <>
-              <div className="overflow-x-auto relative flex flex-col bg-white">
-                <table
-                  {...getTableProps()}
-                  className="w-full text-left text-gray-500 whitespace-nowrap border"
+      {isLoading && <Loading text={true} />}
+      {noFoundData && <div className="p-4 w-full flex flex-col justify-center items-center">{noFoundData}</div>}
+      {rows.length !== 0 && (
+        <div className="overflow-x-auto relative flex flex-col bg-white">
+          <table
+            {...getTableProps()}
+            className="w-full text-left text-gray-500 whitespace-nowrap border"
+          >
+            <thead className="text-gray-700">
+              {headerGroups.map((headerGroup) => (
+                <tr
+                  {...headerGroup.getHeaderGroupProps()}
+                  className="text-center"
                 >
-                  <thead className="text-gray-700">
-                    {headerGroups.map((headerGroup) => (
-                      <tr
-                        {...headerGroup.getHeaderGroupProps()}
-                        className="text-center"
-                      >
-                        {headerGroup.headers.map((column) => (
-                          <th
-                            {...column.getHeaderProps(column.getSortByToggleProps())}
-                            scope="col"
-                            className="py-3 px-2"
-                          >
-                            {column.render("Header")}
-                            {column.isSorted ? (column.isSortedDesc ? " ▾" : " ▴") : ""}
-                          </th>
-                        ))}
-                      </tr>
-                    ))}
-                  </thead>
+                  {headerGroup.headers.map((column) => (
+                    <th
+                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                      scope="col"
+                      className="py-3 px-2"
+                    >
+                      {column.render("Header")}
+                      {column.isSorted ? (column.isSortedDesc ? " ▾" : " ▴") : ""}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
 
-                  <tbody {...getTableBodyProps()}>
-                    {rows.map((row) => {
-                      prepareRow(row);
+            <tbody {...getTableBodyProps()}>
+              {rows.map((row) => {
+                prepareRow(row);
 
+                return (
+                  <tr {...row.getRowProps()} className="border-y">
+                    {row.cells.map((cell) => {
                       return (
-                        <tr {...row.getRowProps()} className="border-y">
-                          {row.cells.map((cell) => {
-                            return (
-                              <td
-                                {...cell.getCellProps()}
-                                className="p-2 max-w-[16rem] relative truncate border"
-                              >
-                                {cell.render("Cell")}
-                              </td>
-                            );
-                          })}
-                        </tr>
+                        <td
+                          {...cell.getCellProps()}
+                          className="p-2 max-w-[16rem] relative truncate border"
+                        >
+                          {cell.render("Cell")}
+                        </td>
                       );
                     })}
-                  </tbody>
-                </table>
-              </div>
-            </>
-          )}
-        </>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       )}
-      
-      <>
-      {items && totalPage && (
+
+      {totalPage !== undefined && totalPage > 0 && (
         <div className="py-4 w-full flex flex-col md:flex-row justify-between md:items-center gap-4">
           <div className="text-gray-700">Showing {page +1} to {totalPage} of {totalRows}</div>
           <ReactPaginate
@@ -235,7 +225,6 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
           />
         </div>
       )}
-      </>
     </>
   );
 };

@@ -86,7 +86,7 @@ const Sidebar = () => {
             )}
           </div>
 
-          <div className="pt-3 flex-1 w-full flex flex-col justify-between overflow-y-auto border-r">
+          <div className="flex-1 w-full flex flex-col justify-between overflow-y-auto border-r">
             <SidebarMenu />
             <DashFooter />
           </div>
