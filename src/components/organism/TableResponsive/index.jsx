@@ -157,56 +157,63 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
           )}
         </div>
       </div>
-      {isLoading && <Loading text={true} />}
-      {noFoundData && <div className="p-4 w-full flex flex-col justify-center items-center">{noFoundData}</div>}
-      {rows.length !== 0 && (
-        <div className="overflow-x-auto relative flex flex-col bg-white">
-          <table
-            {...getTableProps()}
-            className="w-full text-left text-gray-500 whitespace-nowrap border"
-          >
-            <thead className="text-gray-700">
-              {headerGroups.map((headerGroup) => (
-                <tr
-                  {...headerGroup.getHeaderGroupProps()}
-                  className="text-center"
-                >
-                  {headerGroup.headers.map((column) => (
-                    <th
-                      {...column.getHeaderProps(column.getSortByToggleProps())}
-                      scope="col"
-                      className="py-3 px-2"
+      
+      {isLoading && isLoading ? <Loading text={true} /> : (
+        <>
+          {noFoundData && (
+            <div className="p-4 w-full flex flex-col justify-center items-center">{noFoundData}</div>
+          )}
+          
+          {rows.length !== 0 && (
+            <div className="overflow-x-auto relative flex flex-col bg-white">
+              <table
+                {...getTableProps()}
+                className="w-full text-left text-gray-500 whitespace-nowrap border"
+              >
+                <thead className="text-gray-700">
+                  {headerGroups.map((headerGroup) => (
+                    <tr
+                      {...headerGroup.getHeaderGroupProps()}
+                      className="text-center"
                     >
-                      {column.render("Header")}
-                      {column.isSorted ? (column.isSortedDesc ? " ▾" : " ▴") : ""}
-                    </th>
-                  ))}
-                </tr>
-              ))}
-            </thead>
-
-            <tbody {...getTableBodyProps()}>
-              {rows.map((row) => {
-                prepareRow(row);
-
-                return (
-                  <tr {...row.getRowProps()} className="border-y">
-                    {row.cells.map((cell) => {
-                      return (
-                        <td
-                          {...cell.getCellProps()}
-                          className="p-2 max-w-[16rem] relative truncate border"
+                      {headerGroup.headers.map((column) => (
+                        <th
+                          {...column.getHeaderProps(column.getSortByToggleProps())}
+                          scope="col"
+                          className="py-3 px-2"
                         >
-                          {cell.render("Cell")}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+                          {column.render("Header")}
+                          {column.isSorted ? (column.isSortedDesc ? " ▾" : " ▴") : ""}
+                        </th>
+                      ))}
+                    </tr>
+                  ))}
+                </thead>
+
+                <tbody {...getTableBodyProps()}>
+                  {rows.map((row) => {
+                    prepareRow(row);
+
+                    return (
+                      <tr {...row.getRowProps()} className="border-y">
+                        {row.cells.map((cell) => {
+                          return (
+                            <td
+                              {...cell.getCellProps()}
+                              className="p-2 max-w-[16rem] relative truncate border"
+                            >
+                              {cell.render("Cell")}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </>
       )}
 
       {totalPage !== undefined && totalPage > 0 && (
