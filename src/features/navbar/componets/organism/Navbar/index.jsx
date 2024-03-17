@@ -57,8 +57,8 @@ const Navbar = () => {
 
     return (
         <div className={`
-            ${visible  ? 'bg-white' : 'hidden'}
-            ${prevScrollPos <= 218 ? "bg-white/20" : ""} 
+            ${prevScrollPos === 0 ? "border-none" : "shadow"}
+            ${visible  ? "bg-white" : "hidden"}
             fixed top-0 w-full z-20 transition-all duration-300`
         }>
             <div className={`mx-auto px-3 h-16 w-full max-w-7xl box-border flex justify-between items-center text-base backdrop-blur-sm transition ease-in duration-300`}>
@@ -80,20 +80,16 @@ const Navbar = () => {
                         <RiFacebookCircleLine className="text-2xl" />
                         <RiWhatsappLine className="text-2xl" />
                     </div>
-                    {AuthLoading && AuthLoading ? (
+                    {AuthLoading ? (
                         <>
                             <Placeholder variant={"h-8 w-8 rounded-full"} />
                         </>
-                    ) : (
-                        <>
-                        {userAuth && (
-                            <Dropdown onLogout={handleLogout} options={dropdownOptions}>
-                                <div className="h-8 w-8 flex items-center justify-center bg-gray-200 rounded-full cursor-pointer text-lg font-semibold">
-                                    {Array.from(`${userAuth.name}`)[0]}
-                                </div>
-                            </Dropdown>
-                        )}
-                        </>
+                    ) : userAuth && (
+                        <Dropdown onLogout={handleLogout} options={dropdownOptions}>
+                            <div className="h-8 w-8 flex items-center justify-center bg-gray-200 rounded-full cursor-pointer text-lg font-semibold">
+                                {Array.from(`${userAuth.name}`)[0]}
+                            </div>
+                        </Dropdown>
                     ) }
                 </div>
             </div>

@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 const Breadcrumb = ({ items }) => {
   return (
-    <nav className="h-8 lg:h-16 text-sm flex justify-start items-center" aria-label="Breadcrumb">
+    <nav className="h-8 lg:h-16 text-sm flex justify-start items-center overflow-x-auto no-scrollbar " aria-label="Breadcrumb">
       <ol className="list-none p-0 inline-flex">
         {items.map((item, index) => (
-          <li key={index + 1} className="flex items-center">
+          <li key={index + 1} className="flex items-center truncate">
             {item.url ? (
               <Link to={item.url} className="text-slate-500 hover:text-slate-700">
                 {item.text}

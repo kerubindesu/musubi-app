@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Button, FloatingLabel, Loading} from "../../../../../components/atoms"
+import {Button, CustomTextArea, FloatingLabel, Loading} from "../../../../../components/atoms"
 import {useDispatch} from "react-redux";
 import {updateAbout} from "../../../aboutSlice";
 import {RiImageAddLine, RiImageEditLine} from "react-icons/ri";
@@ -79,7 +79,7 @@ const EditForm = ({about, loading}) => {
           </label>
 
           {preview && (
-              <div className="text-base text-orange-400 font-semibold">Click the Image to change it.</div>
+              <div className="mb-4 text-xs text-orange-400 font-semibold">Click the Image to change it.</div>
           )}
 
           <FloatingLabel 
@@ -92,14 +92,15 @@ const EditForm = ({about, loading}) => {
             htmlFor={"title"}
           />
 
-          <FloatingLabel 
-            id={"text"}
-            type={"text"}
-            text={"Text"}
+          <CustomTextArea
+            id="text"
+            text={"Description"}
             value={text}
             onChange={(e) => setText(e.target.value)}
-            variant={"border-b-0 rounded-t-lg"}
             htmlFor={"text"}
+            variant={"resize-none"}
+            rows={3}
+            cols={40}
           />
 
           <FloatingLabel 

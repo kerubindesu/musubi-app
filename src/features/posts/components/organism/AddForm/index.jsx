@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Button, CustomSelect, FloatingLabel, Loading} from "../../../../../components/atoms"
+import {Button, CustomSelect, CustomTextArea, FloatingLabel, Loading} from "../../../../../components/atoms"
 import {useDispatch, useSelector} from "react-redux";
 import {createPost} from "../../../postsSlice";
 import {getUserAuth} from "../../../../auth/authSlice";
@@ -76,21 +76,18 @@ const AddForm = () => {
             htmlFor={"title"}
           />
 
-          <FloatingLabel 
-            id={"text"}
-            type={"text"}
-            text={"Text"}
+          <CustomTextArea
+            id="text"
+            text={"Description"}
             value={text}
             onChange={(e) => setText(e.target.value)}
-            variant={"border-b-0 rounded-t-lg"}
             htmlFor={"text"}
+            variant={"resize-none"}
+            rows={1}
+            cols={40}
           />
           
           <div className="w-full flex flex-col justify-start items-start gap-2 text-base">
-            {preview && (
-              <div className="text-base text-orange-400 font-semibold">Click the Image to change it.</div>
-            )}
-            
             <label htmlFor="file-upload" className="relative w-full flex flex-col items-center bg-white/90 border rounded shadow-sm hover:shadow-none cursor-pointer overflow-hidden box-border">
             {preview ? (
               <figure className="absolute inset-0">
@@ -116,13 +113,17 @@ const AddForm = () => {
               onChange={loadImage}
             />
             </label>
+
+            {preview && (
+              <div className="text-base text-orange-400 font-semibold">Click the Image to change it.</div>
+            )}
           </div>
 
           <div className="w-full flex flex-col justify-start items-start gap-2 text-base">
             <span>Category</span>
             <CustomSelect
-              options={ categories.map(category => ({ value: category._id, label: category.name }))}
-              value={ category ? {value: category.value, label: category.label} : null }
+              options={categories.map(category => ({value: category._id, label: category.name }))}
+              value={category ? {value: category.value, label: category.label} : null}
               onChange={(selectedOption) => setCategory(selectedOption ? selectedOption : null)}
               placeholder="Select Category"
               menuPlacement="top"

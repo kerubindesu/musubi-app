@@ -153,7 +153,7 @@ const categorieslice = createSlice({
     posts: [],
     isPostsLoading: false,
     noFoundPost: "",
-    totalPostsRows: 0,
+    totalRowsPosts: 0,
     totalPostsPage: 0,
     errPosts: null,
   },
@@ -203,7 +203,7 @@ const categorieslice = createSlice({
     builder.addCase(getPostsByCategory.fulfilled, (state, action) => {
       state.posts = action.payload.result;
       state.noFoundPost = action.payload.message;
-      state.totalPostsRows = action.payload.totalRows;
+      state.totalRowsPosts = action.payload.totalRows;
       state.totalPostsPage = action.payload.totalPage;
       state.isPostsLoading = false;
       state.errPosts = null;

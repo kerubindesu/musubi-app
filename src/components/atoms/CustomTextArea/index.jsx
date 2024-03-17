@@ -1,27 +1,27 @@
 import React from "react";
 
-const FloatingLabel = ({
-  type,
+const CustomTextArea = ({
   value,
   id,
   htmlFor,
   text,
   onChange,
-  readOnly,
   variant,
+  cols,
+  rows
 }) => {
   return (
     <>
       <div className={`relative z-0 mb-6 w-full group text-base ${variant}`}>
-        <input
-          type={type}
+        <textarea
           value={value}
-          id={ id }
+          id={id}
           onChange={onChange}
           className="block py-2.5 px-0 w-full text-slate-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
           placeholder={" "}
           autoComplete="off"
-          readOnly={readOnly}
+          cols={cols}
+          rows={rows}
         />
         <label
           htmlFor={htmlFor}
@@ -34,4 +34,4 @@ const FloatingLabel = ({
   );
 };
 
-export default FloatingLabel;
+export default CustomTextArea;

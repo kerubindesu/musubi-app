@@ -15,9 +15,9 @@ const PostsList = () => {
   const [limit, setLimit] = useState(10)
   const [keyword, setKeyword] = useState("")
   const [id, setId] = useState(null)
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("")
 
-  const { noFoundPost, posts, totalRows, totalPage, loading } = useSelector((state) => state.posts);
+  const { noFoundPost, posts, totalRows, totalPage, loading } = useSelector((state) => state.posts)
 
   useEffect(() => {
       dispatch(getPosts({ search: keyword, page, limit }))

@@ -87,7 +87,6 @@ export const getUserAuth = createAsyncThunk(
 
       return response.data.user;
     } catch (error) {
-      console.log("error")
       return rejectWithValue(error.response.data);
     }
   }

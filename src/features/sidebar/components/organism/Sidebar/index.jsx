@@ -49,7 +49,7 @@ const Sidebar = () => {
       }>
         <div className="w-full h-full flex flex-col justify-start items-start">
 
-          <div className="relative px-3 h-16 w-full flex justify-start items-center gap-2 lg:border-r border-b">
+          <div className="relative px-5 lg:px-3 h-16 w-full flex justify-start items-center gap-2 border-r border-b">
             <div onClick={() => dispatch(setSidebar(!sidebar))} className="lg:hidden h-10 w-10 flex justify-center items-center rounded-full hover:bg-slate-200 focus:bg-slate-100 cursor-pointer">
               <RiMenuLine className="text-2xl" />
             </div>

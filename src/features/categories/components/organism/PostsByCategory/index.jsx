@@ -16,7 +16,7 @@ const PostsByCategory = ({ categoryId }) => {
   const [id, setId] = useState(null)
   const [message, setMessage] = useState("");
 
-  const { noFoundPost, posts, totalPostsRows, totalPostsPage, isPostsLoading } = useSelector((state) => state.categories);
+  const { noFoundPost, posts, totalRowsPosts, totalPostsPage, isPostsLoading } = useSelector((state) => state.categories);
 
   useEffect(() => {
       dispatch(getPostsByCategory({ id: categoryId, search: keyword, page, limit, dispatch }))
@@ -65,7 +65,7 @@ const PostsByCategory = ({ categoryId }) => {
         page={page}
         totalPage={totalPostsPage}
         setPage={setPage}
-        totalRows={totalPostsRows}
+        totalRows={totalRowsPosts}
         noAddData={true}
         noActions={true}
       />
