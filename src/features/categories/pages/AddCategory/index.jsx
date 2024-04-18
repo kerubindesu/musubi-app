@@ -4,6 +4,7 @@ import { AddForm } from '../../components/organism'
 import { useDispatch, useSelector } from 'react-redux';
 import { hideNotification } from '../../../notification/notificationSlice';
 import { Notification } from '../../../notification/components/organism';
+import { Helmet } from 'react-helmet-async';
 
 const AddCategory = () => {
   const dispatch = useDispatch();
@@ -13,21 +14,29 @@ const AddCategory = () => {
     dispatch(hideNotification());
   };
 
+  const pageTitle = "Add Category";
+
   const breadcrumbs = [
-    { text: 'Dashboard', url: '/dash/home' },
-    { text: 'Categories', url: '/dash/categories' },
-    { text: 'Add Category' },
+    { text: "Dashboard", url: "/dash/home" },
+    { text: "Categories", url: "/dash/categories" },
+    { text: pageTitle },
   ];
 
   return (
     <>
+      <Helmet>
+        <title>{pageTitle}</title>
+      </Helmet>
+
       <Breadcrumb items={breadcrumbs} />
+
       <HeadingTitle
-        text={"Add Category"}
+        text={pageTitle}
         back={true} 
         mainVariant={"mb-9"}
         variant={"text-lg"}
       />
+
       {isOpen && (
         <Notification
           message={message}
@@ -35,6 +44,7 @@ const AddCategory = () => {
           onClose={handleCloseNotification}
         />
       )}
+      
       <AddForm />
     </>
   )

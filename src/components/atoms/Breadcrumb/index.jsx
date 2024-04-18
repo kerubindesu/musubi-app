@@ -1,5 +1,5 @@
 import React from 'react';
-import { RiArrowDropRightFill } from 'react-icons/ri';
+import { RiArrowDropRightLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
 const Breadcrumb = ({ items }) => {
@@ -16,7 +16,7 @@ const Breadcrumb = ({ items }) => {
               <span className="text-slate-500">{item.text}</span>
             )}
             {index < items.length - 1 && (
-              <RiArrowDropRightFill className="text-slate-500 text-2xl" />
+              <RiArrowDropRightLine className="text-slate-500 text-2xl" />
             )}
           </li>
         ))}

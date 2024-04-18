@@ -10,18 +10,15 @@ export const injectStore = _store => {
 export const axiosPrivate = axios.create({});
 
 axiosPrivate.interceptors.request.use(async(config) => {
-
-  // refresh token ketika accessToken tidak tersedia dalam state
   if (store.getState().auth.accessToken === "") {
     await store.dispatch(refreshAccessToken())
   }
 
   const accessToken = store.getState().auth.accessToken
-  
   const decoded = jwtDecode(accessToken)
-
   const currentDate = new Date();
 
+  // refresh token ketika accessToken exp
   if (decoded.exp * 1000 < currentDate.getTime()) {
     try {
       await store.dispatch(refreshAccessToken());
@@ -34,9 +31,9 @@ axiosPrivate.interceptors.request.use(async(config) => {
     }
   } else {
     config.headers.Authorization = `Bearer ${accessToken}`;
-  }
+  }  
 
   return config;
-}, (error) => {
+}, async (error) => {
   return Promise.reject(error);
 })

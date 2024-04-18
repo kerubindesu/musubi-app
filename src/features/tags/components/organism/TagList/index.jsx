@@ -16,7 +16,7 @@ const TagList = () => {
   const [id, setId] = useState(null)
   const [message, setMessage] = useState("");
 
-  const { noFoundTag, tags, totalRows, totalPage, loading } = useSelector((state) => state.tags);
+  const { noFoundTag, tags, totalRows, totalPage, isLoading } = useSelector((state) => state.tags);
 
   useEffect(() => {
       dispatch(getTags({ search: keyword, page, limit }))
@@ -26,7 +26,7 @@ const TagList = () => {
     await dispatch(setModal(true));
     setId(id);
     setMessage(
-      `Tag akan terhapus secara permanent!`
+      `Tag akan terhapus secara permanen!`
     );
   };
 
@@ -56,7 +56,7 @@ const TagList = () => {
           title={"Tag"}
           action={handleDelete}
           setKeyword={setKeyword}
-          isLoading={loading}
+          isLoading={isLoading}
           noFoundData={noFoundTag}
           page={page}
           totalPage={totalPage}

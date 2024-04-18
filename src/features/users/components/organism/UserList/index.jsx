@@ -16,7 +16,7 @@ const UserList = () => {
   const [id, setId] = useState(null)
   const [message, setMessage] = useState("");
 
-  const { noFoundUser, users, totalRows, totalPage, loading } = useSelector((state) => state.users);
+  const { noFoundUser, users, totalRows, totalPage, isLoading } = useSelector((state) => state.users);
 
   useEffect(() => {
       dispatch(getUsers({ search: keyword, page, limit }))
@@ -26,7 +26,7 @@ const UserList = () => {
     await dispatch(setModal(true));
     setId(id);
     setMessage(
-      `User akan terhapus secara permanent!`
+      `User akan terhapus secara permanen!`
     );
   };
 
@@ -59,7 +59,7 @@ const UserList = () => {
         title={"Users"}
         action={handleDelete}
         setKeyword={setKeyword}
-        isLoading={loading}
+        isLoading={isLoading}
         noFoundData={noFoundUser}
         page={page}
         totalPage={totalPage}

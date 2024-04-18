@@ -16,7 +16,7 @@ const MenuList = () => {
   const [id, setId] = useState(null)
   const [message, setMessage] = useState("");
 
-  const { noFoundMenu, menus, totalRows, totalPage, loading } = useSelector((state) => state.menus);
+  const { noFoundMenu, menus, totalRows, totalPage, isLoading } = useSelector((state) => state.menus);
 
   useEffect(() => {
       dispatch(getMenus({ search: keyword, page, limit }))
@@ -26,7 +26,7 @@ const MenuList = () => {
     await dispatch(setModal(true));
     setId(id);
     setMessage(
-      `Menu akan terhapus secara permanent!`
+      `Menu akan terhapus secara permanen!`
     );
   };
 
@@ -58,7 +58,7 @@ const MenuList = () => {
           title={"Menu"}
           action={handleDelete}
           setKeyword={setKeyword}
-          isLoading={loading}
+          isLoading={isLoading}
           noFoundData={noFoundMenu}
           page={page}
           totalPage={totalPage}

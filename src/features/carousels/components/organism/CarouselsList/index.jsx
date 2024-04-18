@@ -17,7 +17,7 @@ const CarouselsList = () => {
   const [id, setId] = useState(null)
   const [message, setMessage] = useState("");
 
-  const { noFoundCarousel, carousels, totalRows, totalPage, loading } = useSelector((state) => state.carousels);
+  const { noFoundCarousel, carousels, totalRows, totalPage, isLoading } = useSelector((state) => state.carousels);
 
   useEffect(() => {
       dispatch(getCarousels({ search: keyword, page, limit }))
@@ -27,7 +27,7 @@ const CarouselsList = () => {
     await dispatch(setModal(true));
     setId(id);
     setMessage(
-      `Carousel akan terhapus secara permanent!`
+      `Carousel akan terhapus secara permanen!`
     );
   };
 
@@ -45,7 +45,7 @@ const CarouselsList = () => {
             "#": page * limit + (index + 1),
             id: carousel._id,
             Title: carousel.title,
-            Desc: carousel.text,
+            Desc: carousel.description,
             Image: [carousel.img_url, carousel.image]
           };
         })
@@ -59,7 +59,7 @@ const CarouselsList = () => {
         title={"Carousels"}
         action={handleDelete}
         setKeyword={setKeyword}
-        isLoading={loading}
+        isLoading={isLoading}
         noFoundData={noFoundCarousel}
         page={page}
         totalPage={totalPage}

@@ -11,11 +11,11 @@ const EditForm = () => {
   const { id } = useParams()
   
   const [name, setName] = useState("");
-  const [text, setText] = useState("");
+  const [description, setDescription] = useState("");
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");
 
-  const {loading, category} = useSelector((state) => state.categories);
+  const {isLoading, category} = useSelector((state) => state.categories);
 
   useEffect(() => {
     dispatch(getCategory({id, dispatch}));
@@ -24,7 +24,7 @@ const EditForm = () => {
   useEffect(() => {
     if (category) {
       setName(category.name || "");
-      setText(category.text || "");
+      setDescription(category.description || "");
       setPreview(category.img_url || "");
    }
  }, [category])
@@ -45,7 +45,7 @@ const EditForm = () => {
     e.preventDefault()
     
     try{
-      await dispatch(updateCategory({id, name, text, file, dispatch, navigate}))
+      await dispatch(updateCategory({id, name, description, file, dispatch, navigate}))
    } catch (error) {
       if(error.response) {
           console.log(error)
@@ -70,11 +70,11 @@ const EditForm = () => {
           <CustomTextArea
             id="text"
             text={"Description"}
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            htmlFor={"text"}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            htmlFor={"description"}
             variant={"resize-none"}
-            rows={3}
+            rows={5}
             cols={40}
           />
 
@@ -109,11 +109,11 @@ const EditForm = () => {
           )}
 
           <Button
-            disabled={loading}
+            disabled={isLoading}
             type={"submit"} 
             variant={"bg-gradient-to-r from-sky-800 to-sky-700 shadow-lg text-white"}
-            text={!loading && "Update"}
-            icon={loading && <Loading />}
+            text={!isLoading && "Update"}
+            icon={isLoading && <Loading />}
           />
         </form>
       </div>

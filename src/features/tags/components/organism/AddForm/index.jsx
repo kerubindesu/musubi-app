@@ -10,7 +10,7 @@ const AddForm = () => {
 
   const [name, setName] = useState("");
 
-  const {loading} = useSelector((state) => state.tags);
+  const {isLoading} = useSelector((state) => state.tags);
 
   const handleSubmit = async(e) => {
     e.preventDefault()
@@ -39,11 +39,11 @@ const AddForm = () => {
           />
 
           <Button
-            disabled={loading}
+            disabled={isLoading}
             type={"submit"} 
             variant={"bg-gradient-to-r from-sky-800 to-sky-700 shadow-lg text-white"}
-            text={!loading && "Save"}
-            icon={loading && <Loading />}
+            text={!isLoading && "Save"}
+            icon={isLoading && <Loading />}
           />
         </form>
       </div>

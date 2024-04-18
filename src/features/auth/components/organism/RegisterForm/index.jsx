@@ -14,7 +14,7 @@ const RegisterForm = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    const loading = useSelector(selectLoading)
+    const isLoading = useSelector(selectLoading)
 
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -73,11 +73,11 @@ const RegisterForm = () => {
                 />
                 
                 <Button 
-                    disabled={loading}
+                    disabled={isLoading}
                     type={"submit"} 
                     variant={"bg-gradient-to-r from-sky-800 to-sky-700 shadow-lg text-white"}
-                    text={!loading && "Register"}
-                    icon={loading && <Loading />}
+                    text={!isLoading && "Register"}
+                    icon={isLoading && <Loading />}
                 />
             </form>
 

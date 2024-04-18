@@ -6,6 +6,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import { injectStore } from './utils/api'; 
+import { ScrollToTopOnMount } from './components/organism';
+import { HelmetProvider } from 'react-helmet-async';
 
 injectStore(store);
 
@@ -14,7 +16,10 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <ScrollToTopOnMount />
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

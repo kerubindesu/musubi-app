@@ -1,6 +1,6 @@
 import AddForm from "./AddForm"
 import EditForm from "./EditForm"
 import CategoryList from "./CategoryList"
-import PostsByCategory from "./PostsByCategory"
+import ProductsByCategory from "./ProductsByCategory"
 
-export { AddForm, EditForm, CategoryList, PostsByCategory }
+export { AddForm, EditForm, CategoryList, ProductsByCategory }

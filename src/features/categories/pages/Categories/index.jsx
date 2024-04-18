@@ -4,6 +4,7 @@ import { Breadcrumb, HeadingTitle } from '../../../../components/atoms'
 import { useDispatch, useSelector } from 'react-redux';
 import { hideNotification } from '../../../notification/notificationSlice';
 import { Notification } from '../../../notification/components/organism';
+import { Helmet } from 'react-helmet-async';
 
 const Categories = () => {
   const dispatch = useDispatch();
@@ -13,15 +14,23 @@ const Categories = () => {
     dispatch(hideNotification());
   };
 
+  const pageTitle = "Categories";
+
   const breadcrumbs = [
-    { text: 'Dashboard', url: '/dash/home' },
-    { text: 'Categories' },
+    { text: "Dashboard", url: "/dash/home" },
+    { text: pageTitle },
   ];
 
   return (
     <>
+      <Helmet>
+        <title>{pageTitle}</title>
+      </Helmet>
+
       <Breadcrumb items={breadcrumbs} />
-      <HeadingTitle variant={"text-lg"} text={"Categories"} />
+
+      <HeadingTitle variant={"text-lg"} text={pageTitle} />
+
       {isOpen && (
         <Notification
           message={message}
@@ -29,6 +38,7 @@ const Categories = () => {
           onClose={handleCloseNotification}
         />
       )}
+      
       <CategoryList />
     </>
   )

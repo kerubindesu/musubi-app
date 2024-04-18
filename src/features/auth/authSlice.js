@@ -81,12 +81,14 @@ export const refreshAccessToken = createAsyncThunk(
 export const getUserAuth = createAsyncThunk(
   'auth/user', async(_, {rejectWithValue}) => {
     try {
-      const response = await axiosPrivate.get('http://localhost:3500/auth/user', {
+      const response = await axiosPrivate.get('http://localhost:3500/auth/user',
+      {
         withCredentials: true,
       });
 
       return response.data.user;
     } catch (error) {
+      console.error('Error checking login status')
       return rejectWithValue(error.response.data);
     }
   }
@@ -106,13 +108,11 @@ export const logout = createAsyncThunk('auth/logout', async(navigate, { rejectWi
   }
 });
 
-export const selectAccessToken = (state) => state.auth.accessToken;
-
 const initialState = {
   userAuth: '',
   isAuthenticated: false,
   accessToken: '',
-  loading: false,
+  isLoading: false,
   error: null,
   errRefreshToken: null,
 };
@@ -124,84 +124,83 @@ const authSlice = createSlice({
     logoutSuccess: (state) => {
       state.isAuthenticated = false;
       state.accessToken = '';
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     },
   },
   extraReducers: (builder) => {
-
     builder.addCase(registerUser.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
     builder.addCase(registerUser.fulfilled, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(registerUser.rejected, (state, action) => {
       state.isAuthenticated = false;
       state.accessToken = '';
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(loginUser.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.accessToken = action.payload;
       state.isAuthenticated = true;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(loginUser.rejected, (state, action) => {
       state.isAuthenticated = false;
       state.accessToken = '';
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(refreshAccessToken.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.errRefreshToken = null;
     });
 
     builder.addCase(refreshAccessToken.fulfilled, (state, action) => {
       state.accessToken = action.payload;
       state.isAuthenticated = true;
-      state.loading = false;
+      state.isLoading = false;
       state.errRefreshToken = null;
     });
 
     builder.addCase(refreshAccessToken.rejected, (state, action) => {
       state.isAuthenticated = false;
       state.accessToken = '';
-      state.loading = false;
+      state.isLoading = false;
       state.errRefreshToken = action.payload;
     });
 
     builder.addCase(getUserAuth.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     });
 
     builder.addCase(getUserAuth.fulfilled, (state, action) => {
       state.userAuth = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(getUserAuth.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(logout.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
@@ -209,12 +208,12 @@ const authSlice = createSlice({
       state.userAuth = '';
       state.isAuthenticated = false;
       state.accessToken = '';
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(logout.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
   },
@@ -222,6 +221,5 @@ const authSlice = createSlice({
 
 export const { logoutSuccess } = authSlice.actions;
 export const selectIsAuthenticated = (state) => state.auth.isAuthenticated;
-export const selectLoading = (state) => state.auth.loading;
-export const selectError = (state) => state.auth.error;
+export const selectLoading = (state) => state.auth.isLoading;
 export default authSlice.reducer;

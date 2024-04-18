@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { RiArrowDropDownLine, RiArrowDropUpLine, RiMenuLine } from "react-icons/ri";
 import { SidebarMenu } from "../../molecules";
 import { DashFooter } from "../../../../../components/organism";
-import { Logo, Placeholder } from "../../../../../components/atoms";
+import { Loading, Logo } from "../../../../../components/atoms";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserAuth, logout } from "../../../../auth/authSlice";
 import { useNavigate } from "react-router-dom";
@@ -15,12 +15,13 @@ const Sidebar = () => {
 
   const [isOpen, setIsOpen] = useState(false)
 
-  const { userAuth, loading: AuthLoading, error: errAuth, errRefreshToken } = useSelector((state) => state.auth);
+  const { userAuth, isLoading: AuthLoading, error: errAuth, errRefreshToken } = useSelector((state) => state.auth);
   const { sidebar } = useSelector((state) => state.sidebar);
 
   useEffect(() => {
     dispatch(getUserAuth())
-  }, [dispatch])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     if ( errAuth && errRefreshToken) {
@@ -58,7 +59,12 @@ const Sidebar = () => {
 
           <div className="px-3 py-3 w-full flex flex-col justify-center items-start gap-4 border-b truncate box-border border-r">
 
-            {AuthLoading ? <Placeholder variant={"h-[2.8rem] w-full rounded-lg"} /> : (
+            {AuthLoading ? 
+            (
+              <div className="h-[2.75rem] w-full">
+                <Loading />
+              </div>
+            ) : (
               <>
                 <div className="w-full flex flex-row justify-between items-center">
                   <div className="max-w-[10rem] truncate">

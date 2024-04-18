@@ -4,6 +4,7 @@ import { LogoConfigurationForm } from '../../components/organism'
 import { useDispatch, useSelector } from 'react-redux';
 import { hideNotification } from '../../../notification/notificationSlice';
 import { Notification } from '../../../notification/components/organism';
+import { Helmet } from 'react-helmet-async';
 
 const LogoConfiguration = () => {
   const dispatch = useDispatch();
@@ -13,15 +14,22 @@ const LogoConfiguration = () => {
     dispatch(hideNotification());
   };
 
+  const pageTitle = "Logo";
+
   const breadcrumbs = [
-    { text: 'Dashboard', url: '/dash/home' },
-    { text: 'Logo' },
+    { text: "Dashboard", url: "/dash/home" },
+    { text: pageTitle },
   ];
 
   return (
     <>
+      <Helmet>
+        <title>{pageTitle}</title>
+      </Helmet>
+
       <Breadcrumb items={breadcrumbs} />
-      <HeadingTitle variant={"text-lg"} text={"Logo"} />
+
+      <HeadingTitle variant={"text-lg"} text={pageTitle} />
       {isOpen && (
         <Notification
           message={message}
@@ -29,6 +37,7 @@ const LogoConfiguration = () => {
           onClose={handleCloseNotification}
         />
       )}
+      
       <LogoConfigurationForm />
     </>
   )

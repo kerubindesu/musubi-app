@@ -72,7 +72,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
           })
         : [],
     [items, dispatch]
-  );  
+  );
 
   const initialState = { hiddenColumns: ["id"] };
 
@@ -148,7 +148,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
             <>
               <Link to="add">
                 <Button
-                  variant={"bg-slate-200 hover:bg-slate-300 border rounded shadow text-black"}
+                  variant={"bg-orange-500 hover:bg-orange-500/90 border rounded shadow text-white"}
                   text={title}
                   icon={<RiAddLine />}
                 />
@@ -225,7 +225,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
             onPageChange={handlePageClick}
             containerClassName="py-2 flex justify-center items-center gap-4 border-t text-gray-700"
             pageCount={Math.min(10,totalPage)}
-            previousLabel="Previous"
+            previousLabel="Prev"
             renderOnZeroPageCount={null}
             activeLinkClassName={"text-emerald-500"}
             disabledLinkClassName={"text-slate-200"}

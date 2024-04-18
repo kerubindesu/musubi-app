@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories, getCategory, getPostsByCategory } from "../../features/categories/categoriesSlice";
-import { Placeholder, PostGrid } from "../../components/atoms";
-import CategoryHeader from "../../components/atoms/CategoryHeader";
+import { getCategories, getCategory, getProductsByCategory } from "../../features/categories/categoriesSlice";
+import { Placeholder } from "../../components/atoms";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { ProductGrid } from "../../components/organism";
+import { Helmet } from "react-helmet-async";
+import { CategoryHeader } from "../../components/molecules";
 
 const Category = () => {
   const dispatch = useDispatch();
 
   const [categoryId, setCategoryId] = useState(null);
-  const [postsLimit, setPostsLimit] = useState(12);
-  const [hasMorePosts, setHasMorePosts] = useState(true);
+  const [productsLimit, setProductsLimit] = useState(12);
+  const [hasMoreProducts, setHasMoreProducts] = useState(true);
 
   const { 
     categories, 
     category, 
-    posts, 
-    totalRowsPosts, 
-    noFoundPost, 
-    loading: isCategoriesLoading, 
+    products, 
+    totalRowsProducts, 
+    noFoundProduct, 
+    isLoading: isCategoriesLoading, 
     isCategoryLoading, 
-    isPostsLoading 
+    isProductsLoading 
   } = useSelector((state) => state.categories);
 
   useEffect(() => {
@@ -40,39 +42,42 @@ const Category = () => {
   useEffect(() => {
     if (categoryId) {
       dispatch(getCategory({ id: categoryId, dispatch }));
-      dispatch(getPostsByCategory({ id: categoryId, search: "", page: "", limit: postsLimit, dispatch }));
+      dispatch(getProductsByCategory({ id: categoryId, search: "", page: "", limit: productsLimit, dispatch }));
     }
-  }, [categoryId, postsLimit, dispatch]);
+  }, [categoryId, productsLimit, dispatch]);
   
-  // Atur ulang postsLimit ketika categoryId berubah
+  // Atur ulang productsLimit ketika categoryId berubah
   useEffect(() => {
-    setPostsLimit(12); // Atur kembali postsLimit ke nilai awal
+    setProductsLimit(12); // Atur kembali productsLimit ke nilai awal
   }, [categoryId]);
   
   // Fungsi untuk menghapus categoryId dari localStorage setelah 2 menit
   useEffect(() => {
     const categoryIdTimeout = setTimeout(() => {
       localStorage.removeItem("categoryId");
-    }, 120000);
+    }, 60000);
     
     // Membersihkan timeout saat komponen di-unmount
     return () => clearTimeout(categoryIdTimeout);
-  }, []);
+  }, [categoryId]);
 
   useEffect(() => {
-    if (posts && posts.length > 0) {
-      setHasMorePosts(posts.length < totalRowsPosts);
+    if (products && products?.length > 0) {
+      setHasMoreProducts(products.length < totalRowsProducts);
     }
-  }, [posts, totalRowsPosts]);
+  }, [products, totalRowsProducts]);
 
   const fetchMoreData = () => {
-    if (postsLimit < totalRowsPosts) {
-      setPostsLimit(postsLimit + 12);
+    if (productsLimit < totalRowsProducts) {
+      setProductsLimit(productsLimit + 12);
     }
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
+      <Helmet>
+        <title>Kategori {"-" + category?.name || ""}</title>
+      </Helmet>
       <CategoryHeader
         isCategoriesLoading={isCategoriesLoading}
         isCategoryLoading={isCategoryLoading}
@@ -82,41 +87,42 @@ const Category = () => {
       />
 
       {isCategoryLoading ? (
-        <>
-          <Placeholder variant={"my-4 h-14 w-56 rounded-xl"} />
-          <Placeholder variant={"my-2 h-10 w-full rounded-xl"} />
-          <Placeholder variant={"my-2 h-10 w-11/12 rounded-xl"} />
-        </>
+        <div className="container mx-auto flex flex-col gap-4">
+          <Placeholder variant={"h-8 w-56 rounded-xl"} />
+          <Placeholder variant={"h-8 w-full rounded-xl"} />
+          <Placeholder variant={"h-8 w-full rounded-xl"} />
+          <Placeholder variant={"h-8 w-11/12 rounded-xl"} />
+        </div>
       ) : (
-        <div className="my-5 py-5 flex flex-col gap-2">
+        <div className="container mx-auto flex flex-col gap-2">
           <div className="text-2xl font-semibold">{category?.name}</div>
-          <div className="text-base text-start">{category?.text}</div>
+          <div className="text-base text-start">{category?.description}</div>
         </div>
       )}
 
-      <div className="my-10">
-        <div className="py-4 text-slate-900">
-          <div className="container mx-auto">
-            {isCategoryLoading ? <Placeholder variant={"my-6 h-14 w-56 rounded-xl"} /> : (
-              <h1 className="text-2xl font-semibold flex items-center">Produk Terkait</h1>
-            )}
-          </div>
+      <div className="my-6 flex flex-col gap-4">
+        <div className="container mx-auto text-slate-900">
+          {isCategoryLoading ?
+          (
+            <Placeholder variant={"my-6 h-8 w-56 rounded-xl"} />
+          ) : (
+            <h1 className="text-2xl font-semibold">Produk Terkait</h1>
+          )}
         </div>
-        {posts && posts.length > 0 ? (
-          <InfiniteScroll
-            dataLength={posts?.length}
-            next={fetchMoreData}
-            hasMore={hasMorePosts}
-          >
-              <PostGrid noFoundPost={noFoundPost} posts={posts} isPostsLoading={isPostsLoading} />
-            
-          </InfiniteScroll>
+        {noFoundProduct ? (
+          // Menampilkan pesan jika tidak ada productingan
+          <div className="col-span-full text-center">{noFoundProduct}</div>
         ) : (
-          // Menampilkan pesan jika tidak ada postingan
-          <div className="col-span-full text-center">{noFoundPost}</div>
+          <InfiniteScroll
+            dataLength={products?.length}
+            next={fetchMoreData}
+            hasMore={hasMoreProducts}
+          >
+            <ProductGrid products={products} isProductsLoading={isProductsLoading} />
+          </InfiniteScroll>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

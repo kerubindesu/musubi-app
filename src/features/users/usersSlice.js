@@ -44,7 +44,7 @@ const userSlice = createSlice({
     users: [],
     totalRows: 0,
     totalPage: 0,
-    loading: false,
+    isLoading: false,
     error: null,
     noFoundUser: ""
   },
@@ -52,7 +52,7 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getUsers.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
@@ -61,25 +61,25 @@ const userSlice = createSlice({
       state.noFoundUser = action.payload.message;
       state.totalRows = action.payload.totalRows;
       state.totalPage = action.payload.totalPage;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(getUsers.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(deleteUser.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     });
 
     builder.addCase(deleteUser.fulfilled, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
     });
 
     builder.addCase(deleteUser.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
   },

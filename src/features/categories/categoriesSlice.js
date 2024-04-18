@@ -33,11 +33,11 @@ export const getCategory = createAsyncThunk(
   }
 );
 
-export const getPostsByCategory = createAsyncThunk(
-  'categories/getPostsByCategory',
+export const getProductsByCategory = createAsyncThunk(
+  'categories/getProductsByCategory',
   async({ id, search, page, limit, dispatch }, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:3500/categories/posts${ id }?search=${search}&page=${page}&limit=${limit}`);
+      const response = await axios.get(`http://localhost:3500/categories/products${ id }?search=${search}&page=${page}&limit=${limit}`);
 
       return response.data;
     } catch (error) {
@@ -52,11 +52,11 @@ export const getPostsByCategory = createAsyncThunk(
 
 export const createCategory = createAsyncThunk(
   'categories/createCategory',
-  async({ name, text, file, dispatch, navigate }, { rejectWithValue }) => {
+  async({ name, description, file, dispatch, navigate }, { rejectWithValue }) => {
     try {
       const formData = new FormData();
       formData.append('name', name);
-      formData.append('text', text);
+      formData.append('description', description);
       formData.append('file', file);
 
       const response = await axiosPrivate.post('http://localhost:3500/categories', formData, {
@@ -85,11 +85,11 @@ export const createCategory = createAsyncThunk(
 
 export const updateCategory = createAsyncThunk(
   'categories/updateCategory',
-  async({ id, name, text, file, dispatch, navigate }, { rejectWithValue }) => {
+  async({ id, name, description, file, dispatch, navigate }, { rejectWithValue }) => {
     try {
       const formData = new FormData();
       formData.append('name', name);
-      formData.append('text', text);
+      formData.append('description', description);
       formData.append('file', file);
 
       const response = await axiosPrivate.patch(`http://localhost:3500/categories/${ id }`, formData, {
@@ -147,21 +147,21 @@ const categorieslice = createSlice({
     noFoundCategory: "",
     totalRows: 0,
     totalPage: 0,
-    loading: false,
+    isLoading: false,
     isCategoryLoading: false,
     error: null,
-    posts: [],
-    isPostsLoading: false,
-    noFoundPost: "",
-    totalRowsPosts: 0,
-    totalPostsPage: 0,
-    errPosts: null,
+    products: [],
+    isProductsLoading: false,
+    noFoundProduct: "",
+    totalRowsProducts: 0,
+    totalProductsPage: 0,
+    errProducts: null,
   },
   reducers: {
   },
   extraReducers: (builder) => {
     builder.addCase(getCategories.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
@@ -170,12 +170,12 @@ const categorieslice = createSlice({
       state.noFoundCategory = action.payload.message;
       state.totalRows = action.payload.totalRows;
       state.totalPage = action.payload.totalPage;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(getCategories.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
@@ -195,67 +195,67 @@ const categorieslice = createSlice({
       state.error = action.payload;
     });
 
-    builder.addCase(getPostsByCategory.pending, (state) => {
-      state.isPostsLoading = true;
+    builder.addCase(getProductsByCategory.pending, (state) => {
+      state.isProductsLoading = true;
       state.error = null;
     });
 
-    builder.addCase(getPostsByCategory.fulfilled, (state, action) => {
-      state.posts = action.payload.result;
-      state.noFoundPost = action.payload.message;
-      state.totalRowsPosts = action.payload.totalRows;
-      state.totalPostsPage = action.payload.totalPage;
-      state.isPostsLoading = false;
-      state.errPosts = null;
+    builder.addCase(getProductsByCategory.fulfilled, (state, action) => {
+      state.products = action.payload.result;
+      state.noFoundProduct = action.payload.message;
+      state.totalRowsProducts = action.payload.totalRows;
+      state.totalProductsPage = action.payload.totalPage;
+      state.isProductsLoading = false;
+      state.errProducts = null;
     });
 
-    builder.addCase(getPostsByCategory.rejected, (state, action) => {
-      state.isPostsLoading = false;
+    builder.addCase(getProductsByCategory.rejected, (state, action) => {
+      state.isProductsLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(createCategory.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
     builder.addCase(createCategory.fulfilled, (state, action) => {
       state.category = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(createCategory.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(updateCategory.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
     builder.addCase(updateCategory.fulfilled, (state, action) => {
       state.category = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(updateCategory.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(deleteCategory.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     });
 
     builder.addCase(deleteCategory.fulfilled, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
     });
 
     builder.addCase(deleteCategory.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
   },

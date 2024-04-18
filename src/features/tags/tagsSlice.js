@@ -114,7 +114,7 @@ const tagSlice = createSlice({
     tags: [],
     totalRows: 0,
     totalPage: 0,
-    loading: false,
+    isLoading: false,
     error: null,
     noFoundTag: ""
   },
@@ -122,7 +122,7 @@ const tagSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getTags.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
@@ -131,73 +131,73 @@ const tagSlice = createSlice({
       state.noFoundTag = action.payload.message;
       state.totalRows = action.payload.totalRows;
       state.totalPage = action.payload.totalPage;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(getTags.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(getTag.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
     builder.addCase(getTag.fulfilled, (state, action) => {
       state.tag = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(getTag.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(createTag.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
     builder.addCase(createTag.fulfilled, (state, action) => {
       state.tag = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(createTag.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(updateTag.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
     builder.addCase(updateTag.fulfilled, (state, action) => {
       state.tag = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(updateTag.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(deleteTag.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     });
 
     builder.addCase(deleteTag.fulfilled, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
     });
 
     builder.addCase(deleteTag.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
   },

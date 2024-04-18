@@ -13,7 +13,7 @@ const EditForm = () => {
   const [link, setLink] = useState("");
   const [icon, setIcon] = useState("");
 
-  const {loading, menu} = useSelector((state) => state.menus);
+  const {isLoading, menu} = useSelector((state) => state.menus);
 
   useEffect(() => {
     dispatch(getMenu({id, dispatch}));
@@ -74,11 +74,11 @@ const EditForm = () => {
           />
 
           <Button
-            disabled={loading}
+            disabled={isLoading}
             type={"submit"} 
             variant={"bg-gradient-to-r from-sky-800 to-sky-700 shadow-lg text-white"}
-            text={!loading && "Update"}
-            icon={loading && <Loading />}
+            text={!isLoading && "Update"}
+            icon={isLoading && <Loading />}
           />
         </form>
       </div>

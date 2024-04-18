@@ -1,12 +1,12 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react"
 
 const Footer = () => {
   return (
-    <div className="flex flex-col justify-center items-center">
-      Footer
-      <Link to="" className="text-blue-500 cursor-pointer">Login</Link>
+    <footer className="p-4 w-full flex justify-center items-center gap-1 text-xs text-slate-700">
+    <div className="container mx-auto flex justify-center items-center gap-1 text-center truncate">
+      <p className="font-normal">	&#169; 2024 Durian Pak Jayus</p>
     </div>
+  </footer>
   )
 }
 

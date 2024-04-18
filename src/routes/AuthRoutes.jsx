@@ -3,7 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshAccessToken, selectIsAuthenticated } from '../features/auth/authSlice';
 import NotFound from '../pages/NotFound';
-import { Login, Register } from '../features/auth/pages';
+import { Login } from '../features/auth/pages';
 
 const AuthRoutes = () => {
   const dispatch = useDispatch()
@@ -24,9 +24,9 @@ const AuthRoutes = () => {
   return (
     <Routes>
       <Route path="login" element={<Login />} />
-      <Route path="register" element={<Register />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
+
   )
 }
 

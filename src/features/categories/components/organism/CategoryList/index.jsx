@@ -17,7 +17,7 @@ const CategoryList = () => {
   const [id, setId] = useState(null)
   const [message, setMessage] = useState("");
 
-  const { noFoundCategory, categories, totalRows, totalPage, loading } = useSelector((state) => state.categories);
+  const { noFoundCategory, categories, totalRows, totalPage, isLoading } = useSelector((state) => state.categories);
 
   useEffect(() => {
       dispatch(getCategories({ search: keyword, page, limit }))
@@ -27,7 +27,7 @@ const CategoryList = () => {
     await dispatch(setModal(true));
     setId(id);
     setMessage(
-      `Category akan terhapus secara permanent!`
+      `Category akan terhapus secara permanen!`
     );
   };
 
@@ -46,7 +46,7 @@ const CategoryList = () => {
               "#": page * limit + (index + 1),
               id: category._id,
               Name: <Link className="text-emerald-400" to={`view/${category._id}`}>{category.name}</Link>,
-              Desc: category.text,
+              Desc: category.description,
               Image: [category.img_url, category.image]
             };
           })
@@ -60,7 +60,7 @@ const CategoryList = () => {
           title={"Category"}
           action={handleDelete}
           setKeyword={setKeyword}
-          isLoading={loading}
+          isLoading={isLoading}
           noFoundData={noFoundCategory}
           page={page}
           totalPage={totalPage}

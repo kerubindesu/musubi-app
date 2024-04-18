@@ -35,11 +35,11 @@ export const getCarousel = createAsyncThunk(
 
 export const createCarousel = createAsyncThunk(
   'carousels/createCarousel',
-  async({ title, text, file, dispatch, navigate }, { rejectWithValue }) => {
+  async({ title, description, file, dispatch, navigate }, { rejectWithValue }) => {
     try {
       const formData = new FormData();
       formData.append('title', title);
-      formData.append('text', text);
+      formData.append('description', description);
       formData.append('file', file);
 
       const response = await axiosPrivate.post('http://localhost:3500/carousels', formData, {
@@ -67,11 +67,11 @@ export const createCarousel = createAsyncThunk(
 
 export const updateCarousel = createAsyncThunk(
   'carousels/updateCarousel',
-  async({ id, title, text, file, dispatch, navigate }, { rejectWithValue }) => {
+  async({ id, title, description, file, dispatch, navigate }, { rejectWithValue }) => {
     try {
       const formData = new FormData();
       formData.append('title', title);
-      formData.append('text', text);
+      formData.append('description', description);
       formData.append('file', file);
 
       const response = await axiosPrivate.patch(`http://localhost:3500/carousels/${ id }`, formData, {
@@ -128,7 +128,7 @@ const carouselSlice = createSlice({
     carousel: "",
     totalRows: 0,
     totalPage: 0,
-    loading: false,
+    isLoading: false,
     error: null,
     noFoundCarousel: ""
   },
@@ -136,7 +136,7 @@ const carouselSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getCarousels.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
@@ -145,74 +145,74 @@ const carouselSlice = createSlice({
       state.noFoundCarousel = action.payload.message;
       state.totalRows = action.payload.totalRows;
       state.totalPage = action.payload.totalPage;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
 
     });
 
     builder.addCase(getCarousels.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(getCarousel.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
     builder.addCase(getCarousel.fulfilled, (state, action) => {
       state.carousel = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(getCarousel.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(createCarousel.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
     builder.addCase(createCarousel.fulfilled, (state, action) => {
       state.carousel = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(createCarousel.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(updateCarousel.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
     builder.addCase(updateCarousel.fulfilled, (state, action) => {
       state.carousel = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(updateCarousel.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(deleteCarousel.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     });
 
     builder.addCase(deleteCarousel.fulfilled, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
     });
 
     builder.addCase(deleteCarousel.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
   },

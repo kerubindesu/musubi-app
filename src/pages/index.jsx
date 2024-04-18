@@ -1,7 +1,8 @@
-import About from "./About"
+import Contact from "./Contact"
 import Dashboard from "./Dashboard"
 import Category from "./Category"
 import Explore from "./Explore"
 import Home from "./Home"
+import ProductDetail from "./ProductDetail"
 
-export { About, Dashboard, Category, Explore, Home }
+export { Contact, Dashboard, Category, Explore, Home, ProductDetail }

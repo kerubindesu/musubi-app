@@ -114,7 +114,7 @@ const menuSlice = createSlice({
     menus: [],
     totalRows: 0,
     totalPage: 0,
-    loading: false,
+    isLoading: false,
     error: null,
     noFoundMenu: ""
   },
@@ -122,7 +122,7 @@ const menuSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getMenus.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
@@ -131,73 +131,73 @@ const menuSlice = createSlice({
       state.noFoundMenu = action.payload.message;
       state.totalRows = action.payload.totalRows;
       state.totalPage = action.payload.totalPage;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(getMenus.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(getMenu.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
     builder.addCase(getMenu.fulfilled, (state, action) => {
       state.menu = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(getMenu.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(createMenu.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
     builder.addCase(createMenu.fulfilled, (state, action) => {
       state.menu = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(createMenu.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(updateMenu.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
     builder.addCase(updateMenu.fulfilled, (state, action) => {
       state.menu = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(updateMenu.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(deleteMenu.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     });
 
     builder.addCase(deleteMenu.fulfilled, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
     });
 
     builder.addCase(deleteMenu.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
   },

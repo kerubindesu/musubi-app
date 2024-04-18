@@ -83,57 +83,57 @@ const logoSlice = createSlice({
   name: 'logo',
   initialState: {
     logo: "",
-    loading: false,
+    isLoading: false,
     error: null,
   },
   reducers: {
   },
   extraReducers: (builder) => {
     // builder.addCase(createLogo.pending, (state) => {
-    //   state.loading = true;
+    //   state.isLoading = true;
     //   state.error = null;
     // });
 
     // builder.addCase(createLogo.fulfilled, (state, action) => {
     //   state.logo = action.payload;
-    //   state.loading = false;
+    //   state.isLoading = false;
     //   state.error = null;
     // });
 
     // builder.addCase(createLogo.rejected, (state, action) => {
-    //   state.loading = false;
+    //   state.isLoading = false;
     //   state.error = action.payload;
     // });
 
     builder.addCase(getLogo.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
     builder.addCase(getLogo.fulfilled, (state, action) => {
       state.logo = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(getLogo.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
 
     builder.addCase(updateLogo.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
 
     builder.addCase(updateLogo.fulfilled, (state, action) => {
       state.logo = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
     });
 
     builder.addCase(updateLogo.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     });
   },

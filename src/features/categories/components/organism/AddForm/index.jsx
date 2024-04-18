@@ -10,11 +10,11 @@ const AddForm = () => {
   const navigate = useNavigate()
 
   const [name, setName] = useState("");
-  const [text, setText] = useState("");
+  const [description, setDescription] = useState("");
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");
 
-  const {loading} = useSelector((state) => state.categories);
+  const {isLoading} = useSelector((state) => state.categories);
 
   const loadImage = (e) => {
     const image = e.target.files[0];
@@ -32,7 +32,7 @@ const AddForm = () => {
     e.preventDefault()
     
     try{
-      await dispatch(createCategory({name, text, file, dispatch, navigate}))
+      await dispatch(createCategory({name, description, file, dispatch, navigate}))
    } catch (error) {
       if(error.response) {
           console.log(error)
@@ -57,9 +57,9 @@ const AddForm = () => {
           <CustomTextArea
             id="text"
             text={"Description"}
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            htmlFor={"text"}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            htmlFor={"description"}
             variant={"resize-none"}
             rows={1}
             cols={40}
@@ -96,11 +96,11 @@ const AddForm = () => {
           </label>
 
           <Button
-            disabled={loading}
+            disabled={isLoading}
             type={"submit"} 
             variant={"bg-gradient-to-r from-sky-800 to-sky-700 shadow-lg text-white"}
-            text={!loading && "Save"}
-            icon={loading && <Loading />}
+            text={!isLoading && "Save"}
+            icon={isLoading && <Loading />}
           />
         </form>
       </div>

@@ -19,9 +19,9 @@ const SidebarMenu = () => {
           <NavItem
             action={() => dispatch(setSidebar(false))}
             variant={"px-2 rounded"}
-            to={"/dash/posts"}
+            to={"/dash/products"}
             icon={<RiArticleLine />}
-            text={"Posts"}
+            text={"Products"}
           />
           <NavItem
             action={() => dispatch(setSidebar(false))}
@@ -55,11 +55,17 @@ const SidebarMenu = () => {
             <div className="pt-4 pb-3 pl-3 text-xs text-slate-500">Configuration</div>
             <ul className="px-3 flex flex-col justify-center items-start">
                 <NavItem
-                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-4 border-l-4 rounded-r"} to={"/dash/logo"} text={"Logo"} />
+                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-4 border-l-4 rounded-r"} to={"/dash/logo"} text={"Logo"}
+                />
                 <NavItem
-                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-4 border-l-4 rounded-r"} to={"/dash/about"} text={"About"} />
+                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-4 border-l-4 rounded-r"} to={"/dash/contact"} text={"Contact"}
+                />
                 <NavItem
-                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-4 border-l-4 rounded-r"} to={"/dash/menus"} text={"Guest Menu"} />
+                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-4 border-l-4 rounded-r"} to={"/dash/menus"} text={"Navigation Menu"}
+                />
+                <NavItem
+                  action={() => dispatch(setSidebar(false))} variant={"py-3 pl-4 border-l-4 rounded-r"} to={"/dash/seo-management"} text={"SEO Management"}
+                />
             </ul>
         </li>
       </ul>

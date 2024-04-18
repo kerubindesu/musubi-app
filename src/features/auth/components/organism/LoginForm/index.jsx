@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, FloatingLabel, Loading } from '../../../../../components/atoms'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser, selectLoading } from '../../../authSlice'
 
@@ -11,7 +11,7 @@ const LoginForm = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
-    const loading = useSelector(selectLoading)
+    const isLoading = useSelector(selectLoading)
 
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -52,18 +52,18 @@ const LoginForm = () => {
                 />
                 
                 <Button 
-                    disabled={loading}
+                    disabled={isLoading}
                     type={"submit"} 
                     variant={"bg-gradient-to-r from-sky-800 to-sky-700 shadow-lg text-white"}
-                    text={!loading && "Login"}
-                    icon={loading && <Loading />}
+                    text={!isLoading && "Login"}
+                    icon={isLoading && <Loading />}
                 />
             </form>
 
-            <div className="w-full flex justify-start items-center gap-1 font-semibold">
+            {/* <div className="w-full flex justify-start items-center gap-1 font-semibold">
                 <p className="taxt-base">Don't have an account?</p>
                 <Link className="text-blue-500" to="/auth/register">Register</Link>
-            </div>
+            </div> */}
         </div>
     </>
   )

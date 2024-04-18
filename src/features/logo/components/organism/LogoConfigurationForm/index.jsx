@@ -11,7 +11,7 @@ const LogoConfigurationForm = () => {
     const [file, setFile] = useState()
     const [preview, setPreview] = useState()
 
-    const { loading, logo } = useSelector((state) => state.logo);
+    const { isLoading, logo } = useSelector((state) => state.logo);
 
     useEffect(() => {
         dispatch(getLogo())
@@ -76,11 +76,11 @@ const LogoConfigurationForm = () => {
                 )}
 
                 <Button
-                    disabled={loading}
+                    disabled={isLoading}
                     type={"submit"} 
                     variant={"bg-gradient-to-r from-sky-800 to-sky-700 shadow-lg text-white"}
-                    text={!loading && "Update"}
-                    icon={loading && <Loading />}
+                    text={!isLoading && "Update"}
+                    icon={isLoading && <Loading />}
                 />
             </form>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { GuestTemplate } from '../components/templates';
-import { About, Category, Explore, Home } from '../pages';
+import { Contact, Category, Explore, Home, ProductDetail } from '../pages';
 import NotFound from '../pages/NotFound';
 
 const PublicRoutes = () => {
@@ -11,7 +11,8 @@ const PublicRoutes = () => {
         <Route index element={<Home />} />
         <Route path="explore" element={<Explore />} />
         <Route path="categories" element={<Category />} />
-        <Route path="about" element={<About />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="product/:slug" element={<ProductDetail />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
