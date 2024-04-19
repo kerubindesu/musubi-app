@@ -8,10 +8,10 @@ const NavItem = ({ action, to, icon, text, variant }) => {
         onClick={action}
         to={to}
         className={({ isPending, isActive, isTransitioning }) => 
-          `py-1 w-full flex justify-start items-center box-border truncate hover:bg-slate-100 focus:bg-slate-100 text-sm font-semibold ${variant} ${
+          `py-1 w-full flex justify-start items-center box-border truncate hover:bg-slate-200 focus:bg-slate-200 hover:border-black text-sm ${variant} ${
             isPending ? "text-slate-500" : ""
           } ${
-            isActive ? "bg-slate-100 border-black text-black" : "text-slate-800"
+            isActive ? "bg-slate-200 border-black text-black" : "text-slate-800"
           } ${
             isTransitioning ? "transition-all duration-300 ease-in-out" : ""
           }`
@@ -19,7 +19,7 @@ const NavItem = ({ action, to, icon, text, variant }) => {
       >
         <div className={"w-full flex items-center gap-2"}>
           {icon && <div className="h-10 w-10 flex justify-center items-center text-2xl">{icon}</div>}
-          <div>{text}</div>
+          <div className="font-">{text}</div>
         </div>
       </NavLink>
   </>

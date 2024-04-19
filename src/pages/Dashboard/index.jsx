@@ -11,6 +11,7 @@ import { getCarousels } from '../../features/carousels/carouselsSlice';
 import { getUsers } from '../../features/users/usersSlice';
 import { getTags } from '../../features/tags/tagsSlice';
 import { Helmet } from 'react-helmet-async';
+import VisitorChart from '../../features/visitors/components/molecules/VisitorChart/index.jsx';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <>
+    <div className="flex flex-col gap-4 lg-gap-6">
       <Helmet>
         <title>{pageTitle}</title>
       </Helmet>
@@ -51,70 +52,6 @@ const Dashboard = () => {
       <Breadcrumb items={breadcrumbs} />
 
       <HeadingTitle variant={"text-lg"} text={pageTitle} />
-
-      {/* <div className="flex justify-start items-center flex-wrap gap-1 sm:gap-3">
-        <>
-          {isProductLoading ? (
-            <Placeholder variant="aspect-square w-[11rem] sm:w-[12rem]" />
-          ) : (
-            <Link to="/dash/products" className="aspect-square w-[11rem] sm:w-[12rem] flex flex-col justify-center items-center gap-2">
-              <div className="h-10 w-10 flex justify-center items-center bg-white rounded-full">
-                <RiArticleLine className="text-2xl" />
-              </div>
-              <div className="text-lg font-semibold">{totalProductRows}</div>
-              <div className="truncate text-xs text-slate-500">Products</div>
-            </Link>
-          )}
-
-          {isCategoryLoading ? (
-            <Placeholder variant="aspect-square w-[11rem] sm:w-[12rem]" />
-          ) : (
-            <Link to="/dash/categories" className="aspect-square w-[11rem] sm:w-[12rem] flex flex-col justify-center items-center gap-2">
-              <div className="h-10 w-10 flex justify-center items-center bg-white rounded-full">
-                <RiListIndefinite className="text-2xl" />
-              </div>
-              <div className="text-lg font-semibold">{totalCategoryRows}</div>
-              <div className="truncate text-xs text-slate-500">Categories</div>
-            </Link>
-          )}
-
-          {isCarouselLoading ? (
-            <Placeholder variant="aspect-square w-[11rem] sm:w-[12rem]" />
-          ) : (
-            <Link to="/dash/carousels" className="aspect-square w-[11rem] sm:w-[12rem] flex flex-col justify-center items-center gap-2">
-              <div className="h-10 w-10 flex justify-center items-center bg-white rounded-full">
-                <RiImageLine className="text-2xl" />
-              </div>
-              <div className="text-lg font-semibold">{totalCarouselRows}</div>
-              <div className="truncate text-xs text-slate-500">Carousels</div>
-            </Link>
-          )}
-
-          {isUserLoading ? (
-            <Placeholder variant="aspect-square w-[11rem] sm:w-[12rem]" />
-          ) : (
-            <Link to="/dash/users" className="aspect-square w-[11rem] sm:w-[12rem] flex flex-col justify-center items-center gap-2">
-              <div className="h-10 w-10 flex justify-center items-center bg-white rounded-full">
-                <RiFileUserLine className="text-2xl" />
-              </div>
-              <div className="text-lg font-semibold">{totalUserRows}</div>
-              <div className="truncate text-xs text-slate-500">Users</div>
-            </Link>
-          )}
-
-          {isTagLoading ? (
-            <Placeholder variant="aspect-square w-[11rem] sm:w-[12rem]" />
-          ) : (
-            <Link to="/dash/tags" className="aspect-square w-[11rem] sm:w-[12rem] flex flex-col justify-center items-center gap-2">
-              <div className="h-10 w-10 flex justify-center items-center bg-white rounded-full">
-                <RiPriceTag3Line className="text-2xl" />
-              </div>
-              <div className="text-lg font-semibold">{totalTagRows}</div>
-              <div className="truncate text-xs text-slate-500">Tags</div>
-            </Link>
-          )}
-        </>
-      </div> */}
 
       <div className="container mx-auto">
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-5 lg:gap-6">
@@ -180,6 +117,8 @@ const Dashboard = () => {
         </div>
       </div>
 
+      <VisitorChart />
+      
       {isOpen && (
         <Notification
           message={message}
@@ -187,7 +126,7 @@ const Dashboard = () => {
           onClose={handleCloseNotification}
         />
       )}
-    </>
+    </div>
   )
 }
 

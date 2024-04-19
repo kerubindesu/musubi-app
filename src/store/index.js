@@ -10,6 +10,7 @@ import imagePreviewReducer from "../features/imagePreview/imagePreviewSlice";
 import navbarReducer from "../features/navbar/navbarSlice";
 import sidebarReducer from "../features/sidebar/sidebarSlice";
 import seoDataReducer from "../features/seoData/seoDataSlice";
+import visitorsReducer from "../features/visitors/visitorsSlice";
 import menusReducer from "../features/menus/menusSlice";
 import categoriesReducer from "../features/categories/categoriesSlice";
 import notificationReducer from "../features/notification/notificationSlice";
@@ -30,6 +31,7 @@ const store = configureStore({
     tags: tagsReducer,
     carousels: carouselsReducer,
     seoData: seoDataReducer,
+    visitors: visitorsReducer,
     confirmDeleteModal: confirmDeleteModalReducer,
     imagePreview: imagePreviewReducer,
 

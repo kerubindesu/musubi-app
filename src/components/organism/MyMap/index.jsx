@@ -11,6 +11,7 @@ import { Circle as CircleStyle, Fill, Style } from 'ol/style';
 import { Feature } from 'ol';
 import { Point } from 'ol/geom';
 import { Link } from 'react-router-dom';
+import { RiExternalLinkLine } from 'react-icons/ri';
 
 const MyMap = ({ latitude, longitude }) => {
   useEffect(() => {
@@ -19,9 +20,13 @@ const MyMap = ({ latitude, longitude }) => {
       target: 'map',
       layers: [
         new TileLayer({
-          source: new OSM()
+          source: new OSM({
+            attributions: [
+              '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+              'Data under <a href="https://opendatacommons.org/licenses/odbl/">ODbL</a>'
+            ]
+          })
         }),
-        // Layer titik
         new VectorLayer({
           source: new VectorSource({
             features: [
@@ -45,18 +50,23 @@ const MyMap = ({ latitude, longitude }) => {
       })
     });
 
-    return () => {
-      // Membersihkan peta saat komponen tidak lagi digunakan
-      map.setTarget(undefined);
-    };
+    return () => map.setTarget(undefined); // Membersihkan peta saat komponen tidak lagi digunakan
   }, [latitude, longitude]);
 
   return (
-    <Link to={`https://www.google.com/maps?q=${latitude},${longitude}`} target="_blank">
-        <div id="map" className="h-[16rem] lg:h-[26rem] w-full">
+    <>
+      <div id="map" className="h-[16rem] lg:h-[26rem] w-full">
         {/* Container untuk peta */}
-        </div>
-    </Link>
+      </div>
+      <Link
+        to={`https://www.google.com/maps?q=${latitude},${longitude}`}
+        target="_blank"
+        className="my-4 text-blue-600 underline underline-offset-4 flex justify-start items-center gap-1"
+      >
+        <div className="text-base">Buka di Google Maps</div>
+        <RiExternalLinkLine className="text-lg" />
+      </Link>
+    </>
   );
 };
 

@@ -46,7 +46,7 @@ const Sidebar = () => {
     <>
       <div className={`
         ${sidebar && sidebar ? "flex" : "hidden"}
-        fixed z-30 inset-0 top-0 left-0 right-auto w-[14rem] lg:flex flex-col justify-between overflow-x-hidden overflow-y-hidden font-semibold leading-6 bg-white`
+        fixed z-30 inset-0 top-0 left-0 right-auto w-[14rem] lg:flex flex-col justify-between overflow-x-hidden overflow-y-hidden leading-6 bg-white`
       }>
         <div className="w-full h-full flex flex-col justify-start items-start">
 
@@ -68,7 +68,7 @@ const Sidebar = () => {
               <>
                 <div className="w-full flex flex-row justify-between items-center">
                   <div className="max-w-[10rem] truncate">
-                    <div className="text-base truncate">{userAuth?.name}</div>
+                    <div className="text-base truncate font-semibold">{userAuth?.name}</div>
                     <div className="text-sm font-normal truncate">{userAuth?.username}</div>
                   </div>
 

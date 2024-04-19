@@ -81,7 +81,7 @@ const Contact = () => {
       ) : (
         <div className="my-4 container mx-auto grid grid-cols-1 sm:col-span-2 md:grid-cols-3 gap-4 md:gap-10">
           <div className="px-3 md:px-0 -mx-3 md:mx-auto col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1">
-            <img className="p-4 aspect-auto w-full h-auto object-cover bg-slate-50 rounded-xl" src={contact?.img_url} alt={contact?.image} />
+            <img className="aspect-auto w-full h-auto object-cover bg-white" src={contact?.img_url} alt={contact?.image} />
           </div>
 
           <div className="col-span-1 sm:col-span-2 md:col-span-2 flex flex-col gap-6">
@@ -92,12 +92,12 @@ const Contact = () => {
             <div className="container mx-auto flex flex-col gap-4">
               <div className="w-full flex gap-2">
                 <div className="w-24 truncate text-sm font-semibold text-slate-500">WhatsApp</div>
-                <div className="w-full text-sm">
+                <div className="w-full">
                   <Link
                     to={contact ? createWhatsAppLink(contact.whatsapp_number, `Halo, saya tertarik dengan produk Anda!`) : "#"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-emerald-500"
+                    className="text-sm"
                   >
                     {contact ? formatWhatsappNumber(contact.whatsapp_number) : 'N/A'}
                   </Link>
@@ -105,9 +105,10 @@ const Contact = () => {
               </div>
               <div className="w-full flex gap-2">
                 <div className="w-24 truncate text-sm font-semibold text-slate-500">Email</div>
-                <div className="w-full text-sm">
+                <div className="w-full">
                   <Link
                     to={contact ? createEmailLink(contact.email, "Informasi Produk", "Saya tertarik dengan produk Anda, mohon informasi lebih lanjut.") : "#"}
+                    className="text-sm"
                   >
                     {contact?.email}
                   </Link>
@@ -115,7 +116,13 @@ const Contact = () => {
               </div>
               <div className="w-full flex gap-2">
                 <div className="w-24 truncate text-sm font-semibold text-slate-500">Alamat</div>
-                <div className="w-full text-sm">{contact?.address}</div>
+                <Link
+                  to={`https://www.google.com/maps?q=${contact?.location?.coordinates[0]},${contact?.location?.coordinates[1]}`}
+                  target="_blank"
+                  className="w-full text-sm text-blue-600 underline underline-offset-4"
+                >
+                  <div>{contact?.address}</div>
+                </Link>
               </div>
             </div>
             
