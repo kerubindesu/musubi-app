@@ -1,67 +1,36 @@
-import React, { useEffect } from 'react';
-import 'ol/ol.css';
-import Map from 'ol/Map';
-import View from 'ol/View';
-import TileLayer from 'ol/layer/Tile';
-import OSM from 'ol/source/OSM';
-import { fromLonLat } from 'ol/proj';
-import { Vector as VectorLayer } from 'ol/layer';
-import { Vector as VectorSource } from 'ol/source';
-import { Circle as CircleStyle, Fill, Style } from 'ol/style';
-import { Feature } from 'ol';
-import { Point } from 'ol/geom';
+import React from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 import { Link } from 'react-router-dom';
 import { RiExternalLinkLine } from 'react-icons/ri';
 
+// Memperbaiki isu icon marker yang tidak muncul
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+});
+
 const MyMap = ({ latitude, longitude }) => {
-  useEffect(() => {
-    // Membuat peta OpenLayers
-    const map = new Map({
-      target: 'map',
-      layers: [
-        new TileLayer({
-          source: new OSM({
-            attributions: [
-              '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-              'Data under <a href="https://opendatacommons.org/licenses/odbl/">ODbL</a>'
-            ]
-          })
-        }),
-        new VectorLayer({
-          source: new VectorSource({
-            features: [
-              new Feature({
-                geometry: new Point(fromLonLat([longitude, latitude])),
-                name: 'Titik',
-              }),
-            ],
-          }),
-          style: new Style({
-            image: new CircleStyle({
-              radius: 8,
-              fill: new Fill({ color: 'red' }),
-            }),
-          }),
-        }),
-      ],
-      view: new View({
-        center: fromLonLat([longitude, latitude]),
-        zoom: 10
-      })
-    });
-
-    return () => map.setTarget(undefined); // Membersihkan peta saat komponen tidak lagi digunakan
-  }, [latitude, longitude]);
-
   return (
     <>
-      <div id="map" className="h-[16rem] lg:h-[26rem] w-full">
-        {/* Container untuk peta */}
-      </div>
+      <MapContainer center={[latitude, longitude]} zoom={13} style={{ zIndex: 1 }} scrollWheelZoom={false} className="h-[16rem] lg:h-[26rem] rounded-lg">
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='© OpenStreetMap contributors'
+        />
+        <Marker position={[latitude, longitude]}>
+          <Popup>
+            Lokasi terpilih berada pada latitude {latitude} dan longitude {longitude}.
+          </Popup>
+        </Marker>
+      </MapContainer>
       <Link
         to={`https://www.google.com/maps?q=${latitude},${longitude}`}
         target="_blank"
-        className="my-4 text-blue-600 underline underline-offset-4 flex justify-start items-center gap-1"
+        className="mt-4 text-sky-500 flex justify-start items-center gap-1"
       >
         <div className="text-base">Buka di Google Maps</div>
         <RiExternalLinkLine className="text-lg" />

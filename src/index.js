@@ -8,6 +8,7 @@ import store from './store';
 import { injectStore } from './utils/api'; 
 import { ScrollToTopOnMount } from './components/organism';
 import { HelmetProvider } from 'react-helmet-async';
+import 'leaflet/dist/leaflet.css';
 
 injectStore(store);
 

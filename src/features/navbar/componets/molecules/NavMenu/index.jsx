@@ -8,7 +8,6 @@ const NavMenu = ({ variant }) => {
   const dispatch = useDispatch()
 
   const { menus, isLoading } = useSelector((state) => state.menus);
-  console.log(isLoading)
 
   useEffect(() => {
     dispatch(getMenus({ search: "", limit: "", page: "" }))
