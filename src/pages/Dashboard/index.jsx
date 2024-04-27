@@ -53,7 +53,7 @@ const Dashboard = () => {
 
       <HeadingTitle variant={"text-lg"} text={pageTitle} />
 
-      <div className="container mx-auto">
+      <div className="container">
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-5 lg:gap-6">
           {isProductLoading ? (
               <Placeholder variant="aspect-square w-auto rounded-3xl" />

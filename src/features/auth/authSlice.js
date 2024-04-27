@@ -17,8 +17,10 @@ export const registerUser = createAsyncThunk(
       });
 
       if (response) {
-        dispatch(showNotification({ message: response.data.message, type: "success" }))
-  
+        // Kirim email verifikasi
+        await dispatch(verifyEmail(email));
+
+        dispatch(showNotification({ message: response.data.message, type: "success" }));
         navigate("/auth/login");
       }
 
@@ -28,6 +30,76 @@ export const registerUser = createAsyncThunk(
         dispatch(showNotification({ message: rejectWithValue(error.response.data).payload.message }))
       }
       
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const verifyEmail = createAsyncThunk(
+  'auth/verifyEmail',
+  async ({ token }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`http://localhost:3500/auth/verify-email?token=${token}`);
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || { message: 'Failed to verify email' });
+    }
+  }
+);
+
+export const requestNewEmailToken = createAsyncThunk(
+  'auth/requestNewEmailToken',
+  async ({ email }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('http://localhost:3500/auth/request-new-email-token', { email });
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const sendResetPasswordToken = createAsyncThunk(
+  'auth/sendResetPasswordToken',
+  async ({ email, dispatch }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('http://localhost:3500/auth/send-reset-password-token', { email });
+
+      if  (response) {
+        dispatch(showNotification({ message: response.data.message, type: "success" }))
+      }
+
+      return true;
+    } catch (error) {
+      if  (error) {
+        dispatch(showNotification({ message: rejectWithValue(error.response.data).payload.message }))
+      }
+
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const resetPassword = createAsyncThunk(
+  'auth/resetPassword',
+  async ({ token, password, dispatch, navigate }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`http://localhost:3500/auth/reset-password/${token}`, { password });
+
+      if  (response) {
+        dispatch(showNotification({ message: response.data.message, type: "success" }))
+      }
+
+      navigate("/auth/login")
+
+      return true;
+    } catch (error) {
+      if  (error) {
+        dispatch(showNotification({ message: rejectWithValue(error.response.data).payload.message }))
+      }
+
       return rejectWithValue(error.response.data);
     }
   }
@@ -112,22 +184,28 @@ const initialState = {
   userAuth: '',
   isAuthenticated: false,
   accessToken: '',
+  isEmailSent: false,
   isLoading: false,
   error: null,
   errRefreshToken: null,
+
+  // Verify Email
+  verifyEmailStatus: 'idle',
+  isVerifyEmailError: false,
+
+  // Request New Email Token
+  requestNewEmailTokenStatus: 'idle',
+  isRequestNewEmailTokenError: false,
+
+  // Send Reset Password Token
+  sendResetPasswordTokenStatus: 'idle',
+  isSendResetPasswordTokenError: false,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    logoutSuccess: (state) => {
-      state.isAuthenticated = false;
-      state.accessToken = '';
-      state.isLoading = false;
-      state.error = null;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(registerUser.pending, (state) => {
       state.isLoading = true;
@@ -144,6 +222,51 @@ const authSlice = createSlice({
       state.accessToken = '';
       state.isLoading = false;
       state.error = action.payload;
+    });
+
+    builder.addCase(verifyEmail.pending, (state) => {
+      state.verifyEmailStatus = 'loading';
+      state.isVerifyEmailError = null;
+    });
+
+    builder.addCase(verifyEmail.fulfilled, (state) => {
+      state.verifyEmailStatus = 'succeeded';
+      state.isVerifyEmailError = null;
+    });
+
+    builder.addCase(verifyEmail.rejected, (state, action) => {
+      state.verifyEmailStatus = 'failed';
+      state.isVerifyEmailError = action.payload.message;
+    });
+
+    builder.addCase(requestNewEmailToken.pending, (state) => {
+      state.requestNewEmailTokenStatus = 'loading';
+      state.isRequestNewEmailTokenError = null;
+    });
+
+    builder.addCase(requestNewEmailToken.fulfilled, (state) => {
+      state.requestNewEmailTokenStatus = 'succeeded';
+      state.isRequestNewEmailTokenError = null;
+    });
+
+    builder.addCase(requestNewEmailToken.rejected, (state, action) => {
+      state.requestNewEmailTokenStatus = 'failed';
+      state.isRequestNewEmailTokenError = action.payload.message;
+    });
+
+    builder.addCase(sendResetPasswordToken.pending, (state) => {
+      state.sendResetPasswordTokenStatus = "loading";
+      state.isSendResetPasswordTokenError = null;
+    });
+
+    builder.addCase(sendResetPasswordToken.fulfilled, (state, action) => {
+      state.sendResetPasswordTokenStatus = 'succeeded';
+      state.isSendResetPasswordTokenError = null;
+    });
+
+    builder.addCase(sendResetPasswordToken.rejected, (state, action) => {
+      state.sendResetPasswordTokenStatus = 'failed';
+      state.isSendResetPasswordTokenError = action.payload.message;
     });
 
     builder.addCase(loginUser.pending, (state) => {
@@ -219,7 +342,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { logoutSuccess } = authSlice.actions;
 export const selectIsAuthenticated = (state) => state.auth.isAuthenticated;
 export const selectLoading = (state) => state.auth.isLoading;
 export default authSlice.reducer;

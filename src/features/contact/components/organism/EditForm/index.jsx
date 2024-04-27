@@ -21,8 +21,6 @@ const EditForm = ({contact, isLoading}) => {
   const [longitude, setLongitude] = useState("");
   const [preview, setPreview] = useState("");
 
-  console.log(contact?.location?.coordinates)
-
   useEffect(() => {
     if (contact) {
       setCompanyName(contact.company_name || "")
@@ -91,7 +89,7 @@ const EditForm = ({contact, isLoading}) => {
           </label>
 
           {preview && (
-              <div className="mb-4 text-xs text-orange-400 font-semibold">Click the Image to change it.</div>
+              <div className="mb-4 text-xs text-orange-400">Click the Image to change it.</div>
           )}
 
           <FloatingLabel 
@@ -165,17 +163,19 @@ const EditForm = ({contact, isLoading}) => {
             htmlFor={"longitude"}
           />
 
-          <MyMap
-            latitude={contact?.location?.coordinates[0]}
-            longitude={contact?.location?.coordinates[1]}
-          />
+          {contact?.location && (
+            <MyMap
+              latitude={contact.location.coordinates[0]}
+              longitude={contact.location.coordinates[1]}
+            />
+          )}
 
           <Button
             disabled={isLoading}
             type={"submit"} 
-            variant={"bg-gradient-to-r from-sky-800 to-sky-700 shadow-lg text-white"}
+            variant={"bg-slate-700 shadow-lg text-white"}
             text={!isLoading && "Update"}
-            icon={isLoading && <Loading />}
+            icon={isLoading && <Loading text={true} />}
           />
         </form>
       </div>

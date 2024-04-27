@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { RiArrowDropDownLine, RiArrowDropUpLine, RiMenuLine } from "react-icons/ri";
+import { RiArrowDropDownLine, RiArrowDropUpLine, RiCloseLine } from "react-icons/ri";
 import { SidebarMenu } from "../../molecules";
 import { DashFooter } from "../../../../../components/organism";
 import { Loading, Logo } from "../../../../../components/atoms";
@@ -50,9 +50,9 @@ const Sidebar = () => {
       }>
         <div className="w-full h-full flex flex-col justify-start items-start">
 
-          <div className="relative px-5 lg:px-3 h-16 w-full flex justify-start items-center gap-2 border-r border-b">
-            <div onClick={() => dispatch(setSidebar(!sidebar))} className="lg:hidden h-10 w-10 flex justify-center items-center rounded-full hover:bg-slate-200 focus:bg-slate-100 cursor-pointer">
-              <RiMenuLine className="text-2xl" />
+          <div className="relative px-3 h-16 w-full flex justify-start items-center gap-2 border-r border-b">
+            <div onClick={() => dispatch(setSidebar(!sidebar))} className="lg:hidden h-10 w-10 flex justify-center items-center rounded-full bg-slate-100 hover:bg-slate-200 focus:bg-slate-100 cursor-pointer">
+              <RiCloseLine className="text-2xl" />
             </div>
             <Logo link={"/dash/home"} variant="max-h-[2.5rem]" />
           </div>

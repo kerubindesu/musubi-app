@@ -13,7 +13,7 @@ const NavItem = ({ to, icon, text }) => {
     <NavLink onClick={() => dispatch(setNavBurgerMenu(false))}
       to={to}
       className={({ isActive }) => `
-        relative py-4 md:py-0 px-3 h-full w-full md:w-auto flex flex-col justify-center items-start md:items-center box-border truncate text-base text-slate-700 hover:bg-slate-100 md:hover:bg-inherit
+        relative py-4 md:py-0 px-3 h-full w-full md:w-auto flex flex-col justify-center items-start md:items-center box-border truncate text-base font-semibold text-slate-700 hover:bg-slate-100 md:hover:bg-inherit
         ${isActive ? "text-slate-900" : ""}
       `}
     >

@@ -97,7 +97,7 @@ const AddForm = () => {
           </label>
 
           {preview && (
-              <div className="mb-4 text-xs text-orange-400 font-semibold">Click the Image to change it.</div>
+              <div className="mb-4 text-xs text-orange-400">Click the Image to change it.</div>
           )}
 
           <FloatingLabel 
@@ -153,9 +153,9 @@ const AddForm = () => {
           <Button
             disabled={isLoading}
             type={"submit"} 
-            variant={"bg-gradient-to-r from-sky-800 to-sky-700 shadow-lg text-white"}
+            variant={"bg-slate-700 shadow-lg text-white"}
             text={!isLoading && "Save"}
-            icon={isLoading && <Loading />}
+            icon={isLoading && <Loading text={true} />}
           />
         </form>
       </div>

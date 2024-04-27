@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Placeholder } from '../../atoms'
 
 const ProductGrid = ({ products, isProductsLoading }) => {
     return (
         <div className="container mx-auto">
-            <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 lg:grid-cols-5 lg:gap-6 xl:grid-cols-6">
+            <div className="grid grid-cols-3 gap-x-4 gap-y-8 sm:grid-cols-4 lg:grid-cols-5 lg:gap-x-6 lg:gap-y-10 xl:grid-cols-6">
                 {products && products.length > 0 ? (
                     products.map((product, index) => (
                     <Link to={`/product/${product?.slug}`} key={index + 1} className="relative flex flex-col w-full overflow-hidden rounded-t">
@@ -29,11 +30,106 @@ const ProductGrid = ({ products, isProductsLoading }) => {
                     ))
                 ) : isProductsLoading && (
                     <>
-                        <div className="rounded-lg bg-gray-200 h-32 sm:h-48 w-full"></div>
-                        <div className="rounded-lg bg-gray-200 h-32 sm:h-48 w-full"></div>
-                        <div className="rounded-lg bg-gray-200 h-32 sm:h-48 w-full"></div>
-                        <div className="rounded-lg bg-gray-200 h-32 sm:h-48 w-full"></div>
-                        <div className="rounded-lg bg-gray-200 h-32 sm:h-48 w-full"></div>
+                        <div className="w-full rounded-lg flex flex-col gap-1">
+                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
+                            <div className="flex justify-start items-center gap-1">
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                            </div>
+                        </div>
+                        <div className="w-full rounded-lg flex flex-col gap-1">
+                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
+                            <div className="flex justify-start items-center gap-1">
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                            </div>
+                        </div>
+                        <div className="w-full rounded-lg flex flex-col gap-1">
+                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
+                            <div className="flex justify-start items-center gap-1">
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                            </div>
+                        </div>
+                        <div className="w-full rounded-lg flex flex-col gap-1">
+                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
+                            <div className="flex justify-start items-center gap-1">
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                            </div>
+                        </div>
+                        <div className="w-full rounded-lg flex flex-col gap-1">
+                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
+                            <div className="flex justify-start items-center gap-1">
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                            </div>
+                        </div>
+                        <div className="w-full rounded-lg flex flex-col gap-1">
+                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
+                            <div className="flex justify-start items-center gap-1">
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                            </div>
+                        </div>
+                        <div className="w-full rounded-lg flex flex-col gap-1">
+                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
+                            <div className="flex justify-start items-center gap-1">
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                            </div>
+                        </div>
+                        <div className="w-full rounded-lg flex flex-col gap-1">
+                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
+                            <div className="flex justify-start items-center gap-1">
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                            </div>
+                        </div>
+                        <div className="w-full rounded-lg flex flex-col gap-1">
+                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
+                            <div className="flex justify-start items-center gap-1">
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                            </div>
+                        </div>
+                        <div className="w-full rounded-lg flex flex-col gap-1">
+                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-full rounded-lg"} />
+                            <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
+                            <div className="flex justify-start items-center gap-1">
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                                <Placeholder variant={"h-4 w-12 rounded"} />
+                            </div>
+                        </div>
                     </>
                 )}
             </div>

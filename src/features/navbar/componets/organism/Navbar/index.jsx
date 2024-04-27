@@ -74,11 +74,11 @@ const Navbar = () => {
                     <div className="max-h-max w-[7rem] box-border flex justify-end items-center gap-4">
                         {isAuthLoading ? (
                             <>
-                                <Placeholder variant={"h-8 w-8 rounded-full"} />
+                                <Placeholder variant={"h-10 w-10 rounded-full"} />
                             </>
                         ) : userAuth ?  (
                             <Dropdown onLogout={handleLogout} options={dropdownOptions}>
-                                <div className="h-8 w-8 flex items-center justify-center bg-gray-200 rounded-full cursor-pointer text-lg font-semibold">
+                                <div className="h-10 w-10 flex items-center justify-center bg-gray-200 rounded-full cursor-pointer text-lg font-semibold">
                                     {Array.from(`${userAuth.name}`)[0]}
                                 </div>
                             </Dropdown>

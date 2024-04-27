@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, FloatingLabel, Loading } from '../../../../../components/atoms'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser, selectLoading } from '../../../authSlice'
 
@@ -26,7 +26,7 @@ const LoginForm = () => {
 
   return (
     <>
-        <div className="flex-[2] py-10 px-4 md:px-10 h-full w-full md:max-w-[24rem] bg-white flex flex-col justify-center items-center gap-4 rounded-t-xl md:rounded-r-none md:rounded-l-xl">
+        <div className="flex-[2] p-8 h-full w-full max-w-sm bg-white flex flex-col justify-center items-center gap-4 rounded-t-xl md:rounded-r-none md:rounded-l-xl shadow">
             <form onSubmit={handleSubmit} className='w-full flex flex-col justify-center items-center gap-4'>
                 <div className="mb-4 w-full text-center">
                     <h1 className="text-2xl font-semibold text-slate-800">Login</h1>
@@ -54,16 +54,20 @@ const LoginForm = () => {
                 <Button 
                     disabled={isLoading}
                     type={"submit"} 
-                    variant={"bg-gradient-to-r from-sky-800 to-sky-700 shadow-lg text-white"}
+                    variant={"bg-slate-800 shadow-lg text-white"}
                     text={!isLoading && "Login"}
-                    icon={isLoading && <Loading />}
+                    icon={isLoading && <Loading text={true} />}
                 />
             </form>
 
-            {/* <div className="w-full flex justify-start items-center gap-1 font-semibold">
+            <div className="my-4 w-full flex justify-center items-center font-semibold">
+                <Link className="text-blue-500 text-xs" to="/auth/send-reset-password-token">Forgot Password?</Link>
+            </div>
+
+            <div className="pt-6 w-full flex justify-start items-center gap-1 border-t">
                 <p className="taxt-base">Don't have an account?</p>
                 <Link className="text-blue-500" to="/auth/register">Register</Link>
-            </div> */}
+            </div>
         </div>
     </>
   )

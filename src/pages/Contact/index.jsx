@@ -50,7 +50,10 @@ const Contact = () => {
 
       <div className="container mx-auto">
         {isLoading ? (
-          <Placeholder variant={"h-[16rem] lg:h-[26rem] w-full rounded-lg"} />
+          <div className="flex flex-col gap-4">
+            <Placeholder variant={"h-[16rem] lg:h-[26rem] w-full rounded-lg"} />
+            <Placeholder variant={"h-4 w-3/4 sm:max-w-[16rem] rounded-lg"} />
+          </div>
         ) : (
           <>
             {contact?.location && (
@@ -64,24 +67,38 @@ const Contact = () => {
       </div>
 
       {isLoading ? (
-        <div className="my-8 container mx-auto grid grid-cols-1 sm:col-span-2 md:grid-cols-3 gap-4 md:gap-10">
+        <div className="mb-8 container mx-auto grid grid-cols-1 sm:col-span-2 md:grid-cols-3 gap-4 md:gap-10">
           <div className="px-3 md:px-0 -mx-3 md:mx-auto col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1 flex justify-center items-center rounded w-full">
-            <Placeholder variant={"aspect-video w-full h-auto object-cover rounded-lg"} />
+            <Placeholder variant={"aspect-video w-8rem md:w-full h-auto object-cover rounded-lg"} />
           </div>
           <div className="md:pl-10 col-span-1 md:col-span-2 flex flex-col gap-6 md:border-l">
             <Placeholder variant={"h-8 w-[12rem] rounded-lg"} />
-            <Placeholder variant={"h-8 w-full rounded-lg"} />
-            <Placeholder variant={"h-8 w-full rounded-lg"} />
-            <Placeholder variant={"h-8 w-3/4 rounded-lg"} />
-            <Placeholder variant={"h-8 w-[16rem] rounded-lg"} />
-            <Placeholder variant={"h-8 w-[16rem] rounded-lg"} />
-            <Placeholder variant={"h-8 w-3/4 rounded-lg"} />
+            <div className="container mx-auto flex flex-col gap-4">
+              <div className="w-full flex gap-6">
+                <Placeholder variant={"h-4 w-32 rounded-lg"} />
+                <Placeholder variant={"h-4 w-full rounded-lg"} />
+              </div>
+              <div className="w-full flex gap-6">
+                <Placeholder variant={"h-4 w-32 rounded-lg"} />
+                <Placeholder variant={"h-4 w-full rounded-lg"} />
+              </div>
+              <div className="w-full flex gap-6">
+                <Placeholder variant={"h-4 w-32 rounded-lg"} />
+                <div className="w-full flex flex-col gap-4">
+                  <Placeholder variant={"h-4 w-full rounded-lg"} />
+                  <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
+                </div>
+              </div>
+            </div>
+            <Placeholder variant={"h-4 w-full rounded-lg"} />
+            <Placeholder variant={"h-4 w-full rounded-lg"} />
+            <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
           </div>
         </div>
       ) : (
-        <div className="container mx-auto grid grid-cols-1 sm:col-span-2 md:grid-cols-3 gap-4 md:gap-10">
-          <div className="hidden px-3 md:px-0 -mx-3 md:mx-auto col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1 md:flex justify-center items-center border md:border-none rounded">
-            <img className="aspect-auto w-full h-auto object-cover bg-white" src={contact?.img_url} alt={contact?.image} />
+        <div className="mb-8 container mx-auto grid grid-cols-1 sm:col-span-2 md:grid-cols-3 gap-4 md:gap-10">
+          <div className="px-3 md:px-0 -mx-3 md:mx-auto order-last md:order-first col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1 flex justify-center items-center rounded">
+            <img className="aspect-auto w-[8rem] md:w-full h-auto object-cover bg-white" src={contact?.img_url} alt={contact?.image} />
           </div>
 
           <div className="md:pl-10 col-span-1 md:col-span-2 flex flex-col gap-6 md:border-l">

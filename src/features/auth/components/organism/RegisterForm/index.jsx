@@ -29,7 +29,7 @@ const RegisterForm = () => {
 
   return (
     <>
-        <div className="flex-[2] py-10 px-4 md:px-10 h-full w-full md:max-w-[24rem] bg-white flex flex-col justify-center items-center gap-4 rounded-t-xl md:rounded-r-none md:rounded-l-xl">
+        <div className="flex-[2] p-6 sm:p-8 h-full w-full max-w-sm bg-white flex flex-col justify-center items-center gap-4 rounded-t-xl md:rounded-r-none md:rounded-l-xl shadow">
             <form onSubmit={handleSubmit} className='w-full flex flex-col justify-center items-center gap-4'>
                 <div className="mb-4 w-full text-center">
                     <h1 className="text-2xl font-semibold text-slate-800">Register</h1>
@@ -75,13 +75,13 @@ const RegisterForm = () => {
                 <Button 
                     disabled={isLoading}
                     type={"submit"} 
-                    variant={"bg-gradient-to-r from-sky-800 to-sky-700 shadow-lg text-white"}
+                    variant={"mb-4 bg-zinc-800 shadow-lg text-white"}
                     text={!isLoading && "Register"}
-                    icon={isLoading && <Loading />}
+                    icon={isLoading && <Loading text={true} />}
                 />
             </form>
 
-            <div className="w-full flex justify-start items-center gap-1 font-semibold">
+            <div className="pt-6 w-full flex justify-start items-center gap-1 border-t">
                 <p className="taxt-base">Have an account?</p>
                 <Link className="text-blue-500" to="/auth/login">Login</Link>
             </div>

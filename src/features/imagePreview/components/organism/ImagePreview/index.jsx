@@ -31,15 +31,15 @@ const ImagePreview = () => {
     <>
       {imagePreview && (
         <div onClick={closePreview} className="flex justify-center items-center fixed inset-0 z-50 bg-black/20">
-          <div className="p-4 flex flex-col justify-center items-center">
-            <div
-              onClick={closePreview}
-              className="absolute top-2 right-2 bg-slate-800/10 rounded-full text-white text-3xl font-semibold text-center cursor-pointer z-10"
-            >
-              <RiCloseLine />
-            </div>
-            <div onClick={(e) => e.stopPropagation()} className="max-w-3xl w-full bg-white rounded-sm shadow-lg overflow-hidden">
+          <div className="relative container p-4 max-w-3xl h-full flex flex-col justify-center items-center">
+            <div onClick={(e) => e.stopPropagation()} className="relative container mx-auto h-max max-w-3xl bg-black/5 rounded-sm">
               <img src={imgProperties.url} alt={imgProperties.alt} className="w-full h-full object-contain" />
+              <div
+              onClick={closePreview}
+              className="absolute top-5 right-5 h-10 w-10 bg-white border rounded-full shadow-lg flex justify-center items-center text-black cursor-pointer z-10"
+            >
+              <RiCloseLine className="text-3xl" />
+            </div>
             </div>
           </div>
         </div>

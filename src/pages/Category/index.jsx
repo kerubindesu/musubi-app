@@ -76,7 +76,7 @@ const Category = () => {
   return (
     <div className="flex flex-col gap-4">
       <Helmet>
-        <title>Kategori {"-" + category?.name || ""}</title>
+        <title>Kategori { category ? `- ${category.name}` : "" }</title>
       </Helmet>
       <CategoryHeader
         isCategoriesLoading={isCategoriesLoading}
@@ -88,10 +88,10 @@ const Category = () => {
 
       {isCategoryLoading ? (
         <div className="container mx-auto flex flex-col gap-4">
-          <Placeholder variant={"h-8 w-56 rounded-xl"} />
-          <Placeholder variant={"h-8 w-full rounded-xl"} />
-          <Placeholder variant={"h-8 w-full rounded-xl"} />
-          <Placeholder variant={"h-8 w-11/12 rounded-xl"} />
+          <Placeholder variant={"h-8 w-56 rounded-lg"} />
+          <Placeholder variant={"h-4 w-full rounded-lg"} />
+          <Placeholder variant={"h-4 w-full rounded-lg"} />
+          <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
         </div>
       ) : (
         <div className="container mx-auto flex flex-col gap-2">
@@ -104,7 +104,7 @@ const Category = () => {
         <div className="container mx-auto text-slate-900">
           {isCategoryLoading ?
           (
-            <Placeholder variant={"my-6 h-8 w-56 rounded-xl"} />
+            <Placeholder variant={"my-6 h-8 w-56 rounded-lg"} />
           ) : (
             <h1 className="text-2xl font-semibold">Produk Terkait</h1>
           )}

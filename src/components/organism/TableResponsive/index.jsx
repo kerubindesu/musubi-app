@@ -7,7 +7,7 @@ import ReactPaginate from "react-paginate";
 import { useDispatch } from "react-redux";
 import { setImagePreview, setImgProperties } from "../../../features/imagePreview/imagePreviewSlice";
 import { ImagePreview } from "../../../features/imagePreview/components/organism";
-import { RiAddLine, RiEyeLine } from "react-icons/ri";
+import { RiAddLine, RiFullscreenLine } from "react-icons/ri";
 
 const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyword, page, totalPage, setPage, totalRows, noAddData, noEdit, noDelete, noActions }) => {
   const dispatch = useDispatch()
@@ -54,7 +54,7 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
                       dispatch(setImgProperties({url: value[0], alt: value[1]}))
                     }}
                     className="absolute inset-0 z-10 flex flex-col justify-center items-center text-2xl text-transparent hover:text-white cursor-pointer hover:bg-black/10">
-                    <RiEyeLine />
+                    <RiFullscreenLine />
                   </div>
                   <div className="absolute inset-0 flex flex-col justify-center items-center">
                     <img 

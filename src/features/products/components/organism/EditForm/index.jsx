@@ -120,7 +120,7 @@ const EditForm = () => {
             </label>
 
             {preview && (
-              <div className="text-base text-orange-400 font-semibold">Click the Image to change it.</div>
+              <div className="text-base text-orange-400">Click the Image to change it.</div>
             )}
           </div>
 
@@ -154,9 +154,9 @@ const EditForm = () => {
           <Button
             disabled={isLoading}
             type={"submit"} 
-            variant={"bg-gradient-to-r from-sky-800 to-sky-700 shadow-lg text-white"}
+            variant={"bg-slate-700 shadow-lg text-white"}
             text={!isLoading && "Update"}
-            icon={isLoading && <Loading />}
+            icon={isLoading && <Loading text={true} />}
           />
         </form>
       </div>

@@ -76,9 +76,9 @@ const EditForm = () => {
           <Button
             disabled={isLoading}
             type={"submit"} 
-            variant={"bg-gradient-to-r from-sky-800 to-sky-700 shadow-lg text-white"}
+            variant={"bg-slate-700 shadow-lg text-white"}
             text={!isLoading && "Update"}
-            icon={isLoading && <Loading />}
+            icon={isLoading && <Loading text={true} />}
           />
         </form>
       </div>

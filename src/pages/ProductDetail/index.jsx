@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { getProductBySlug, getProducts } from '../../features/products/productsSlice';
-import { Placeholder } from '../../components/atoms';
+import { Loading, Placeholder } from '../../components/atoms';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { ProductGrid } from '../../components/organism';
-import { RiArrowLeftSLine, RiWhatsappLine } from 'react-icons/ri';
+import { RiArrowLeftSLine, RiFullscreenLine, RiWhatsappLine } from 'react-icons/ri';
 import { Helmet } from 'react-helmet-async';
 import NotFound from '../NotFound';
 import { getWhatsappNumber } from '../../features/contact/contactSlice';
+import { setImagePreview, setImgProperties } from '../../features/imagePreview/imagePreviewSlice';
+import { ImagePreview } from '../../features/imagePreview/components/organism';
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -28,6 +30,7 @@ const ProductDetail = () => {
   } = useSelector((state) => state.products)
 
   const { 
+    isWhatsappNumberLoading,
     whatsappNumber,
   } = useSelector((state) => state.contact)
 
@@ -76,22 +79,48 @@ const ProductDetail = () => {
             <Placeholder variant={"aspect-square w-full h-auto rounded-none md:rounded"} />
           </div>
           <div className="col-span-1 md:col-span-1 lg:col-span-2 flex flex-col gap-4">
-            <Placeholder variant={"h-8 w-[12rem] rounded-lg"} />
-            <Placeholder variant={"h-8 w-full rounded-lg"} />
-            <Placeholder variant={"h-8 w-full rounded-lg"} />
-            <Placeholder variant={"h-8 w-[12rem] rounded-lg"} />
-            <Placeholder variant={"h-8 w-full rounded-lg"} />
-            <Placeholder variant={"h-8 w-10/12 rounded-lg"} />
-            <Placeholder variant={"h-8 w-3/4 rounded-lg"} />
+            <div className="col-span-1 md:col-span-2 flex flex-col gap-6">
+              <Placeholder variant={"h-8 w-[12rem] rounded-lg"} />
+              <div className="container mx-auto mb-4 flex flex-col gap-4">
+                <div className="w-full flex gap-6">
+                  <Placeholder variant={"h-4 w-32 rounded-lg"} />
+                  <Placeholder variant={"h-4 w-full rounded-lg"} />
+                </div>
+                <div className="w-full flex gap-6">
+                  <Placeholder variant={"h-4 w-32 rounded-lg"} />
+                  <Placeholder variant={"h-4 w-full rounded-lg"} />
+                </div>
+              </div>
+              <Placeholder variant={"h-6 w-[8rem] rounded-lg"} />
+              <Placeholder variant={"h-4 w-full rounded-lg"} />
+              <Placeholder variant={"h-4 w-full rounded-lg"} />
+              <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
+              {isWhatsappNumberLoading && (
+                <div className="relative mt-4 h-10 w-[8rem] rounded box-border overflow-hidden flex justify-center items-center">
+                <Placeholder variant={"absolute inset-0"} />
+                <Loading />
+              </div>
+              )}
+            </div>
           </div>
         </div>
       ) : isProductBySlugError ? (
         <NotFound />
       ) : (
         <div className="container mx-auto grid grid-cols-1 sm:col-span-2 md:grid-cols-3 gap-4 md:gap-6">
-          <div className="-mx-3 md:mx-auto col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1">
+          <div
+            onClick={() => {
+              dispatch(setImagePreview(true))
+              dispatch(setImgProperties({url: productBySlug?.img_url, alt: productBySlug?.image}))
+            }}
+            className="relative -mx-3 md:mx-auto col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1 cursor-pointer"
+          >
+            <div className="aspect-square absolute inset-0 z-10 flex flex-col justify-center items-center text-2xl text-transparent hover:text-white cursor-pointer hover:bg-black/10">
+              <RiFullscreenLine className="text-5xl" />
+            </div>
             <img className="aspect-square w-full h-auto border object-cover rounded-none md:rounded" src={productBySlug?.img_url} alt={productBySlug?.image} />
           </div>
+          <ImagePreview />
 
           <div className="col-span-1 sm:col-span-2 md:col-span-2 flex flex-col gap-6">
             <div className="container mx-auto">

@@ -21,7 +21,7 @@ const Notification = ({ message, type, onClose }) => {
 
   return (
     <div
-      className={`mt-4 mr-4 p-4 fixed top-0 right-0 bg-black/80 rounded shadow z-50 ${
+      className={`ml-4 p-4 fixed bottom-4 right-4 bg-black/80 rounded shadow z-50 ${
         type === "success" ? '' : 'border-b-2 border-red-500'
       } text-white`}
     >
