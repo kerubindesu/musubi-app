@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { RiMenuLine, RiLoginCircleLine } from 'react-icons/ri';
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { NavBurgerMenu, NavMenu } from "../../molecules";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserAuth, logout } from "../../../../auth/authSlice";
@@ -17,20 +16,10 @@ const Navbar = () => {
 
     const { userAuth, isLoading: isAuthLoading, errRefreshToken } = useSelector((state) => state.auth);
 
-    const { navBurgerMenu } = useSelector((state) => state.navbar);
-
     useEffect(() => {
         dispatch(getUserAuth())
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
-    useEffect(() => {
-        if (navBurgerMenu) {
-            disableBodyScroll(document);
-        } else {
-            enableBodyScroll(document);
-        }
-    }, [navBurgerMenu]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -53,7 +42,7 @@ const Navbar = () => {
 
     const dropdownOptions = [
         { label: 'Dashboard', link: '/dash/home' },
-        { label: 'Settings', link: '/settings' },
+        { label: 'User Settings', link: '/dash/users/settings' },
     ];
 
     return (
@@ -90,7 +79,8 @@ const Navbar = () => {
                         )}
                     </div>
                 </div>
-                {navBurgerMenu && <NavBurgerMenu />}
+                
+                <NavBurgerMenu />
             </div>
         </div>
     )

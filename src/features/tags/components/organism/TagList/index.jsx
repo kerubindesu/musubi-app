@@ -59,6 +59,7 @@ const TagList = () => {
           isLoading={isLoading}
           noFoundData={noFoundTag}
           page={page}
+          pageSize={limit}
           totalPage={totalPage}
           setPage={setPage}
           totalRows={totalRows}

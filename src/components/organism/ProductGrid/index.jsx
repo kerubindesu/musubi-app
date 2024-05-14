@@ -31,7 +31,7 @@ const ProductGrid = ({ products, isProductsLoading }) => {
                 ) : isProductsLoading && (
                     <>
                         <div className="w-full rounded-lg flex flex-col gap-1">
-                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"aspect-square h-24 sm:h-40 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
                             <div className="flex justify-start items-center gap-1">
@@ -41,7 +41,7 @@ const ProductGrid = ({ products, isProductsLoading }) => {
                             </div>
                         </div>
                         <div className="w-full rounded-lg flex flex-col gap-1">
-                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"aspect-square h-24 sm:h-40 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
                             <div className="flex justify-start items-center gap-1">
@@ -51,7 +51,7 @@ const ProductGrid = ({ products, isProductsLoading }) => {
                             </div>
                         </div>
                         <div className="w-full rounded-lg flex flex-col gap-1">
-                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"aspect-square h-24 sm:h-40 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
                             <div className="flex justify-start items-center gap-1">
@@ -61,7 +61,7 @@ const ProductGrid = ({ products, isProductsLoading }) => {
                             </div>
                         </div>
                         <div className="w-full rounded-lg flex flex-col gap-1">
-                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"aspect-square h-24 sm:h-40 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
                             <div className="flex justify-start items-center gap-1">
@@ -71,7 +71,7 @@ const ProductGrid = ({ products, isProductsLoading }) => {
                             </div>
                         </div>
                         <div className="w-full rounded-lg flex flex-col gap-1">
-                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"aspect-square h-24 sm:h-40 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
                             <div className="flex justify-start items-center gap-1">
@@ -81,7 +81,7 @@ const ProductGrid = ({ products, isProductsLoading }) => {
                             </div>
                         </div>
                         <div className="w-full rounded-lg flex flex-col gap-1">
-                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"aspect-square h-24 sm:h-40 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
                             <div className="flex justify-start items-center gap-1">
@@ -91,7 +91,7 @@ const ProductGrid = ({ products, isProductsLoading }) => {
                             </div>
                         </div>
                         <div className="w-full rounded-lg flex flex-col gap-1">
-                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"aspect-square h-24 sm:h-40 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
                             <div className="flex justify-start items-center gap-1">
@@ -101,7 +101,7 @@ const ProductGrid = ({ products, isProductsLoading }) => {
                             </div>
                         </div>
                         <div className="w-full rounded-lg flex flex-col gap-1">
-                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"aspect-square h-24 sm:h-40 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
                             <div className="flex justify-start items-center gap-1">
@@ -111,7 +111,7 @@ const ProductGrid = ({ products, isProductsLoading }) => {
                             </div>
                         </div>
                         <div className="w-full rounded-lg flex flex-col gap-1">
-                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"aspect-square h-24 sm:h-40 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
                             <div className="flex justify-start items-center gap-1">
@@ -121,7 +121,7 @@ const ProductGrid = ({ products, isProductsLoading }) => {
                             </div>
                         </div>
                         <div className="w-full rounded-lg flex flex-col gap-1">
-                            <Placeholder variant={"aspect-square w-full rounded-lg"} />
+                            <Placeholder variant={"aspect-square h-24 sm:h-40 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-full rounded-lg"} />
                             <Placeholder variant={"h-4 w-1/2 rounded-lg"} />
                             <div className="flex justify-start items-center gap-1">

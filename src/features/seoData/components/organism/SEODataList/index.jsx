@@ -61,6 +61,7 @@ const SEODataList = () => {
         isLoading={isLoading}
         noFoundData={noFoundSEOData}
         page={page}
+        pageSize={limit}
         totalPage={totalPage}
         setPage={setPage}
         totalRows={totalRows}

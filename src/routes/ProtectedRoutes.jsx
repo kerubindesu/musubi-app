@@ -4,7 +4,7 @@ import { ProtectedTemplate } from '../components/templates';
 import { Dashboard } from '../pages';
 import NotFound from '../pages/NotFound';
 import { useSelector } from 'react-redux';
-import { Users } from '../features/users/pages';
+import { UserSettings, Users } from '../features/users/pages';
 import { AddProduct, EditProduct, Products } from '../features/products/pages';
 import { LogoConfiguration } from '../features/logo/pages';
 import { AddMenu, EditMenu, Menus } from '../features/menus/pages';
@@ -32,7 +32,7 @@ const AdminRoutes = () => {
 
         <Route path="users">
           <Route index element={<Users />} />
-          {/* <Route path=":id" element={<EditUser />} /> */}
+          <Route path="settings" element={<UserSettings />} />
           <Route path="*" element={<NotFound />} />
         </Route>
 

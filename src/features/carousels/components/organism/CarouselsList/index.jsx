@@ -62,6 +62,7 @@ const CarouselsList = () => {
         isLoading={isLoading}
         noFoundData={noFoundCarousel}
         page={page}
+        pageSize={limit}
         totalPage={totalPage}
         setPage={setPage}
         totalRows={totalRows}

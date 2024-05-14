@@ -9,7 +9,7 @@ import { setImagePreview, setImgProperties } from "../../../features/imagePrevie
 import { ImagePreview } from "../../../features/imagePreview/components/organism";
 import { RiAddLine, RiFullscreenLine } from "react-icons/ri";
 
-const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyword, page, totalPage, setPage, totalRows, noAddData, noEdit, noDelete, noActions }) => {
+const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyword, page, totalPage, setPage, totalRows, noAddData, noEdit, noDelete, noActions, pageSize }) => {
   const dispatch = useDispatch()
 
   const data = useMemo(() => (items ? [...items] : []), [items]);
@@ -218,12 +218,14 @@ const TableResponsive = ({ isLoading, noFoundData, items, title, action, setKeyw
 
       {totalPage !== undefined && totalPage > 0 && (
         <div className="py-4 w-full flex flex-col md:flex-row justify-between md:items-center gap-4">
-          <div className="text-gray-700">Showing {page +1} to {totalPage} of {totalRows}</div>
+          <div className="text-gray-700">
+            Showing {(page * pageSize) + 1} to {Math.min((page + 1) * pageSize, totalRows)} of {totalRows}
+          </div>
           <ReactPaginate
             breakLabel="..."
             nextLabel="Next"
             onPageChange={handlePageClick}
-            containerClassName="py-2 flex justify-center items-center gap-4 border-t text-gray-700"
+            containerClassName="py-2 flex justify-center items-center gap-4 border-t md:border-none text-gray-700"
             pageCount={Math.min(10,totalPage)}
             previousLabel="Prev"
             renderOnZeroPageCount={null}

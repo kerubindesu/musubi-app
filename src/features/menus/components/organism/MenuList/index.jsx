@@ -61,6 +61,7 @@ const MenuList = () => {
           isLoading={isLoading}
           noFoundData={noFoundMenu}
           page={page}
+          pageSize={limit}
           totalPage={totalPage}
           setPage={setPage}
           totalRows={totalRows}

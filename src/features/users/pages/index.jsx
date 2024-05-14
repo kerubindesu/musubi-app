@@ -1,3 +1,4 @@
 import Users from "./Users";
+import UserSettings from "./UserSettings";
 
-export { Users }
+export { Users, UserSettings }

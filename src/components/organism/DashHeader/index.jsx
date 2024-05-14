@@ -11,8 +11,8 @@ const DashHeader = () => {
   const { sidebar } = useSelector((state) => state.sidebar);
 
   return (
-    <div className="lg:hidden sticky top-0 px-3 h-16 w-full z-20 flex justify-start items-center gap-2 bg-white border-b">
-      <div onClick={() => dispatch(setSidebar(!sidebar))} className="h-10 w-10 flex justify-center items-center rounded-full hover:bg-slate-200 focus:bg-slate-100 cursor-pointer">
+    <div className="md:hidden fixed top-0 px-3 h-16 w-full z-20 flex justify-start items-center gap-2 bg-white border-b">
+      <div onClick={() => dispatch(setSidebar(!sidebar))} className="h-10 w-10 flex justify-center items-center cursor-pointer">
         <RiMenuLine className="text-2xl" />
       </div>
       <Logo link={"/dash/home"} variant="max-h-[2.5rem]" />

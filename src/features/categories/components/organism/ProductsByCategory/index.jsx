@@ -63,6 +63,7 @@ const ProductsByCategory = ({ categoryId }) => {
         isLoading={isProductsLoading}
         noFoundData={noFoundProduct}
         page={page}
+        pageSize={limit}
         totalPage={totalProductsPage}
         setPage={setPage}
         totalRows={totalRowsProducts}

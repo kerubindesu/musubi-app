@@ -1,3 +1,4 @@
 import UserList from "./organism/UserList"
+import FormUserSettings from "./organism/FormUserSettings"
 
-export { UserList }
+export { UserList, FormUserSettings }

@@ -96,11 +96,11 @@ export const resetPassword = createAsyncThunk(
 
       return true;
     } catch (error) {
-      if  (error) {
-        dispatch(showNotification({ message: rejectWithValue(error.response.data).payload.message }))
+      if (error) {
+        dispatch(showNotification({ message: rejectWithValue(error.response.data.message).payload.message }));
       }
 
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error.response.data.message);
     }
   }
 );

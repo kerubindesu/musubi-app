@@ -64,6 +64,7 @@ const ProductsList = () => {
         isLoading={isLoading}
         noFoundData={noFoundProduct}
         page={page}
+        pageSize={limit}
         totalPage={totalPage}
         setPage={setPage}
         totalRows={totalRows}

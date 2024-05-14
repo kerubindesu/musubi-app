@@ -63,6 +63,7 @@ const CategoryList = () => {
           isLoading={isLoading}
           noFoundData={noFoundCategory}
           page={page}
+          pageSize={limit}
           totalPage={totalPage}
           setPage={setPage}
           totalRows={totalRows}

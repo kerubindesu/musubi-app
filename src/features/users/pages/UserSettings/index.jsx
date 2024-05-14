@@ -1,25 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { FormUserSettings } from '../../components'
 import { Breadcrumb, HeadingTitle } from '../../../../components/atoms'
-import { LogoConfigurationForm } from '../../components/organism'
-import { useDispatch, useSelector } from 'react-redux';
 import { hideNotification } from '../../../notification/notificationSlice';
-import { Notification } from '../../../notification/components/organism';
+import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
+import { getUserAuth } from '../../../auth/authSlice';
+import { Notification } from '../../../notification/components/organism';
 
-const LogoConfiguration = () => {
-  const dispatch = useDispatch();
+const UserSettings = () => {
+  const dispatch = useDispatch()
+
   const { message, type, isOpen } = useSelector((state) => state.notification);
 
-  console.log(message)
+  const { userAuth } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(getUserAuth())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleCloseNotification = () => {
     dispatch(hideNotification());
   };
 
-  const pageTitle = "Logo";
+  const pageTitle = "User Settings"
 
   const breadcrumbs = [
     { text: "Dashboard", url: "/dash/home" },
+    { text: "Users", url: "/dash/users" },
     { text: pageTitle },
   ];
 
@@ -32,6 +40,7 @@ const LogoConfiguration = () => {
       <Breadcrumb items={breadcrumbs} />
 
       <HeadingTitle variant={"text-lg"} text={pageTitle} />
+
       {isOpen && (
         <Notification
           message={message}
@@ -39,10 +48,9 @@ const LogoConfiguration = () => {
           onClose={handleCloseNotification}
         />
       )}
-      
-      <LogoConfigurationForm />
+      <FormUserSettings userAuth={userAuth} />
     </>
   )
 }
 
-export default LogoConfiguration
+export default UserSettings

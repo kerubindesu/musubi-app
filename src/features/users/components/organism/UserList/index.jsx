@@ -47,10 +47,13 @@ const UserList = () => {
             Username: user.username,
             Nama: user.name,
             Email: user.email,
+            Status: user.isVerified === true ? "Verified" : "Not Verified"
           };
         })
     );
   }, [users, page, limit]);
+
+  console.log(items)
 
   return (
     <>
@@ -62,11 +65,12 @@ const UserList = () => {
         isLoading={isLoading}
         noFoundData={noFoundUser}
         page={page}
+        pageSize={limit}
         totalPage={totalPage}
         setPage={setPage}
         totalRows={totalRows}
         noAddData={true}
-        noEdit={true}
+        noActions={true}
       />
       <ConfirmDeleteModal confirm={confirm} message={message} />
     </>
